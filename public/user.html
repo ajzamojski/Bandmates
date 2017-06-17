@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+    <title>Bandmates</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  </head>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    #sidebar {
+        width: 20%;
+        height: 100%;
+        position: fixed;
+        border-right: solid 1px black;
+    }
+    #content {
+        width: 80%;
+        height: auto;
+        position: absolute;
+        right: 0;
+        background: #f2f2f2;
+    }
+    .nav-header {
+      font-size: 21px;
+      padding: 10px;
+      height: 50px;
+      background-color: #f2f2f2;
+    }
+  </style>
+  <body>
+    <!--Sidebar Menu-->
+    <nav id="sidebar">
+      <ul class="nav nav-list nav-stacked span2">
+        <li class="nav-header text-center">Menu</li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/finder">Finder</a></li>
+        <li><a href="/messenger">Messenger</a></li>
+        <li><a href="/events">Events</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a href="/settings">Settings</a></li>
+      </ul>
+    </nav>
+
+    <!--Content-->
+    <div id="content"></div>
+  </body>
+</html>
