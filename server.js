@@ -22,6 +22,10 @@ app.get('/', function(req,res) {
     res.sendFile(__dirname + "./public/index.html");
 });
 
+app.get('/user', function(req,res) {
+    res.sendFile(__dirname + "/public/user.html");
+});
+
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({}).then(function() {
   app.listen(PORT, function() {

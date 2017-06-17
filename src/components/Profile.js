@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Link = require("react-router").Link;
 
-class Main extends Component {
+class Profile extends Component {
 
 	render () {
 
@@ -11,7 +11,7 @@ class Main extends Component {
 			<div className ="container">
 				<div className="row">
 					<div className="jumbotron">
-						<h1>Main</h1>
+						<h1>Profile</h1>
 						{/*<Link to="/"><button className="btn btn-default">Home</button></Link>*/}
 						{/*<Link to="/chat"><button className="btn btn-default">Comments</button></Link>*/}
 					</div>
@@ -22,4 +22,4 @@ class Main extends Component {
 	}
 }
 
-export default Main;
+export default Profile;
