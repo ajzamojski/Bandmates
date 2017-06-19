@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+var React = require('react');
+import { NavLink } from "react-router-dom";
 
-class Sidebar extends Component {
-    render() {
+var Sidebar = React.createClass ({
+    render: function() {
         <div>
             <nav id="sidebar">
                 <ul class="nav nav-list nav-stacked span2">
                     <li class="nav-header text-center">Menu</li>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/finder">Finder</a></li>
-                    <li><a href="/messenger">Messenger</a></li>
-                    <li><a href="/events">Events</a></li>
-                    <li><a href="/profile">Profile</a></li>
-                    <li><a href="/settings">Settings</a></li>
-                    <li><a class="nav-footer" href="/">Logout</a></li>
+                    <li><NavLink href="/">Home</NavLink></li>
+                    <li><NavLink href="/finder">Finder</NavLink></li>
+                    <li><NavLink href="/messenger">Messenger</NavLink></li>
+                    <li><NavLink href="/events">Events</NavLink></li>
+                    <li><NavLink href="/profile">Profile</NavLink></li>
+                    <li><NavLink href="/settings">Settings</NavLink></li>
+                    <li><NavLink class="nav-footer" href="/">Logout</NavLink></li>
                 </ul>
             </nav>
         </div>
     }
-}
+});
 
-export default Sidebar;
+module.exports = Sidebar;
