@@ -1,25 +1,38 @@
-import React, { Component } from 'react';
+// -------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
+// TO DO:
+// 1. Integrate Eventbrite API
+// 2. Search for events by type of events
+// 3. Styling
 
+// PIE IN THE SKY:
+// 1. Be able to create user's own events
+// 2. Show users that are going
+// -------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
+
+var React = require('react');
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Link = require("react-router").Link;
 
-class Events extends Component {
-
-	render () {
-
+var Events = React.createClass({
+	getInitialState: function() {
+        return {
+            state: null
+        }
+  	},
+	render: function() {
 		return (
 			<div className ="container">
 				<div className="row">
 					<div className="jumbotron">
-						<h1>Events</h1>
-						{/*<Link to="/"><button className="btn btn-default">Home</button></Link>*/}
-						{/*<Link to="/chat"><button className="btn btn-default">Comments</button></Link>*/}
+						<h1>Events JS</h1>
 					</div>
 				</div>
 			</div>
 
 			)
 	}
-}
+});
 
-export default Events;
+module.exports = Events;
