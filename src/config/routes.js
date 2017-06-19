@@ -1,41 +1,32 @@
-var React = require('react');
+const React = require('react');
 var router = require('react-router');
-
-// Include the Route component for displaying individual routes
-var Route = router.Route;
-
-// Include the Router component to contain all our Routes
-// Here where we can pass in some configuration as props
-var Router = router.Router;
-
-// Include the hashHistory prop to handle routing client side without a server
-// https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#hashhistory
-var hashHistory = router.hashHistory;
+const Switch = require('react-router-dom').Switch;
+import { BrowserRouter } from 'react-router-dom'
+import { 
+    BrowserRouter as Router, 
+    Route, 
+    Link 
+} from "react-router-dom";
 
 // Include the IndexRoute (catch-all route)
-var IndexRoute = router.IndexRoute;
+// const IndexRoute = require('react-router-dom').IndexRoute;
 
 var Home = require("../components/Home.js");
-// var Main = require("../components/Main.js");
-// var Events = require("../components/Events.js");
-// var Finder = require("../components/Finder.js");
-// var Messenger = require("../components/Messenger.js");
-// var Profile = require("../components/Profile.js");
-// var Settings = require("../components/Settings.js");
-// var Sidebar = require("../components/Sidebar.js");
+var Main = require("../components/Main.js");
 
 //Export routes
 module.exports = (
 
     // The high level component is the Router component
-    <Router history={hashHistory}>
-        <Route path="/" component={Home} >
-
+    <BrowserRouter >
+            <Switch>
+                <Route path="/" component={Main}/>
+                <Route path="/home" component={Home}/>
+                {/*<IndexRoute component={Main} />*/}
+            </Switch>
             {/* If user selects User show the appropriate component */}
-            {/*<Route path="/user" component={User} />*/}
 
-            {/* If user selects any other path... we get the Main Route */}
-            <IndexRoute component={Home} />
-        </Route>
-    </Router>
+        {/* If user selects any other path... we get the Main Route */}
+        
+    </BrowserRouter>
 );
