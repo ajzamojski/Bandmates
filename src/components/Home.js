@@ -134,12 +134,12 @@ var Home = React.createClass({
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="password">Password: </label>
-											<input type="text" className="form-control" placeholder="Password *" id="password" required data-validation-required-message="Please enter a password."/>
+											<input type="password" className="form-control" placeholder="Password *" id="password" required data-validation-required-message="Please enter a password."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="confirmpw">Confirm Password: </label>
-											<input type="text" className="form-control" placeholder="Confirm Password *" id="confirmpw" required data-validation-required-message="Please confirm/check your password."/>
+											<input type="password" className="form-control" placeholder="Confirm Password *" id="confirmpw" required data-validation-required-message="Please confirm/check your password."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<button type="button" className="btn btn-primary" id="signupBtn">Sign Up</button>
@@ -157,7 +157,7 @@ var Home = React.createClass({
 									</div>
 									<div className="form-group col-xs-12">
 										<label htmlFor="userpw">Password: </label>
-										<input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
+										<input type="password" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
 										<p className="help-block text-danger"></p>
 									</div>
 									<button type="button" className="btn btn-primary">Login</button>
