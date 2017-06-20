@@ -28,12 +28,40 @@ var Home = React.createClass({
   },
 
     validFields: function(event) {
-    event.preventDefault();
-    console.log("CLICKED");
-        console.log(this.state.inputNameFirst);
+        event.preventDefault();
+        console.log("CLICKED");
+        document.getElementById("firstNameNotFilled").style.display = "none";
+        document.getElementById("lastNameNotFilled").style.display = "none";
+        document.getElementById("emailNotFilled").style.display = "none";
+        document.getElementById("passwordNotFilled").style.display = "none";
 
+        var inputState = true;
+        // console.log(this.state.inputNameFirst);
+        if (this.state.inputNameFirst == "") {
+            document.getElementById("firstNameNotFilled").style.display = "block";
+            inputState = false;
+        }
 
+        if (this.state.inputNameLast == "") {
+            document.getElementById("lastNameNotFilled").style.display = "block";
+            inputState = false;
+        }
 
+        if (this.state.inputEmail == "") {
+            document.getElementById("emailNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (this.state.inputPassword == "") {
+            document.getElementById("passwordNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        console.log(inputState);
+        if (inputState) {
+            document.getElementById("signupForm").submit();
+            return true;
+        }
     },
 
 	render: function() {
@@ -142,34 +170,39 @@ var Home = React.createClass({
 								<div className="col-lg-8 col-lg-offset-2">
 										<h2>Sign Up</h2>
 										<p>We just need some info</p>
-										<form id="signupForm" onSubmit={this.validFields}>
+										<form id="signupForm" onSubmit={this.validFields} action="/somewhere">
 										<div className="form-group col-xs-6">
 											<label htmlFor="firstName">First Name: </label>
-											<input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst" required data-validation-required-message="Please enter your first name."/>
+											<input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="lastName">Last Name: </label>
-											<input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast" required data-validation-required-message="Please enter your last name."/>
+											<input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										
 										<div className="form-group col-xs-12">
 											<label htmlFor="email">Email: </label>
-											<input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail" required data-validation-required-message="Please enter a username."/>
+											<input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="password">Password: </label>
-											<input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword" required data-validation-required-message="Please enter a password."/>
+											<input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="confirmpw">Confirm Password: </label>
-											<input type="text" className="form-control" value={this.state.search} onChange={this.handleChange} placeholder="Confirm Password *" id="confirmpw" required data-validation-required-message="Please confirm/check your password."/>
+											<input type="text" className="form-control" value={this.state.search} onChange={this.handleChange} placeholder="Confirm Password *" id="confirmpw"  data-validation-required-message="Please confirm/check your password."/>
 											<p className="help-block text-danger"></p>
 										</div>
-										<button type="submit" className="btn btn-primary" id="signupBtn">Sign Up</button>
+										<button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
+                                        <br></br>
+                                        <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                        <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
+                                        <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
+                                        <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
 										</form>
 								</div>
 
@@ -187,7 +220,7 @@ var Home = React.createClass({
 										<input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
 										<p className="help-block text-danger"></p>
 									</div>
-									<button type="button" className="btn btn-primary">Login</button>
+									<button type="button" className="btn btn-primary" id="">Login</button>
 									</form>
 								</div>
 							</div>
