@@ -64,6 +64,17 @@ var Home = React.createClass({
         }
     },
 
+    handleSubmit: function() {
+
+        var userRegData = {
+            firstName: this.state.inputNameFirst,
+            lastName: this.state.inputNameLast,
+            email: this.state.inputEmail,
+            password: this.state.inputPassword,
+        }
+        console.log(userRegData);
+    },
+
 	render: function() {
 
 		return (
