@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
 
-var React = require('react');
+const React = require('react');
 
 import { 
     BrowserRouter as Router, 
@@ -25,35 +25,34 @@ var Messenger = require("./Messenger.js");
 var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
-
 //User Routes for sidebar navigation
 const userRoutes = [
   { path: '/',
   	exact: true,
   	sidebar: () => <div></div>,
-    main: () => <h1>home</h1>
+    main: () => <div></div>
   },
-	{ path: '/home',
+	{ path: '/user',
   	sidebar: () => <div></div>,
-    main: () => <Home />
+    main: () => <div></div>
   },
-  { path: '/events',
+  { path: '/user/events',
   	sidebar: () => <div></div>,
     main: () => <Events />
   },
-  { path: '/search',
+  { path: '/user/search',
   	sidebar: () => <div></div>,
     main: () => <Search />
   },
-  { path: '/messenger',
+  { path: '/user/messenger',
   	sidebar: () => <div></div>,
     main: () => <Messenger />
   },
-  { path: '/profile',
+  { path: '/user/profile',
   	sidebar: () => <div></div>,
     main: () => <Profile />
   },
-  { path: '/settings',
+  { path: '/user/settings',
   	sidebar: () => <div></div>,
     main: () => <Settings />
   }
@@ -66,7 +65,6 @@ var Main = React.createClass ({
         }
   },
 	render: function() {
-
 		return (
 			<div>
 			{/*Sidebar*/}
@@ -74,13 +72,13 @@ var Main = React.createClass ({
 					<nav className ="container col-xs-4"id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
 							<li className="nav-header text-center">Menu</li>
-							<li><NavLink to="/home">Home</NavLink></li>
-							<li><NavLink to="/">Main</NavLink></li>
-							<li><NavLink to="/search">Search</NavLink></li>
-							<li><NavLink to="/messenger">Messenger</NavLink></li>
-							<li><NavLink to="/events">Events</NavLink></li>
-							<li><NavLink to="/profile">Profile</NavLink></li>
-							<li><NavLink to="/settings">Settings</NavLink></li>
+							<li><NavLink to="/">Home</NavLink></li>
+							<li><NavLink to="/user">Main</NavLink></li>
+							<li><NavLink to="/user/search">Search</NavLink></li>
+							<li><NavLink to="/user/messenger">Messenger</NavLink></li>
+							<li><NavLink to="/user/events">Events</NavLink></li>
+							<li><NavLink to="/user/profile">Profile</NavLink></li>
+							<li><NavLink to="/user/settings">Settings</NavLink></li>
 							<li><NavLink className="nav-footer" to="/">Logout</NavLink></li>
 						</ul>
 					</nav>
