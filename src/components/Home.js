@@ -6,7 +6,7 @@
 // 3. Styling
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
-
+var Helpers = require('./utils/helpers');
 var React = require('react');
 import Modal from 'react-modal';
 
@@ -23,22 +23,27 @@ const customStyles = {
 };
 
 // var SimpleSlider = require('./Slider.js');
+const currentURL = window.location.origin;
 
 var Home = React.createClass({
     getInitialState: function() {
-        return {
-        inputNameFirst: "",
-        inputNameLast: "",
-        inputEmail: "",
-        inputPassword: "",
-        modalIsOpen: false
+    return {
+      inputNameFirst: "",
+      inputNameLast: "",
+      inputUserName: "",
+      inputEmail: "",
+      inputPassword: "",
+      inputLogInUser: "",
+      inputLogInPassword: "",
+      inputConfirm: "",
+      isLogged: false,
+      modalIsOpen: false
         };
     },
     //------------------- MODAL FUNCTIONS -------------------
     openModal: function() {
         this.setState({modalIsOpen: true});
     },
-
     afterOpenModal: function() {
         // references are now sync'd and can be accessed.
         this.subtitle.style.color = '#393939';
@@ -58,10 +63,154 @@ var Home = React.createClass({
     validFields: function(event) {
         event.preventDefault();
         console.log("CLICKED");
-        console.log(this.state.inputNameFirst);
+        document.getElementById("registerSuccess").style.display = "none";
+        document.getElementById("firstNameNotFilled").style.display = "none";
+        document.getElementById("lastNameNotFilled").style.display = "none";
+        document.getElementById("userNameNotFilled").style.display = "none";
+        document.getElementById("emailNotFilled").style.display = "none";
+        document.getElementById("passwordNotFilled").style.display = "none";
+        document.getElementById("passwordNotMatched").style.display = "none";
+        document.getElementById("emailTaken").style.display = "none";
+
+        var inputState = true;
+        // console.log(this.state.inputNameFirst);
+        if (this.state.inputNameFirst == "") {
+            document.getElementById("firstNameNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (this.state.inputNameLast == "") {
+            document.getElementById("lastNameNotFilled").style.display = "block";
+            inputState = false;
+        }
+        if (this.state.inputUserName == "") {
+            document.getElementById("userNameNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (this.state.inputEmail == "") {
+            document.getElementById("emailNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (this.state.inputPassword == "") {
+            document.getElementById("passwordNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (this.state.inputPassword != this.state.inputConfirm) {
+            document.getElementById("passwordNotMatched").style.display = "block";
+            inputState = false;
+        }
+
+        console.log(inputState);
+        if (inputState) {
+
+
+            var userRegData = {
+                firstName: this.state.inputNameFirst,
+                lastName: this.state.inputNameLast,
+                userName: this.state.inputUserName,
+                email: this.state.inputEmail,
+                password: this.state.inputPassword
+            }
+
+            console.log(userRegData);
+
+            this.setState({         
+                inputNameFirst: "",
+                inputNameLast: "",
+                inputUserName: "",
+                inputEmail: "",
+                inputPassword: "",
+                inputConfirm: ""})
+
+            Helpers.submitNewUser(userRegData).then(function (result) {
+
+                if (result.data.registerError) {
+                    document.getElementById("emailTaken").style.display = "block";
+                    this.setState({isLogged: false});
+                }
+                else {
+                    console.log(result);
+                    document.getElementById("registerSuccess").style.display = "block";
+                    this.setState({isLogged: result.data});
+                    console.log("success");
+                    console.log(this.state.isLogged);
+                }
+            }.bind(this));
+        }
     },
+
+    logInUser: function(event) {
+
+        event.preventDefault();
+        console.log("CLICKED");
+        document.getElementById("logInUserNotFound").style.display = "none";
+        document.getElementById("logInPassIncorrect").style.display = "none";
+        document.getElementById("logInUserNotFilled").style.display = "none";
+        document.getElementById("logInPassNotFilled").style.display = "none";
+
+        var inputState = true;
+        // console.log(this.state.inputNameFirst);
+        if (this.state.inputLogInUser == "") {
+            document.getElementById("logInUserNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (this.state.inputLogInPassword == "") {
+            document.getElementById("logInPassNotFilled").style.display = "block";
+            inputState = false;
+        }
+
+        if (inputState) {
+            this.setState({
+                inputLogInUser: "",
+                inputLogInPassword: ""
+            });
+
+            var userRegData = {
+                email: this.state.inputLogInUser,
+                password: this.state.inputLogInPassword
+            }
+            Helpers.logInUser(userRegData).then(function(result){
+
+                if (result.data.loginError) {
+                    if (result.data.loginError[0] === 'User not found') {
+                        document.getElementById("logInUserNotFound").style.display = "block";
+                    }
+
+                    if (result.data.loginError[0] === 'Password is incorrect') {
+                        document.getElementById("logInPassIncorrect").style.display = "block";
+                    }  
+                }
+                else {
+                
+                console.log(result);
+                document.getElementById("logInSuccess").style.display = "block";
+                }
+
+            }.bind(this));
+        }
+    },
+
+    handleLogChange: function() {
+
+
+    },
+
+    handleSubmit: function() {
+
+
+    },
+
+        // return (
+        //     <div id="sidebar">
+        //         <Sidebar />
+        //     </div>
 	render: function() {
-		return (
+
+        return (
 		<div>
         <nav id="mainNav" className="navbar navbar-default navbar-custom navbar-fixed-top" style={{backgroundColor: 'black'}}>
             <div className="container">
@@ -252,52 +401,71 @@ var Home = React.createClass({
 								{/*<div className="col-lg-8 col-lg-offset-2">
 										<h2>Sign Up</h2>
 										<p>We just need some info</p>
-										<form id="signupForm" onSubmit={this.validFields}>
+										<form id="signupForm" onSubmit={this.validFields} action="/somewhere">
+                                        <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="firstName">First Name: </label>
-											<input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst" required data-validation-required-message="Please enter your first name."/>
+											<input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="lastName">Last Name: </label>
-											<input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast" required data-validation-required-message="Please enter your last name."/>
+											<input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
 											<p className="help-block text-danger"></p>
 										</div>
-										
-										<div className="form-group col-xs-12">
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="lastName">Username: </label>
+                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Last Name *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+										<div className="form-group col-xs-6">
 											<label htmlFor="email">Email: </label>
-											<input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail" required data-validation-required-message="Please enter a username."/>
+											<input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="password">Password: </label>
-											<input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword" required data-validation-required-message="Please enter a password."/>
+											<input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="confirmpw">Confirm Password: </label>
-											<input type="text" className="form-control" value={this.state.search} onChange={this.handleChange} placeholder="Confirm Password *" id="confirmpw" required data-validation-required-message="Please confirm/check your password."/>
+											<input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
 											<p className="help-block text-danger"></p>
 										</div>
-										<button type="submit" className="btn btn-primary" id="signupBtn">Sign Up</button>
+										<button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
+                                        <br></br>
+                                        <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                        <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
+                                        <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
+                                        <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
+                                        <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                                        <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>
+                                        <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
 										</form>
 								</div>*/}
 
 								{/*Log In*/}
 								{/*<div className="col-lg-8 col-lg-offset-2">
 									<h2>Login</h2>
-									<form id="loginForm">
-									<div className="form-group col-xs-12">
-										<label htmlFor="username">Username: </label>
-										<input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
-										<p className="help-block text-danger"></p>
-									</div>
-									<div className="form-group col-xs-12">
-										<label htmlFor="userpw">Password: </label>
-										<input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
-										<p className="help-block text-danger"></p>
-									</div>
-									<button type="button" className="btn btn-primary">Login</button>
+									<form id="loginForm" onSubmit={this.logInUser} >
+                                        <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
+    									<div className="form-group col-xs-12">
+    										<label htmlFor="email">Email: </label>
+    										<input type="email" value={this.state.inputLogInUser} onChange={this.handleChange} className="form-control" placeholder="Email *" id="inputLogInUser" data-validation-required-message="Please enter a username."/>
+    										<p className="help-block text-danger"></p>
+    									</div>
+    									<div className="form-group col-xs-12">
+    										<label htmlFor="userpw">Password: </label>
+    										<input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
+    										<p className="help-block text-danger"></p>
+    									</div>
+    									<button type="submit" className="btn btn-primary" id="logInBtn">Login</button>
+                                         <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                         <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
+                                         <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
+                                         <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
+                                         
 									</form>
 								</div>
 							</div>
