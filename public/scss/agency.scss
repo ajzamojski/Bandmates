@@ -2,6 +2,18 @@
 @import "mixins.scss";
 
 // Global Components
+.ReactModal__Overlay {
+  transition: opacity 500ms ease-in-out;
+  opacity: 0;
+
+  &--after-open {
+    opacity: 1;
+  }
+
+  &--before-close {
+    opacity: 0;
+  }
+}
 
 body {
     overflow-x: hidden;
