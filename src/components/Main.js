@@ -31,7 +31,7 @@ const userRoutes = [
   { path: '/',
   	exact: true,
   	sidebar: () => <div></div>,
-    main: () => <h1>home</h1>
+    main: () => <h1>Main</h1>
   },
 	{ path: '/home',
   	sidebar: () => <div></div>,
