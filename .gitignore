@@ -5,7 +5,6 @@ node_modules
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # omitting bundle
-/public/bundle.js
 
 # dependencies
 /node_modules
