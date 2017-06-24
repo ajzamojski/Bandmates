@@ -338,20 +338,6 @@ var Home = React.createClass({
 								{/*Log In*/}
 								<div className="col-lg-8 col-lg-offset-2">
 									<h2>Login</h2>
-<<<<<<< HEAD
-									<form id="loginForm">
-									<div className="form-group col-xs-12">
-										<label htmlFor="username">Username: </label>
-										<input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
-										<p className="help-block text-danger"></p>
-									</div>
-									<div className="form-group col-xs-12">
-										<label htmlFor="userpw">Password: </label>
-										<input type="password" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
-										<p className="help-block text-danger"></p>
-									</div>
-									<button type="button" className="btn btn-primary">Login</button>
-=======
 									<form id="loginForm" onSubmit={this.logInUser} >
                                         <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
     									<div className="form-group col-xs-12">
@@ -370,7 +356,6 @@ var Home = React.createClass({
                                          <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
                                          <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
                                          
->>>>>>> 50b09f47c8da8c154ccbf5bc72117ba5c0d9b921
 									</form>
 								</div>
 							</div>

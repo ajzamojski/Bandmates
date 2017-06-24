@@ -26,6 +26,7 @@ var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
 
+
 //User Routes for sidebar navigation
 const userRoutes = [
   { path: '/',
@@ -62,9 +63,16 @@ const userRoutes = [
 var Main = React.createClass ({
 	getInitialState: function() {
         return {
-            state: null
+            state: null,
+            userData: {}
         }
   },
+
+  
+  getData: function(){
+  		console.log('the state within Main is: ' + this.state);
+  },
+
 	render: function() {
 
 		return (
@@ -77,7 +85,7 @@ var Main = React.createClass ({
 							<li><NavLink to="/home">Home</NavLink></li>
 							<li><NavLink to="/">Main</NavLink></li>
 							<li><NavLink to="/search">Search</NavLink></li>
-							<li><NavLink to="/messenger">Messenger</NavLink></li>
+							<li><NavLink to="/messenger" randomData = {this.getData}> Messenger</NavLink></li>
 							<li><NavLink to="/events">Events</NavLink></li>
 							<li><NavLink to="/profile">Profile</NavLink></li>
 							<li><NavLink to="/settings">Settings</NavLink></li>
@@ -91,6 +99,7 @@ var Main = React.createClass ({
 							path={route.path}
 							exact={route.exact}
 							component={route.sidebar}
+
 						/>
 					))}
 				</div>
@@ -102,6 +111,7 @@ var Main = React.createClass ({
 						path={route.path}
 						exact={route.exact}
 						component={route.main}
+						randomData = {this.getData}
 					/>
 				))}
 			</div>
