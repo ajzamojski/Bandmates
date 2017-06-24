@@ -36,9 +36,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       defaultValue: "/public/img/default_pic.jpg",
       allowNull: true,
-      validate: {
-        isUrl: true
-      }
+      // validate: {
+      //   isUrl: true
+      // }
     },
     city: {
       type: DataTypes.STRING,

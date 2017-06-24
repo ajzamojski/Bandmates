@@ -104,17 +104,17 @@ var Main = React.createClass ({
 					))}
 				</div>
 
-			<div id="content" style={{ flex: 2, padding: '10px'}}>
-				{userRoutes.map((route, index) => (
-					<Route
-						key={index}
-						path={route.path}
-						exact={route.exact}
-						component={route.main}
-						randomData = {this.getData}
-					/>
-				))}
-			</div>
+				<div id="content" style={{ flex: 2, padding: '0px'}}>
+					{userRoutes.map((route, index) => (
+						<Route
+							key={index}
+							path={route.path}
+							exact={route.exact}
+							component={route.main}
+							randomData = {this.getData}
+						/>
+					))}
+				</div>
 
 			</div>
 		)
