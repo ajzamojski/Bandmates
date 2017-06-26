@@ -77,6 +77,7 @@ var Home = React.createClass({
         }
 
         console.log(inputState);
+        console.log(this.props.userData);
         if (inputState) {
 
 
@@ -109,6 +110,7 @@ var Home = React.createClass({
                     document.getElementById("registerSuccess").style.display = "block";
                     this.setState({isLogged: result.data});
                     console.log("success");
+                    $.ajax
                     console.log(this.state.isLogged);
                 }
             }.bind(this));
@@ -355,7 +357,6 @@ var Home = React.createClass({
                                          <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
                                          <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
                                          <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
-                                         
 									</form>
 								</div>
 							</div>

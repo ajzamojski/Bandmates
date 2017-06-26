@@ -26,58 +26,68 @@ var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
 
-
 //User Routes for sidebar navigation
-const userRoutes = [
-  { path: '/',
-  	exact: true,
-  	sidebar: () => <div></div>,
-    main: () => <h1>Main</h1>
-  },
-	{ path: '/home',
-  	sidebar: () => <div></div>,
-    main: () => <Home />
-  },
-  { path: '/events',
-  	sidebar: () => <div></div>,
-    main: () => <Events />
-  },
-  { path: '/search',
-  	sidebar: () => <div></div>,
-    main: () => <Search />
-  },
-  { path: '/messenger',
-  	sidebar: () => <div></div>,
-    main: () => <Messenger />
-  },
-  { path: '/profile',
-  	sidebar: () => <div></div>,
-    main: () => <Profile />
-  },
-  { path: '/settings',
-  	sidebar: () => <div></div>,
-    main: () => <Settings />
-  }
-]
-
 var Main = React.createClass ({
 	getInitialState: function() {
-        return {
-            state: null,
-            userData: {}
-        }
+		return {
+			state: null,
+			userData: "something interesting"
+		}
   },
 
-  
-  getData: function(){
-  		console.log('the state within Main is: ' + this.state);
-  },
+  printData: (function(){
+		console.log('the state within Main is: ' + this.state.userData);
+  }).bind(this),
 
+
+  getUserData: (function(){
+  	return this.state.userData
+  }).bind(this),
+
+
+  setUserData: (function(userData){
+  	console.log(userData);
+  	this.setState(userData)
+  }).bind(this),
+
+
+	userRoutes: [
+	  { path: '/',
+	  	exact: true,
+	  	sidebar: () => <div></div>,
+	    main: () => <h1>Main</h1>
+	  },
+		{ path: '/home',
+	  	sidebar: () => <div></div>,
+	    main: () => <Home />
+	  },
+	  { path: '/events',
+	  	sidebar: () => <div></div>,
+	    main: () => <Events />
+	  },
+	  { path: '/search',
+	  	sidebar: () => <div></div>,
+	    main: () => <Search />
+	  },
+	  { path: '/messenger',
+	  	sidebar: () => <div></div>,
+	    main: () => <Messenger />
+	  },
+	  { path: '/profile',
+	  	sidebar: () => <div></div>,
+	    main: () => <Profile />
+	  },
+	  { path: '/settings',
+	  	sidebar: () => <div></div>,
+	    main: () => <Settings />
+	  }
+	],
+	
 	render: function() {
 
 		return (
 			<div>
-			{/*Sidebar*/}
+			{/*Sidebar     */}
 				<div>
 					<nav className ="container col-xs-4"id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
@@ -85,15 +95,15 @@ var Main = React.createClass ({
 							<li><NavLink to="/home">Home</NavLink></li>
 							<li><NavLink to="/">Main</NavLink></li>
 							<li><NavLink to="/search">Search</NavLink></li>
-							<li><NavLink to="/messenger" randomData = {this.getData}> Messenger</NavLink></li>
+							<li><NavLink to="/messenger"> Messenger</NavLink></li>
 							<li><NavLink to="/events">Events</NavLink></li>
-							<li><NavLink to="/profile">Profile</NavLink></li>
+							<li><NavLink to="/profile" >Profile</NavLink></li>
 							<li><NavLink to="/settings">Settings</NavLink></li>
 							<li><NavLink className="nav-footer" to="/">Logout</NavLink></li>
 						</ul>
 					</nav>
 
-					{userRoutes.map((route, index) => (
+					{this.userRoutes.map((route, index) => (
 						<Route
 							key={index}
 							path={route.path}
@@ -105,13 +115,13 @@ var Main = React.createClass ({
 				</div>
 
 			<div id="content" style={{ flex: 2, padding: '10px'}}>
-				{userRoutes.map((route, index) => (
+				{this.userRoutes.map((route, index) => (
 					<Route
 						key={index}
 						path={route.path}
 						exact={route.exact}
 						component={route.main}
-						randomData = {this.getData}
+						randomData = {this.printData}
 					/>
 				))}
 			</div>

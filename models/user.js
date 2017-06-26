@@ -32,13 +32,13 @@ module.exports = function(sequelize, DataTypes) {
         len:[6]
       }
     },
-    profilePic: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      validate: {
-        isUrl: true
-      }
-    },
+    // profilePic: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   validate: {
+    //     isUrl: true
+    //   }
+    // },
     city: {
       type: DataTypes.STRING,
       allowNull: true,
