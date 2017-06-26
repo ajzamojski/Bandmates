@@ -39,7 +39,8 @@ module.exports = function (app) {
 	//a login error occured
 	app.get('/loginfail', function(req, res) {
 
-		res.json({loginError: req.flash('loginMessage')});
+		var notAuthenticated = true;
+		res.json({loginError: req.flash('loginMessage'), notAuthenticated: notAuthenticated});
 
 	});
 
@@ -49,7 +50,7 @@ module.exports = function (app) {
 		req.logout();
 		console.log(req.user);
 		console.log(req.isAuthenticated());
-		res.redirect('/login');
+		res.redirect('/');
 
 	});
 

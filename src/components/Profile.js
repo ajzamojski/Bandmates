@@ -27,8 +27,11 @@ var Profile = React.createClass ({
 
    	 $.get("/loggedin", function(data) {
 
-  		if (data) {
-  			console.log(data);
+   	 	console.log(data);
+   	 	console.log(data.notAuthenticated == true);
+   	 	console.log(!(data.notAuthenticated == true));
+  		if (!(data.notAuthenticated === true)) {
+
   			this.setState({
   				firstName: data.userData.firstName,
   				lastName: data.userData.lastName,
