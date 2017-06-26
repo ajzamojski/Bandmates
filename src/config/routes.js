@@ -1,15 +1,12 @@
 const React = require('react');
-var router = require('react-router');
-const Switch = require('react-router-dom').Switch;
+const router = require('react-router');
+import {Switch} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { 
     BrowserRouter as Router, 
     Route, 
     Link 
 } from "react-router-dom";
-
-// Include the IndexRoute (catch-all route)
-// const IndexRoute = require('react-router-dom').IndexRoute;
 
 var Home = require("../components/Home.js");
 var Main = require("../components/Main.js");
@@ -20,9 +17,11 @@ module.exports = (
     // The high level component is the Router component
     <BrowserRouter >
             <Switch>
-                <Route path="/" component={Main}/>
-                <Route path="/home" component={Home}/>
-                {/*<IndexRoute component={Main} />*/}
+                <Route exact path="/" component={Home}/>
+                <Route path="/user" component={Main}/>
+                <Route render={function () {
+                    return <h1>404 Not Found</h1>;
+                }} />
             </Switch>
             {/* If user selects User show the appropriate component */}
 

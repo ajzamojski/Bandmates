@@ -8,7 +8,7 @@
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
 
-var React = require('react');
+const React = require('react');
 
 import { 
     BrowserRouter as Router, 
@@ -25,75 +25,105 @@ var Messenger = require("./Messenger.js");
 var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> kevinlee
 //User Routes for sidebar navigation
-const userRoutes = [
-  { path: '/',
-  	exact: true,
-  	sidebar: () => <div></div>,
-    main: () => <h1>Main</h1>
-  },
-	{ path: '/home',
-  	sidebar: () => <div></div>,
-    main: () => <Home />
-  },
-  { path: '/events',
-  	sidebar: () => <div></div>,
-    main: () => <Events />
-  },
-  { path: '/search',
-  	sidebar: () => <div></div>,
-    main: () => <Search />
-  },
-  { path: '/messenger',
-  	sidebar: () => <div></div>,
-    main: () => <Messenger />
-  },
-  { path: '/profile',
-  	sidebar: () => <div></div>,
-    main: () => <Profile />
-  },
-  { path: '/settings',
-  	sidebar: () => <div></div>,
-    main: () => <Settings />
-  }
-]
+// const userRoutes = [
+//   { path: '/',
+//   	exact: true,
+//   	sidebar: () => <div></div>,
+//     main: () => <div></div>
+//   },
+// 	{ path: '/user',
+//   	sidebar: () => <div></div>,
+//     main: () => <div></div>
+//   },
+//   { path: '/user/events',
+//   	sidebar: () => <div></div>,
+//     main: () => <Events something= {this.state.main} />
+//   },
+//   { path: '/user/search',
+//   	sidebar: () => <div></div>,
+//     main: () => <Search />
+//   },
+//   { path: '/user/messenger',
+//   	sidebar: () => <div></div>,
+//     main: () => <Messenger />
+//   },
+//   { path: '/user/profile',
+//   	sidebar: () => <div></div>,
+//     main: () => <Profile />
+//   },
+//   { path: '/user/settings',
+//   	sidebar: () => <div></div>,
+//     main: () => <Settings />
+//   }
+// ]
 
 var Main = React.createClass ({
 	getInitialState: function() {
         return {
-            state: null,
-            userData: {}
+
+            main: "Main State",
+						userRoutes : [
+							{ path: '/',
+								exact: true,
+								sidebar: () => <div></div>,
+								main: () => <div></div>
+							},
+							{ path: '/user',
+								sidebar: () => <div></div>,
+								main: () => <div></div>
+							},
+							{ path: '/user/events',
+								sidebar: () => <div></div>,
+								// Syntax to reference props *******************************************
+								main: () => <Events something= {this.printData} />
+							},
+							{ path: '/user/search',
+								sidebar: () => <div></div>,
+								main: () => <Search />
+							},
+							{ path: '/user/messenger',
+								sidebar: () => <div></div>,
+								main: () => <Messenger />
+							},
+							{ path: '/user/profile',
+								sidebar: () => <div></div>,
+								main: () => <Profile />
+							},
+							{ path: '/user/settings',
+								sidebar: () => <div></div>,
+								main: () => <Settings />
+							}
+						]
         }
   },
-
-  
-  getData: function(){
-  		console.log('the state within Main is: ' + this.state);
-  },
-
+	printData: function(a) {
+		console.log("i made it" + a);
+	},
 	render: function() {
-
 		return (
 			<div>
 			{/*Sidebar*/}
 				<div>
 					<nav className ="container col-xs-4"id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
-							<li className="nav-header text-center">Menu</li>
-							<li><NavLink to="/home">Home</NavLink></li>
-							<li><NavLink to="/">Main</NavLink></li>
-							<li><NavLink to="/search">Search</NavLink></li>
-							<li><NavLink to="/messenger" randomData = {this.getData}> Messenger</NavLink></li>
-							<li><NavLink to="/events">Events</NavLink></li>
-							<li><NavLink to="/profile">Profile</NavLink></li>
-							<li><NavLink to="/settings">Settings</NavLink></li>
-							<li><NavLink className="nav-footer" to="/">Logout</NavLink></li>
+							<li className="nav-header text-center">MENU</li>
+							<li><NavLink to="/">Home</NavLink></li>
+							<li><NavLink to="/user">Main</NavLink></li>
+							<li><NavLink to="/user/search">Search</NavLink></li>
+							<li><NavLink to="/user/messenger">Messenger</NavLink></li>
+							<li><NavLink to="/user/events/">Events</NavLink></li>
+							<li><NavLink to="/user/profile">Profile</NavLink></li>
+							<li><NavLink to="/user/settings">Settings</NavLink></li>
 						</ul>
 					</nav>
-
-					{userRoutes.map((route, index) => (
+					
+					{this.state.userRoutes.map((route, index) => (
 						<Route
 							key={index}
 							path={route.path}
@@ -104,8 +134,32 @@ var Main = React.createClass ({
 					))}
 				</div>
 
-			<div id="content" style={{ flex: 2, padding: '10px'}}>
-				{userRoutes.map((route, index) => (
+			<div id="content" style={{ flex: 2}}>
+				<nav className="navbar navbar-dark" id="userBar">
+
+                <div className="container">
+
+                    <div className="navbar-toggleable-xs">
+                        {/*<!--Navbar Brand-->*/}
+                        <a className="navbar-brand">Bandmates</a>
+                        {/*<!--Links-->*/}
+                        <ul className="nav navbar-nav" style={{float: 'right'}}>
+                            <li className="nav-item">
+                                <a className="nav-link">Home <span className="sr-only"></span></a>
+                            </li>
+                            <li className="nav-item active btn-group">
+                                <a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged In As *USER*</a>
+                                <div className="dropdown-menu" aria-labelledby="dropdownMenu">
+                                    <NavLink to="/">Logout</NavLink>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </nav>
+				{this.state.userRoutes.map((route, index) => (
 					<Route
 						key={index}
 						path={route.path}

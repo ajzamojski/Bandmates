@@ -8,9 +8,24 @@
 // -------------------------------------------------------------------------------------------------
 var Helpers = require('./utils/helpers');
 var React = require('react');
-const currentURL = window.location.origin;
-var Home = React.createClass({
+import Modal from 'react-modal';
 
+var signupModal = document.getElementById('signupModal');
+var loginModal = document.getElementById('loginModal')
+const customStyles = {
+  content : {
+    top                   : '25%',
+    outline               : 'none',
+    borderRadius          : '7px',
+    backgroundColor       : '#f2f2f2',
+    boxShadow             : '3px 3px 8px #333333',
+  }
+};
+
+// var SimpleSlider = require('./Slider.js');
+const currentURL = window.location.origin;
+
+var Home = React.createClass({
     getInitialState: function() {
     return {
       inputNameFirst: "",
@@ -21,18 +36,30 @@ var Home = React.createClass({
       inputLogInUser: "",
       inputLogInPassword: "",
       inputConfirm: "",
-      isLogged: false
-    };
-  },
+      isLogged: false,
+      modalIsOpen: false
+        };
+    },
+    //------------------- MODAL FUNCTIONS -------------------
+    openModal: function() {
+        this.setState({modalIsOpen: true});
+    },
+    afterOpenModal: function() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#393939';
+    },
 
+    closeModal: function() {
+        this.setState({modalIsOpen: false});
+    },
+//--------------------------------------------------------
     handleChange: function(event) {
-    console.log("TEXT CHANGED");
+        console.log("TEXT CHANGED");
 
-    var newState = {};
-    newState[event.target.id] = event.target.value;
-    this.setState(newState);
-  },
-
+        var newState = {};
+        newState[event.target.id] = event.target.value;
+        this.setState(newState);
+    },
     validFields: function(event) {
         event.preventDefault();
         console.log("CLICKED");
@@ -200,12 +227,98 @@ var Home = React.createClass({
                         <li className="hidden">
                             <a href="#page-top"></a>
                         </li>
+
+                        <li>
+                            <a className="page-scroll" id="signupTog" onClick={this.openModal}>Sign up / Login</a>
+                            
+                            <Modal className={"col-xs-10 col-xs-offset-1"} 
+                                isOpen={this.state.modalIsOpen}
+                                onAfterOpen={this.afterOpenModal}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Sign Up">
+                                
+                            <div className="col-xs-8">
+                                <h2 ref={subtitle => this.subtitle = subtitle}>Sign Up</h2>
+                                <p>We just need some info</p>
+                                <form id="signupForm" onSubmit={this.validFields}>
+                                    <div className="form-group col-xs-6">
+                                        <label htmlFor="firstName">First Name: </label>
+                                        <input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst" required data-validation-required-message="Please enter your first name."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    <div className="form-group col-xs-6">
+                                        <label htmlFor="lastName">Last Name: </label>
+                                        <input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast" required data-validation-required-message="Please enter your last name."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    
+                                    <div className="form-group col-xs-4">
+                                        <label htmlFor="email">Email: </label>
+                                        <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail" required data-validation-required-message="Please enter a username."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    <div className="form-group col-xs-6">
+                                        <label htmlFor="password">Password: </label>
+                                        <input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword" required data-validation-required-message="Please enter a password."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    <div className="form-group col-xs-6">
+                                        <label htmlFor="confirmpw">Confirm Password: </label>
+                                        <input type="text" className="form-control" value={this.state.search} onChange={this.handleChange} placeholder="Confirm Password *" id="confirmpw" required data-validation-required-message="Please confirm/check your password."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    <button type="submit" className="btn btn-primary" id="signupBtn">Sign Up</button>
+                                    </form>
+								</div>
+                                <div className="col-xs-4">
+                                    <h2>Login</h2>
+                                    <form id="loginForm">
+                                    <div className="form-group col-xs-12">
+                                        <label htmlFor="username">Username: </label>
+                                        <input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    <div className="form-group col-xs-12">
+                                        <label htmlFor="userpw">Password: </label>
+                                        <input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
+                                        <p className="help-block text-danger"></p>
+                                    </div>
+                                    <button type="button" className="btn btn-primary">Login</button>
+                                    </form>
+                                </div>
+                                <button onClick={this.closeModal}>close</button>
+                        </Modal>
+                        </li>              
+                      
+                            {/*<Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            contentLabel="Login">
+
+                            <div className="col-lg-8 col-lg-offset-2">
+									<h2 ref={subtitle => this.subtitle = subtitle}>Login</h2>
+                                    <button onClick={this.closeModal}>close</button>
+									<form id="loginForm">
+									<div className="form-group col-xs-12">
+										<label htmlFor="username">Username: </label>
+										<input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
+										<p className="help-block text-danger"></p>
+									</div>
+									<div className="form-group col-xs-12">
+										<label htmlFor="userpw">Password: </label>
+										<input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
+										<p className="help-block text-danger"></p>
+									</div>
+									<button type="button" className="btn btn-primary">Login</button>
+									</form>
+								</div>
+                        </Modal>*/}
                         <li>
                             <a className="page-scroll" href="#about">About</a>
                         </li>
-                        <li>
-                            <a className="page-scroll" href="#login">Sign up / Login</a>
-                        </li>
+                        
                         <li>
                             <a className="page-scroll" href="#team">Team</a>
                         </li>
@@ -219,6 +332,7 @@ var Home = React.createClass({
 
         {/*Header*/}
         <header>
+            {/*<SimpleSlider />*/}
             <div className="container">
                 <div className="intro-text">
                     <div className="intro-lead-in">Welcome To</div>
@@ -227,6 +341,7 @@ var Home = React.createClass({
                     <a href="#about" className="page-scroll btn btn-xl">About Us</a>
                 </div>
             </div>
+            
         </header>
 
         {/*Services Section*/}
@@ -271,20 +386,19 @@ var Home = React.createClass({
         </section>
 
          {/*Login Grid Section*/}
-        }
-        <section id="login" className="bg-light-gray">
-            <div className="container">
-                <div className="row">
+        {/*<section id="login" className="bg-light-gray">
+            <div className="container">*/}
+                {/*<div className="row">
                     <div className="text-center">
                         <h2 className="section-heading">Signup or Login</h2>
                     </div>
-                </div>
-                <div className="row">
+                </div>*/}
+                {/*<div className="row">
                     <div className="col-xs-6 login-item">
                         <div className="container">
 							<div className="row">
 								{/*Sign up*/}
-								<div className="col-lg-8 col-lg-offset-2">
+								{/*<div className="col-lg-8 col-lg-offset-2">
 										<h2>Sign Up</h2>
 										<p>We just need some info</p>
 										<form id="signupForm" onSubmit={this.validFields} action="/somewhere">
@@ -333,10 +447,10 @@ var Home = React.createClass({
                                         <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>
                                         <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
 										</form>
-								</div>
+								</div>*/}
 
 								{/*Log In*/}
-								<div className="col-lg-8 col-lg-offset-2">
+								{/*<div className="col-lg-8 col-lg-offset-2">
 									<h2>Login</h2>
 									<form id="loginForm" onSubmit={this.logInUser} >
                                         <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
@@ -359,10 +473,10 @@ var Home = React.createClass({
 									</form>
 								</div>
 							</div>
-						</div>
+						</div>*/}
                         
-						<div>
-							<a href="#signupModal1" className="login-link" data-toggle="modal">
+						{/*<div>
+							<a href="#signupModal" className="login-link" data-toggle="modal">
 
 								<div className="login-hover">
 									<div className="login-hover-content">
@@ -374,7 +488,7 @@ var Home = React.createClass({
                 	</div>
             	</div>
 			</div>
-        </section>
+        </section>*/}
 
         {/*Team Section*/}
         <section id="team" className="bg-light-gray">

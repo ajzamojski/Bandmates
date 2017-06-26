@@ -3,6 +3,7 @@ var axios = require("axios");
 
 // Geocoder API
 var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
+var eventbriteAPIToken = 'ZOVDW3APCGKQD5SCX75S';
 
 // Helper functions for making API Calls
 var helper = {
@@ -40,13 +41,47 @@ var helper = {
     return axios.get(queryURL).then(function(response) {
       // If get get a result, return that result's formatted address property
       if (response.data.results[0]) {
-        return response.data.results[0].formatted;
+        return response.data.results[0].geometry;
       }
       // If we don't get any results, return an empty string
       return "";
     });
   },
+  // postQueryEvents: function(eventsData) {
+    
+  //   return axios.post("/api/events", eventsData).then(function(err,data) {
+  //       if (err) {
+  //         console.log(err);
+  //       } else {
+  //         console.log("axios post: " + data)
+  //       }
+  //   });
 
+  // },
+  runQueryEvents: function(query,lat,lng,startDate,endDate,radius) {
+
+    var newQ = query.replace(/\s/g, '+');
+    //encode params for URL
+    
+    var queryURL = 'https://www.eventbriteapi.com/v3/events/search/?' + 
+    'q=' + newQ +
+    '&location.within=' + radius + 
+    '&location.latitude=' + lat.toString() +
+    '&location.longitude=' + lng.toString() +
+    '&start_date.range_start=' + startDate + 'T13:00:00'+ 
+    '&start_date.range_end=' + endDate + 'T13:00:00'+
+     '&token=ZOVDW3APCGKQD5SCX75S';
+    
+    return axios.get(queryURL, function(err,data) {
+
+      if (err) {
+        console.log(err);
+      }
+      console.log(data)
+      
+    });
+
+  },
   // This function hits our own server to retrieve the record of query results
   getHistory: function() {
     return axios.get("/api");
