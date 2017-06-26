@@ -46,7 +46,22 @@ app.get('/', function(req,res) {
 app.get('/user/?', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
+app.get('/user/events', function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+});
+// app.post('/api/events', function(req,res) {
+//   console.log('post:' + res);
+//   res.json(res)
+// })
 
+// app.get('/api/events', function(req,res) {
+//   console.log("get: " + res);
+//   res.json(res)
+// });
+
+app.get('*', function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+});
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({}).then(function() {

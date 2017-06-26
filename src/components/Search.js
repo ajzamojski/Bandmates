@@ -65,9 +65,9 @@ var Search = React.createClass({
 									<select className="form-control" id="radiusFilt" name="radiusFilt" defaultValue="" value={this.state.radius}>
 										<option value={5}>5</option>
 										<option value={10}>10</option>
-										<option value={20}>20</option>
-										<option value={30}>30</option>
-										<option value={45}>45</option>
+										<option value={20}>15</option>
+										<option value={30}>25</option>
+										<option value={45}>40</option>
 									</select>
 								</div>
 								<button type="submit" className="btn btn-lg" id="SearchBtn">Submit</button>
