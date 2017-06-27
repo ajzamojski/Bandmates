@@ -23,6 +23,7 @@ var Profile = React.createClass ({
 				<div className="row">
 					<div className="jumbotron">
 						<h1>Profile</h1>
+						
 					</div>
 				</div>
 			</div>
