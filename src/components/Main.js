@@ -25,11 +25,7 @@ var Messenger = require("./Messenger.js");
 var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
-<<<<<<< HEAD
 
-
-=======
->>>>>>> kevinlee
 //User Routes for sidebar navigation
 // const userRoutes = [
 //   { path: '/',
