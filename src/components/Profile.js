@@ -14,9 +14,39 @@ var Link = require("react-router").Link;
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
-            state: null
+            firstName: null,
+            lastName: null,
+            userName: null,
+            email: null,
+            picture: null,
+            address: null,
         }
   	},
+
+   componentDidMount() {
+
+   	 $.get("/loggedin", function(data) {
+
+   	 	console.log(data);
+   	 	console.log(data.notAuthenticated == true);
+   	 	console.log(!(data.notAuthenticated == true));
+  		if (!(data.notAuthenticated === true)) {
+
+  			this.setState({
+  				firstName: data.userData.firstName,
+  				lastName: data.userData.lastName,
+  				userName: data.userData.username,
+  				email: data.userData.email,
+
+  			})
+  		}
+  		console.log(this.state.firstName);
+  	}.bind(this));
+   },
+
+  getProfile: function () {
+
+  },
 	render: function () {
 		return (
 
