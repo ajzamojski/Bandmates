@@ -26,6 +26,8 @@ var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 
 
 =======
@@ -63,43 +65,44 @@ var Settings = require("./Settings.js");
 //   }
 // ]
 
+>>>>>>> master
 var Main = React.createClass ({
 	getInitialState: function() {
         return {
 
             main: "Main State",
-						userRoutes : [
-							{ path: '/',
-								exact: true,
-								sidebar: () => <div></div>,
-								main: () => <div></div>
-							},
-							{ path: '/user',
-								sidebar: () => <div></div>,
-								main: () => <div></div>
-							},
-							{ path: '/user/events',
-								sidebar: () => <div></div>,
-								// Syntax to reference props *******************************************
-								main: () => <Events something= {this.printData} />
-							},
-							{ path: '/user/search',
-								sidebar: () => <div></div>,
-								main: () => <Search />
-							},
-							{ path: '/user/messenger',
-								sidebar: () => <div></div>,
-								main: () => <Messenger />
-							},
-							{ path: '/user/profile',
-								sidebar: () => <div></div>,
-								main: () => <Profile />
-							},
-							{ path: '/user/settings',
-								sidebar: () => <div></div>,
-								main: () => <Settings />
-							}
-						]
+			userRoutes : [
+				{ path: '/',
+					exact: true,
+					sidebar: () => <div></div>,
+					main: () => <div></div>
+				},
+				{ path: '/user',
+					sidebar: () => <div></div>,
+					main: () => <div></div>
+				},
+				{ path: '/user/events',
+					sidebar: () => <div></div>,
+					// Syntax to reference props *******************************************
+					main: () => <Events something= {this.printData} />
+				},
+				{ path: '/user/search',
+					sidebar: () => <div></div>,
+					main: () => <Search />
+				},
+				{ path: '/user/messenger',
+					sidebar: () => <div></div>,
+					main: () => <Messenger />
+				},
+				{ path: '/user/profile',
+					sidebar: () => <div></div>,
+					main: () => <Profile />
+				},
+				{ path: '/user/settings',
+					sidebar: () => <div></div>,
+					main: () => <Settings />
+				}
+			]
         }
   },
 	printData: function(a) {
@@ -135,18 +138,16 @@ var Main = React.createClass ({
 				</div>
 
 			<div id="content" style={{ flex: 2}}>
-				<nav className="navbar navbar-dark" id="userBar">
+				<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
 
                 <div className="container">
 
                     <div className="navbar-toggleable-xs">
                         {/*<!--Navbar Brand-->*/}
-                        <a className="navbar-brand">Bandmates</a>
+                        <a className="navbar-brand">Home</a>
                         {/*<!--Links-->*/}
                         <ul className="nav navbar-nav" style={{float: 'right'}}>
-                            <li className="nav-item">
-                                <a className="nav-link">Home <span className="sr-only"></span></a>
-                            </li>
+                            
                             <li className="nav-item active btn-group">
                                 <a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged In As *USER*</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenu">

@@ -179,7 +179,8 @@ var Events = React.createClass({
 
 							</div>
 
-							<button className="btn btn-yellow" value="Search" id="searchBtn" onSubmit={this.handleSearch}><Link to="/user/events/search"></Link> Search</button>
+							<button className="btn btn-yellow waves-effect" value="Search" id="searchBtn" onSubmit={this.handleSearch}>
+								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />Search</button>
 						</form>
 						</div>
 					</div>
