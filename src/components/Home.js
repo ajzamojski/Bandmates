@@ -258,7 +258,7 @@ var Home = React.createClass({
                                         </div>
                                         <div className="form-group col-xs-6">
                                             <label htmlFor="lastName">Username: </label>
-                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Last Name *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
+                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Username *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
                                             <p className="help-block text-danger"></p>
                                             <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
                                         </div>
