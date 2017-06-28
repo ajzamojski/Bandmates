@@ -425,12 +425,16 @@ var Home = React.createClass({
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="password">Password: </label>
+
 											<input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
+
 											<p className="help-block text-danger"></p>
 										</div>
 										<div className="form-group col-xs-6">
 											<label htmlFor="confirmpw">Confirm Password: </label>
+
 											<input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
+
 											<p className="help-block text-danger"></p>
 										</div>
 										<button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
@@ -489,7 +493,7 @@ var Home = React.createClass({
         {/*Team Section*/}
         <section id="team" className="bg-light-gray">
             <div className="container">
-                <div className="row">
+                 <div className="row">
                     <div className="col-lg-12 text-center">
                         <h2 className="section-heading">Our Amazing Team</h2>
                         <h3 className="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
@@ -498,9 +502,14 @@ var Home = React.createClass({
                 <div className="row">
                     <div className="col-sm-4">
                         <div className="team-member">
-                            <img src="#" className="img-responsive img-circle" alt=""/>
-                            <h4>Kevin Lee</h4>
-                            <p className="text-muted">Web Developer</p>
+                           <figure className="snip1543">
+                              <img src="https://avatars0.githubusercontent.com/u/19822314?v=3&s=400" alt="sample108" />
+                              <figcaption>
+                                <h3>Kevin Lee</h3>
+                                <p>The only skills I have the patience to learn are those that have no real application in life.</p>
+                              </figcaption>
+                              <a href="#"></a>
+                            </figure>
                             <ul className="list-inline social-buttons">
                                 <li><a href="#"><i className="fa fa-twitter"></i></a>
                                 </li>
@@ -513,9 +522,13 @@ var Home = React.createClass({
                     </div>
                     <div className="col-sm-4">
                         <div className="team-member">
-                            <img src="#" className="img-responsive img-circle" alt=""/>
-                            <h4>Ralph Manlapig</h4>
-                            <p className="text-muted">Web Developer</p>
+                            <figure className="snip1543"><img src="https://avatars3.githubusercontent.com/u/23372535?v=3&s=400" alt="sample100" />
+                              <figcaption>
+                                <h3>Adam Zamojski</h3>
+                                <p>The real fun of living wisely is that you get to be smug about it.</p>
+                              </figcaption>
+                              <a href="#"></a>
+                            </figure>
                             <ul className="list-inline social-buttons">
                                 <li><a href="#"><i className="fa fa-twitter"></i></a>
                                 </li>
@@ -528,9 +541,13 @@ var Home = React.createClass({
                     </div>
                     <div className="col-sm-4">
                         <div className="team-member">
-                            <img src="#" className="img-responsive img-circle" alt=""/>
-                            <h4>Adam Zamojski</h4>
-                            <p className="text-muted">Web Developer</p>
+                            <figure className="snip1543"><img src="http://i.imgur.com/V56f3Uv.jpg" alt="sample101" />
+                              <figcaption>
+                                <h3>Ralph Manlapig</h3>
+                                <p>But Calvin is no kind and loving god! He's one of the old gods! He demands sacrifice! </p>
+                              </figcaption>
+                              <a href="#"></a>
+                            </figure>
                             <ul className="list-inline social-buttons">
                                 <li><a href="#"><i className="fa fa-twitter"></i></a>
                                 </li>

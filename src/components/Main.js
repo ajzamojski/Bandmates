@@ -25,9 +25,51 @@ var Messenger = require("./Messenger.js");
 var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> kevinlee
+//User Routes for sidebar navigation
+// const userRoutes = [
+//   { path: '/',
+//   	exact: true,
+//   	sidebar: () => <div></div>,
+//     main: () => <div></div>
+//   },
+// 	{ path: '/user',
+//   	sidebar: () => <div></div>,
+//     main: () => <div></div>
+//   },
+//   { path: '/user/events',
+//   	sidebar: () => <div></div>,
+//     main: () => <Events something= {this.state.main} />
+//   },
+//   { path: '/user/search',
+//   	sidebar: () => <div></div>,
+//     main: () => <Search />
+//   },
+//   { path: '/user/messenger',
+//   	sidebar: () => <div></div>,
+//     main: () => <Messenger />
+//   },
+//   { path: '/user/profile',
+//   	sidebar: () => <div></div>,
+//     main: () => <Profile />
+//   },
+//   { path: '/user/settings',
+//   	sidebar: () => <div></div>,
+//     main: () => <Settings />
+//   }
+// ]
+
+>>>>>>> master
 var Main = React.createClass ({
 	getInitialState: function() {
         return {
+
             main: "Main State",
 			userRoutes : [
 				{ path: '/',
@@ -90,6 +132,7 @@ var Main = React.createClass ({
 							path={route.path}
 							exact={route.exact}
 							component={route.sidebar}
+
 						/>
 					))}
 				</div>
@@ -123,6 +166,7 @@ var Main = React.createClass ({
 						path={route.path}
 						exact={route.exact}
 						component={route.main}
+						randomData = {this.getData}
 					/>
 				))}
 			</div>
