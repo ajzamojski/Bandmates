@@ -26,12 +26,12 @@ var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
-
-
 =======
->>>>>>> kevinlee
+>>>>>>> c6a40983e76e71c3fe645672a2679baebc849c53
+
 //User Routes for sidebar navigation
 // const userRoutes = [
 //   { path: '/',
