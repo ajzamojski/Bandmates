@@ -54,7 +54,7 @@ var Profile = React.createClass ({
 				<div className="container">
 					<div className="container">
 
-						<div className="container" id="banner" style={{display: 'block', height: '15em'}}>
+						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
 							<h1 className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
 						</div>
 
