@@ -158,9 +158,10 @@ var Events = React.createClass({
 								</div>
 								
 								
-								<div className="md-form container col-xs-3">					
+								<div className="md-form container col-xs-3">	
+									<label htmlFor="startDate">Event Start Date Range:</label>				
 									<input className="form-control" type="text" placeholder="2017-01-01" name="startDate" ref="startDate"/>
-									<label htmlFor="startDate">Event Start Date Range:</label>
+									{/*<label htmlFor="startDate">Event Start Date Range:</label>*/}
 									<p className="col text-center">to</p>
 									<input className="col" type="text" placeholder="2017-02-01" name="endDate" ref="endDate"/>
 								</div>
