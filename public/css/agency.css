@@ -13,7 +13,7 @@ body {
   font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .nav-list{
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .text-muted {
   color: #777777;
@@ -36,13 +36,13 @@ a.active {
   outline: none;
 }
 a {
-  color: #fed136;
+  color: white;
 }
 a:hover,
 a:focus,
 a:active,
 a.active {
-  color: #fec503;
+  /*color: #fec503;*/
 }
 h1,
 h2,
@@ -193,8 +193,8 @@ fieldset[disabled] .btn-xl.active {
   background-color: white;
 }
 @font-face {
-  font-family: 'Painting in the Sunlight';
-  src: url('../brand-font/Painting in the Sunlight.ttf') format('truetype')
+  font-family: "Painting in the Sunlight";
+  src: url('../font/Painting in the Sunlight.ttf') format('truetype')
 }
 #signupForm {
   color: white ;
@@ -649,8 +649,11 @@ section#contact .section-heading {
 section#contact .form-group {
   margin-bottom: 25px;
 }
-section#contact .form-group input,
+section#contact .form-group input {
+  color: white;
+}
 section#contact .form-group textarea {
+  color: white;
   padding: 20px;
 }
 section#contact .form-group input.form-control {

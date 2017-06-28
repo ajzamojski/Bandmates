@@ -17,18 +17,11 @@ module.exports = (
     // The high level component is the Router component
     <BrowserRouter>
             <Switch>
-<<<<<<< HEAD
                 <Route exact path="/" component={Home}/>
                 <Route path="/user" component={Main}/>
                 <Route render={function () {
                     return <h1>404 Not Found</h1>;
                 }} />
-=======
-                <Route path="/" component={Main}/>
-                <Route path="/home" component={Home}/>
-                
-                {/*<IndexRoute component={Main} />*/}
->>>>>>> ralph-branch
             </Switch>
             {/* If user selects User show the appropriate component */}
 

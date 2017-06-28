@@ -363,7 +363,7 @@ var Home = React.createClass({
                             <i className="fa fa-search fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 className="service-heading">Find Musicians</h4>
-                        <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p className="text-muted">Search for musicians of all sorts through our growing network.</p>
                     </div>
                     <div className="col-md-4">
                         <span className="fa-stack fa-4x">
@@ -371,7 +371,7 @@ var Home = React.createClass({
                             <i className="fa fa-users fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 className="service-heading">Socialize</h4>
-                        <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p className="text-muted">Get connected and friendly, with our messaging feature.</p>
                     </div>
                     <div className="col-md-4">
                         <span className="fa-stack fa-4x">
@@ -379,7 +379,7 @@ var Home = React.createClass({
                             <i className="fa fa-calendar fa-stack-1x fa-inverse"></i>
                         </span>
                         <h4 className="service-heading">Live Events & Jams</h4>
-                        <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit.</p>
+                        <p className="text-muted">Look for local music events via <i>Eventbrite</i>, right here on this platform. </p>
                     </div>
                 </div>
             </div>
@@ -601,7 +601,7 @@ var Home = React.createClass({
                 <div className="row">
                     <div className="col-lg-12 text-center">
                         <h2 className="section-heading">Contact Us</h2>
-                        <h3 className="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                        <h3 className="section-subheading text-muted">If you have any feedback, questions or concerns, please feel free to contact us below.</h3>
                     </div>
                 </div>
                 <div className="row">
@@ -648,11 +648,11 @@ var Home = React.createClass({
                     </div>
                     <div className="col-md-4">
                         <ul className="list-inline social-buttons">
-                            <li><a href="#"><i className="fa fa-twitter"></i></a>
+                            <li><a href="http://www.twitter.com"><i className="fa fa-twitter"></i></a>
                             </li>
-                            <li><a href="#"><i className="fa fa-facebook"></i></a>
+                            <li><a href="http://www.facebook.com"><i className="fa fa-facebook"></i></a>
                             </li>
-                            <li><a href="#"><i className="fa fa-linkedin"></i></a>
+                            <li><a href="http://www.linkedin.com"><i className="fa fa-linkedin"></i></a>
                             </li>
                             <li><a href="https://github.com/ajzamojski/Bandmates"><i className="fa fa-github"></i></a>
                             </li>

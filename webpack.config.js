@@ -23,7 +23,7 @@ module.exports = {
           // These are the specific transformations we'll be using.
           presets: ["react", "es2015"]
         }
-      }
+      },
     ]
   },
   // This lets us debug our react code in chrome dev tools. Errors will have lines and file names
