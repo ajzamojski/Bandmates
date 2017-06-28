@@ -8,9 +8,24 @@
 // -------------------------------------------------------------------------------------------------
 var Helpers = require('./utils/helpers');
 var React = require('react');
-const currentURL = window.location.origin;
-var Home = React.createClass({
+import Modal from 'react-modal';
 
+var signupModal = document.getElementById('signupModal');
+var loginModal = document.getElementById('loginModal')
+const customStyles = {
+  content : {
+    top                   : '17%',
+    outline               : 'none',
+    borderRadius          : '7px',
+    backgroundColor       : '#f2f2f2',
+    boxShadow             : '3px 3px 8px #333333',
+  }
+};
+
+// var SimpleSlider = require('./Slider.js');
+const currentURL = window.location.origin;
+
+var Home = React.createClass({
     getInitialState: function() {
     return {
       inputNameFirst: "",
@@ -21,18 +36,30 @@ var Home = React.createClass({
       inputLogInUser: "",
       inputLogInPassword: "",
       inputConfirm: "",
-      isLogged: false
-    };
-  },
+      isLogged: false,
+      modalIsOpen: false
+        };
+    },
+    //------------------- MODAL FUNCTIONS -------------------
+    openModal: function() {
+        this.setState({modalIsOpen: true});
+    },
+    afterOpenModal: function() {
+        // references are now sync'd and can be accessed.
+        this.subtitle.style.color = '#393939';
+    },
 
+    closeModal: function() {
+        this.setState({modalIsOpen: false});
+    },
+//--------------------------------------------------------
     handleChange: function(event) {
-    console.log("TEXT CHANGED");
+        console.log("TEXT CHANGED");
 
-    var newState = {};
-    newState[event.target.id] = event.target.value;
-    this.setState(newState);
-  },
-
+        var newState = {};
+        newState[event.target.id] = event.target.value;
+        this.setState(newState);
+    },
     validFields: function(event) {
         event.preventDefault();
         console.log("CLICKED");
@@ -77,7 +104,6 @@ var Home = React.createClass({
         }
 
         console.log(inputState);
-        console.log(this.props.userData);
         if (inputState) {
 
 
@@ -110,7 +136,6 @@ var Home = React.createClass({
                     document.getElementById("registerSuccess").style.display = "block";
                     this.setState({isLogged: result.data});
                     console.log("success");
-                    $.ajax
                     console.log(this.state.isLogged);
                 }
             }.bind(this));
@@ -202,12 +227,120 @@ var Home = React.createClass({
                         <li className="hidden">
                             <a href="#page-top"></a>
                         </li>
+
+                        <li>
+                            <a className="page-scroll" id="signupTog" onClick={this.openModal}>Sign up / Login</a>
+                            
+                            <Modal className={"col-xs-10 col-xs-offset-1"} 
+                                isOpen={this.state.modalIsOpen}
+                                onAfterOpen={this.afterOpenModal}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Sign Up">
+                                
+                            <div className="col-xs-8">
+                                <h2 ref={subtitle => this.subtitle = subtitle}>Sign Up</h2>
+                                <p>We just need some info</p>
+                                <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
+                                        <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="firstName">First Name: </label>
+                                            <input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                        </div>
+
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="lastName">Last Name: </label>
+                                            <input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
+                                            <p className="help-block text-danger"></p>
+                                             <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="lastName">Username: </label>
+                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Last Name *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="email">Email: </label>
+                                            <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="password">Password: </label>
+                                            <input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="confirmpw">Confirm Password: </label>
+
+                                            <input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
+
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
+                                        <br></br>
+                                         <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>                                   
+                                        <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
+                                    </form>
+								</div>
+                                <div className="col-xs-4">
+                                    <h2>Login</h2>
+                                   <form id="loginForm" onSubmit={this.logInUser} >
+                                        <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
+                                        <div className="form-group col-xs-12">
+                                            <label htmlFor="email">Email: </label>
+                                            <input type="email" value={this.state.inputLogInUser} onChange={this.handleChange} className="form-control" placeholder="Email *" id="inputLogInUser" data-validation-required-message="Please enter a username."/>
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+                                        <div className="form-group col-xs-12">
+                                            <label htmlFor="userpw">Password: </label>
+                                            <input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary" id="logInBtn">Login</button>
+                                         <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                         <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                                         <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
+                                         <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
+                                         
+                                    </form>
+                                </div>
+                                <button onClick={this.closeModal}>close</button>
+                        </Modal>
+                        </li>              
+                      
+                            {/*<Modal
+                            isOpen={this.state.modalIsOpen}
+                            onAfterOpen={this.afterOpenModal}
+                            onRequestClose={this.closeModal}
+                            contentLabel="Login">
+
+                            <div className="col-lg-8 col-lg-offset-2">
+									<h2 ref={subtitle => this.subtitle = subtitle}>Login</h2>
+                                    <button onClick={this.closeModal}>close</button>
+									<form id="loginForm">
+									<div className="form-group col-xs-12">
+										<label htmlFor="username">Username: </label>
+										<input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
+										<p className="help-block text-danger"></p>
+									</div>
+									<div className="form-group col-xs-12">
+										<label htmlFor="userpw">Password: </label>
+										<input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
+										<p className="help-block text-danger"></p>
+									</div>
+									<button type="button" className="btn btn-primary">Login</button>
+									</form>
+								</div>
+                        </Modal>*/}
                         <li>
                             <a className="page-scroll" href="#about">About</a>
                         </li>
-                        <li>
-                            <a className="page-scroll" href="#login">Sign up / Login</a>
-                        </li>
+                        
                         <li>
                             <a className="page-scroll" href="#team">Team</a>
                         </li>
@@ -221,6 +354,7 @@ var Home = React.createClass({
 
         {/*Header*/}
         <header>
+            {/*<SimpleSlider />*/}
             <div className="container">
                 <div className="intro-text">
                     <div className="intro-lead-in">Welcome To</div>
@@ -229,6 +363,7 @@ var Home = React.createClass({
                     <a href="#about" className="page-scroll btn btn-xl">About Us</a>
                 </div>
             </div>
+            
         </header>
 
         {/*Services Section*/}
@@ -273,20 +408,19 @@ var Home = React.createClass({
         </section>
 
          {/*Login Grid Section*/}
-        }
-        <section id="login" className="bg-light-gray">
-            <div className="container">
-                <div className="row">
+        {/*<section id="login" className="bg-light-gray">
+            <div className="container">*/}
+                {/*<div className="row">
                     <div className="text-center">
                         <h2 className="section-heading">Signup or Login</h2>
                     </div>
-                </div>
-                <div className="row">
+                </div>*/}
+                {/*<div className="row">
                     <div className="col-xs-6 login-item">
                         <div className="container">
 							<div className="row">
 								{/*Sign up*/}
-								<div className="col-lg-8 col-lg-offset-2">
+								{/*<div className="col-lg-8 col-lg-offset-2">
 										<h2>Sign Up</h2>
 										<p>We just need some info</p>
 										<form id="signupForm" onSubmit={this.validFields} action="/somewhere">
@@ -335,10 +469,10 @@ var Home = React.createClass({
                                         <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>
                                         <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
 										</form>
-								</div>
+								</div>*/}
 
 								{/*Log In*/}
-								<div className="col-lg-8 col-lg-offset-2">
+								{/*<div className="col-lg-8 col-lg-offset-2">
 									<h2>Login</h2>
 									<form id="loginForm" onSubmit={this.logInUser} >
                                         <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
@@ -357,13 +491,14 @@ var Home = React.createClass({
                                          <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
                                          <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
                                          <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
+                                         
 									</form>
 								</div>
 							</div>
-						</div>
+						</div>*/}
                         
-						<div>
-							<a href="#signupModal1" className="login-link" data-toggle="modal">
+						{/*<div>
+							<a href="#signupModal" className="login-link" data-toggle="modal">
 
 								<div className="login-hover">
 									<div className="login-hover-content">
@@ -375,7 +510,7 @@ var Home = React.createClass({
                 	</div>
             	</div>
 			</div>
-        </section>
+        </section>*/}
 
         {/*Team Section*/}
         <section id="team" className="bg-light-gray">
@@ -573,7 +708,7 @@ var Home = React.createClass({
                                     <h2>Sign Up</h2>
                                     <p>We just need some info</p>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Your First Name *" id="firstName" required data-validation-required-message="Please enter your first name."/>
+                                        <input type="text" className="form-control" placeholder="Your FFirst Name *" id="firstName" required data-validation-required-message="Please enter your first name."/>
                                         <input type="text" className="form-control" placeholder="Your Last Name *" id="lastName" required data-validation-required-message="Please enter your last name."/>
                                         <p className="help-block text-danger"></p>
                                     </div>
