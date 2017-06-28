@@ -15,13 +15,14 @@ var Main = require("../components/Main.js");
 module.exports = (
 
     // The high level component is the Router component
-    <BrowserRouter >
+    <BrowserRouter>
             <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/user" component={Main}/>
-                <Route render={function () {
-                    return <h1>404 Not Found</h1>;
-                }} />
+
+                <Route path="/" component={Main}/>
+                <Route path="/home" component={Home}/>
+                
+                {/*<IndexRoute component={Main} />*/}
+
             </Switch>
             {/* If user selects User show the appropriate component */}
 

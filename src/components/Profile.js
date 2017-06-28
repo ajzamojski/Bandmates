@@ -49,9 +49,9 @@ var Profile = React.createClass ({
   },
 	render: function () {
 		return (
+
 			<div >
 				<div className="container">
-
 					<div className="container">
 
 						<div className="container" id="banner" style={{display: 'block', height: '15em'}}>
