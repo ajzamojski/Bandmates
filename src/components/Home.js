@@ -264,7 +264,7 @@ var Home = React.createClass({
                                         </div>
                                         <div className="form-group col-xs-6">
                                             <label htmlFor="email">Email: </label>
-                                            <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
+                                            <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Enter Email *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
                                             <p className="help-block text-danger"></p>
                                             <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
                                         </div>
