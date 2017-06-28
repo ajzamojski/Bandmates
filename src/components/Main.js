@@ -25,47 +25,6 @@ var Messenger = require("./Messenger.js");
 var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> c6a40983e76e71c3fe645672a2679baebc849c53
-
-//User Routes for sidebar navigation
-// const userRoutes = [
-//   { path: '/',
-//   	exact: true,
-//   	sidebar: () => <div></div>,
-//     main: () => <div></div>
-//   },
-// 	{ path: '/user',
-//   	sidebar: () => <div></div>,
-//     main: () => <div></div>
-//   },
-//   { path: '/user/events',
-//   	sidebar: () => <div></div>,
-//     main: () => <Events something= {this.state.main} />
-//   },
-//   { path: '/user/search',
-//   	sidebar: () => <div></div>,
-//     main: () => <Search />
-//   },
-//   { path: '/user/messenger',
-//   	sidebar: () => <div></div>,
-//     main: () => <Messenger />
-//   },
-//   { path: '/user/profile',
-//   	sidebar: () => <div></div>,
-//     main: () => <Profile />
-//   },
-//   { path: '/user/settings',
-//   	sidebar: () => <div></div>,
-//     main: () => <Settings />
-//   }
-// ]
-
->>>>>>> master
 var Main = React.createClass ({
 	getInitialState: function() {
         return {
