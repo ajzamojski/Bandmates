@@ -43,25 +43,72 @@ app.get('/', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get('/user/?', function(req,res) {
+app.get('/user', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
-app.get('/user/events', function(req,res) {
+
+app.get('/user/events/?', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
+
+app.get('/user/search', function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get('/user/profile', function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get('/user/settings', function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get('/user/messenger', function(req,res) {
+    res.sendFile(__dirname + "/public/index.html");
+});
+
 // app.post('/api/events', function(req,res) {
 //   console.log('post:' + res);
 //   res.json(res)
 // })
 
-// app.get('/api/events', function(req,res) {
-//   console.log("get: " + res);
-//   res.json(res)
+// app.get('*', function(req,res) {
+//     res.sendFile(__dirname + "/public/index.html");
 // });
 
-app.get('*', function(req,res) {
-    res.sendFile(__dirname + "/public/index.html");
+//------------------- API ROUTES ------------------------
+//get route for all musicians
+app.get("/api/musicians", function(req, res) {
+    db.User.findAll({
+        // where:{
+        //     instruments: req.params.instrument
+        // }
+    }).then(function(data) {
+      res.json(data);
+      console.log(data);
+      res.end();
+    });
 });
+
+app.put("/api/newUser", function(req,res) {
+
+})
+
+//get route for param filter
+app.get("/api/musicFilter?", function(req, res) {
+    var query = req.params.musicFilter;
+    console.log(query);
+    db.User.findAll({
+      where: {
+        study_subject: query
+      }
+    }).then(function(data) {
+      res.json(data);
+      console.log(data);
+      res.end();
+    });
+});
+//-------------------------------------------------------
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({}).then(function() {

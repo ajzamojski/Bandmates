@@ -54,6 +54,9 @@ h6 {
   text-transform: uppercase;
   font-weight: 700;
 }
+h1#searchHeader {
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
 .img-centered {
   margin: 0 auto;
 }
@@ -131,34 +134,13 @@ fieldset[disabled] .btn-primary.active {
 .btn-xl.active,
 .eventDesc {
   font-family: 'Roboto:400i', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px !important;
   padding: 5px;
 }
 .eventTitle {
   font-family: 'Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 18px !important;
   text-transform: none;
-}
-.eventLink {
-  display: block;
-  font-family: 'Raleway', sans-serif;
-  font-size: 16px;
-  color: #FBC640;
-  width: 25%;
-  text-align: center;
-  padding: 1%;
-  border-radius: 4px;
-  border: 1px solid #FBC640;
-  text-transform: uppercase;
-  text-decoration: none !important;
-}
-.eventLink:hover {
-  cursor: pointer;
-  background-color: #FBC640;
-  color: #f1f1f1;
-  opacity: .9;
-  -webkit-transition: all .2s ease-in;
-  -moz-transition: all .2s ease-in;
-  -o-transition: all .2s ease-in;
-  transition: all .2s ease-in;
 }
 form#eventSearch {
   height: 100px;
@@ -831,23 +813,23 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #fed136;
 }
-#searchBtn {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
-  float:right;
+#searchForm {
+  margin: 100px;
 }
 #eventHeader {
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: 300 !important;
   font-size: 48px;
   text-transform: none;
+}
+#resultEvents {
+  display: inline-flex;
 }
 .jumbotron p {
   font-size: 15px;
 }
 .panel {
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
-  
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
 }
 .panel-primary {
   border-color: transparent;
@@ -855,11 +837,5 @@ body {
 .panel-heading {
   font-family: 'Quicksand', sans-serif;
   font-size: 1.5em;
-
-}
-
-.panel>.panel-heading {
-  background-image: none;
-  background-color:#37474F;
-  color: white;
+  background-color:#37474F !important;
 }
