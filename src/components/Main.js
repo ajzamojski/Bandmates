@@ -96,7 +96,7 @@ var Main = React.createClass ({
 					))}
 				</div>
 
-			<div id="content" style={{ flex: 2}}>
+			<div id="content">
 				<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
 
                 <div className="container">

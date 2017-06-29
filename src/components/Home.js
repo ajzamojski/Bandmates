@@ -196,18 +196,12 @@ var Home = React.createClass({
 
     handleLogChange: function() {
 
-
     },
 
     handleSubmit: function() {
 
 
     },
-
-        // return (
-        //     <div id="sidebar">
-        //         <Sidebar />
-        //     </div>
 	render: function() {
 
         return (
