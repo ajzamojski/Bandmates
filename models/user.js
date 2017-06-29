@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     profilePic: {
       type: DataTypes.STRING,
-      defaultValue: "/public/img/default_pic.jpg",
+      defaultValue: "/img/default_pic.jpg",
       allowNull: true,
       // validate: {
       //   isUrl: true
