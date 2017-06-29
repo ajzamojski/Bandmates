@@ -10,6 +10,16 @@ import {
 var Home = require("../components/Home.js");
 var Main = require("../components/Main.js");
 
+function requireAuth(nextState, replace) {
+    var log = true;
+
+  if (log) {
+    replace({
+      pathname: '/login'
+    })
+  }
+}
+
 //Export routes
 module.exports = (
     // The high level component is the Router component
