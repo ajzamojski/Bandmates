@@ -30,7 +30,9 @@ var helper = {
         return result;
       });
   },
-
+  getUsers: function() {
+    return axios.get("/api/musicians");
+  },
   // This function serves our purpose of running the query to geolocate.
   runQuery: function(location) {
 
@@ -68,8 +70,8 @@ var helper = {
     '&location.within=' + radius + 
     '&location.latitude=' + lat.toString() +
     '&location.longitude=' + lng.toString() +
-    '&start_date.range_start=' + startDate + 'T13:00:00'+ 
-    '&start_date.range_end=' + endDate + 'T13:00:00'+
+    '&start_date.range_start=' + startDate + 'T01:00:00'+ 
+    '&start_date.range_end=' + endDate + 'T23:00:00'+
      '&token=ZOVDW3APCGKQD5SCX75S';
     
     return axios.get(queryURL, function(err,data) {
