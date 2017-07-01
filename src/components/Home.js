@@ -9,6 +9,12 @@
 var Helpers = require('./utils/helpers');
 var React = require('react');
 import Modal from 'react-modal';
+import { 
+    BrowserRouter as Router, 
+    Route,
+    Redirect,
+    Link 
+} from "react-router-dom";
 
 var signupModal = document.getElementById('signupModal');
 var loginModal = document.getElementById('loginModal')
@@ -37,7 +43,8 @@ var Home = React.createClass({
       inputLogInPassword: "",
       inputConfirm: "",
       isLogged: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      fireRedirect: false
         };
     },
     //------------------- MODAL FUNCTIONS -------------------
@@ -187,6 +194,10 @@ var Home = React.createClass({
                 else {
                 
                 console.log(result);
+                window.location.href = "/user";
+                // localStorage.setItem('isLogged', result.data.userAuthenticated);
+                // this.setState({fireRedirect: true })
+                console.log(result.data.userAuthenticated);
                 document.getElementById("logInSuccess").style.display = "block";
                 }
 
@@ -209,6 +220,9 @@ var Home = React.createClass({
         //         <Sidebar />
         //     </div>
 	render: function() {
+
+        const { from } = this.props.location.state || '/'
+        const { fireRedirect } = this.state
 
         return (
 		<div>
@@ -301,13 +315,14 @@ var Home = React.createClass({
                                             <input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
                                             <p className="help-block text-danger"></p>
                                         </div>
-                                        <button type="submit" className="btn btn-primary" id="logInBtn">Login</button>
+                                        <button type="submit" className="btn btn-primary" id="logInBtn" to="/user">Login</button>
                                          <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
                                          <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
                                          <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
                                          <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
                                          
                                     </form>
+
                                 </div>
                                 <button onClick={this.closeModal}>close</button>
                         </Modal>
