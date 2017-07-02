@@ -70,6 +70,20 @@ var Main = React.createClass ({
 			]
         }
   },
+  logout: function() {
+
+  	console.log("test worked");
+  	$.get('/logout', function(data) {
+  		console.log(data);
+  		console.log('successfully logged out')
+  	});
+
+  },
+
+  something: function() {
+  	console.log("this is triggereed");
+  },
+
 	printData: function(a) {
 		console.log("i made it" + a);
 	},
@@ -92,7 +106,11 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
 							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
+<<<<<<< HEAD
 							<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+=======
+							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+>>>>>>> 1b08230b07b9434cdc4e19f935a638dac48be3e8
 						</ul>
 					</nav>
 
@@ -107,6 +125,7 @@ var Main = React.createClass ({
 					
 				</div>
 
+<<<<<<< HEAD
 			<div id="content">
 				
 				{/*Top Navbar*/}
@@ -128,11 +147,12 @@ var Main = React.createClass ({
 					</div>
             	</nav>*/}
 				
+=======
+>>>>>>> 1b08230b07b9434cdc4e19f935a638dac48be3e8
 				<div>
 				<Route render={({location, history, match}) => {
 
 					return (
-
 						<div>
 						{this.state.userRoutes.map((route, index) => (
 							<RouteTransition 
@@ -158,7 +178,7 @@ var Main = React.createClass ({
 					);
 
 				}} />
-				</div>
+
 			</div>
 
 			</div>
