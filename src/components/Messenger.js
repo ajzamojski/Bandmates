@@ -11,68 +11,71 @@
 // -------------------------------------------------------------------------------------------------
 
 var React = require('react');
-
-// auth.onAuthStateChanged(function(user) { 
-//     if(user) {
-//         $('#btnLogout').removeClass("hide");
-//         var queryUrl;
-//         queryUrl = "api/buddies/" + user.email;  
-//         console.log(queryUrl);
-
-//     var yourName;
-
-//     $.get(queryUrl, function(data) {
-//             console.log(data);
-//             yourName = data.firstName;
-//             console.log(yourName);
-//             currentid = data.id;
-//             return currentid;
-
-//             return yourName;
-            
-//         });
-
-//       $(function () {
-        
-//         var socket = io();
-//         $('form').submit(function(){
-//           socket.emit('chat message', $('#m').val());
-//           $('#m').val('');
-//           return false;
-//         });
-//         socket.on('chat message', function(msg){
-//           $('#messages').append($('<li>').text(yourName + ": " +msg));
-//           window.scrollTo(0, document.body.scrollHeight);
-//         });
-//       });
-
-       
-//     } else {
-//         console.log('Not logged in');
-//         $('#btnLogout').addClass("hide");
-//     }
- 
-// });
-
-// Including the Link component from React Router to navigate within our application without full page reloads
-var Link = require("react-router").Link;
+const io = require('socket.io-client');
 
 var Messenger = React.createClass ({
 	getInitialState: function() {
         return {
-            state: null
+            usersContacts: [],
+			messageHistory:[],
+			messages:[]
         }
   	},
+	componentDidMount: function() {
+		this.socket = io().connect();
+		console.log("socket " + this.socket)
+		this.socket.on('message', function(message) {
+			console.log(message);
+			this.setState({messages: [message, ...this.state.messages] })
+		}.bind(this))
+	},
+	handleSubmit: function(event) {
+		event.preventDefault();
+		const body = event.target.value
+		if(event.keyCode === 13 && body) {
+			const message = {
+				body,
+				from: 'Me'
+			}
+			this.setState({ messages: [message, ...this.state.messages] })
+			this.socket.emit('message', body)
+			event.target.value='';
+		}
+		
+	},
 	render: function() {
+		const messages = this.state.messages.map((message,index) => {
+			const img = message.img ? <img src={message.img} width='100px' /> : null
+			return <li key={index}><b>{message.from}:</b>{message.body}</li>
+		})
 		return (
-			<div className ="container">
+			<div className ="container contentWrapper">
 				<div className="row">
-					<div className="jumbotron">
-						<h1>Messenger</h1>
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}> Main > Messenger</h2>
+				</div>
+				<div className="row" style={{height: "800px"}}>
+					<div className="container-fluid">
+
+						{/*Contacts/Friends List*/}
+						<div className="container col-xs-4" style={{border:"solid black 1px", height: "550px", margin: "1em"}}>
+							<h3>Friends</h3>
+						</div>
+
+						{/*Messaging*/}
+						<div className="container col-xs-7" style={{border:"solid black 1px", height: "550px", margin: "1em"}}>
+							<h3>Message</h3>
+							<div id="chatBox">
+								{messages}
+							</div>
+							<form onSubmit={this.handleSubmit}>
+								<input type='text' placeholder="Enter a message..." onKeyUp={this.handleSubmit}/>
+								<button className="btn btn-md" type="submit" onSubmit={this.handleSubmit}>Send</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
-			)
+		)
 	}
 });
 
