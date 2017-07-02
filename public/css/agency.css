@@ -7,10 +7,9 @@
   overflow: none;
   height: 500px;
 }
-
 body {
   overflow-x: hidden;
-  font-family: "Roboto Slab", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .nav-list{
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -120,6 +119,8 @@ fieldset[disabled] .btn-primary.active {
   border-radius: 3px;
   font-size: 18px;
   padding: 20px 40px;
+  transition: box-shadow .55s;
+  box-shadow: 0;
 }
 .btn-xl:hover,
 .btn-xl:focus,
@@ -129,9 +130,14 @@ fieldset[disabled] .btn-primary.active {
   color: white;
   background-color: #fec503;
   border-color: #f6bf01;
+  transition: box-shadow .45s;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .btn-xl:active,
 .btn-xl.active,
+.open .dropdown-toggle.btn-xl {
+  background-image: none;
+}
 .eventDesc {
   font-family: 'Roboto:400i', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px !important;
@@ -146,11 +152,7 @@ form#eventSearch {
   height: 100px;
 }
 form#eventSearch .form-group{
-
   font-family: 'Roboto', sans-serif;
-}
-.open .dropdown-toggle.btn-xl {
-  background-image: none;
 }
 .btn-xl.disabled,
 .btn-xl[disabled],
@@ -179,15 +181,11 @@ fieldset[disabled] .btn-xl.active {
   src: url('../font/Painting in the Sunlight.ttf') format('truetype')
 }
 #signupForm {
-  color: white ;
-  background-color: #222222;
-  padding: 2em;
+
   border-radius: 10px;
 }
 #loginForm {
-  color: white ;
-  background-color: #222222;
-  padding: 2em;
+
   border-radius: 10px;
 }
 .navbar-custom {
@@ -620,10 +618,12 @@ aside.clients img {
   margin: 50px auto;
 }
 section#contact {
-  background-color: #222222;
-  background-image: url('../img/map-image.png');
+  /*background-color: #222222;*/
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
+  background-color: #363636;
+  background-image: url("https://www.transparenttextures.com/patterns/diagmonds.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 section#contact .section-heading {
   color: white;
@@ -632,10 +632,8 @@ section#contact .form-group {
   margin-bottom: 25px;
 }
 section#contact .form-group input {
-  color: white;
 }
 section#contact .form-group textarea {
-  color: white;
   padding: 20px;
 }
 section#contact .form-group input.form-control {
@@ -649,7 +647,7 @@ section#contact .form-control:focus {
   box-shadow: none;
 }
 section#contact ::-webkit-input-placeholder {
-  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
   font-weight: 700;
   color: #eeeeee;
@@ -821,6 +819,39 @@ body {
   font-weight: 300 !important;
   font-size: 48px;
   text-transform: none;
+}
+#aboutBtn{
+  transition: box-shadow .55s;
+  box-shadow: 0;
+}
+#signUpBtn, #logInBtn {
+  transition: box-shadow .55s;
+  box-shadow: 0;
+  font-weight: 700;
+  color: white;
+  display: block;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+  background-color: #FED136;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+#signUpBtn:hover,
+#logInBtn:hover {
+  background-color: #fec503;
+  border-color: #f6bf01;
+  transition: box-shadow .45s;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#modalCloseBtn {
+  background-color: transparent;
+   transition: box-shadow .55s;
+   box-shadow: 0;
+}
+#modalCloseBtn:hover {
+  background-color: #f2f2f2;
+  transition: box-shadow .45s;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 #resultEvents {
   display: inline-flex;

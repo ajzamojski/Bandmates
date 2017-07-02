@@ -6,6 +6,7 @@ import {
     Route, 
     Link 
 } from "react-router-dom";
+import { RouteTransition } from 'react-router-transition';
 
 var Home = require("../components/Home.js");
 var Main = require("../components/Main.js");
@@ -24,13 +25,13 @@ function requireAuth(nextState, replace) {
 module.exports = (
     // The high level component is the Router component
     <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={Home}/>
-                <Route path="/user" component={Main}/>
-                <Route render={function () {
-                    return <h1>404 Not Found</h1>;
-                }} />
-            </Switch>
+                <Switch>
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/user" component={Main}/>
+                    <Route render={() => {
+                        return <h1>404 Not Found</h1>;
+                    }} />
+                </Switch>
             {/* If user selects User show the appropriate component */}
         {/* If user selects any other path... we get the Main Route */}
     </BrowserRouter>
