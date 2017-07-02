@@ -107,10 +107,17 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 							<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 =======
 							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 >>>>>>> 1b08230b07b9434cdc4e19f935a638dac48be3e8
+=======
+
+							//<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+
+>>>>>>> a6272ce5b234f14f5cc1a4c07a725cd9b5fc9b52
 						</ul>
 					</nav>
 
@@ -125,6 +132,7 @@ var Main = React.createClass ({
 					
 				</div>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 			<div id="content">
 				
@@ -149,6 +157,9 @@ var Main = React.createClass ({
 				
 =======
 >>>>>>> 1b08230b07b9434cdc4e19f935a638dac48be3e8
+=======
+			<div id="content">
+>>>>>>> a6272ce5b234f14f5cc1a4c07a725cd9b5fc9b52
 				<div>
 				<Route render={({location, history, match}) => {
 
