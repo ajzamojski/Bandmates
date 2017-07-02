@@ -203,7 +203,7 @@ var Events = React.createClass({
                         </div>
                         <div className="panel-body" id="results">
                             <Route path="/user/events/search" component={Results}/>
-								<div id="loadingImg" style={{display: 'none', margin: '0'}}>
+								<div id="loadingImg" style={{display: 'none', marginLeft: '0 auto'}}>
 									<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
 								</div>
 								<div><p>{this.state.resultsFound}</p></div>

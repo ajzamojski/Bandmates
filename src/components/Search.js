@@ -108,6 +108,7 @@ var Search = React.createClass({
 					age: '',
 					gender: '',
 					instrument: '',
+					photo: '',
 					key: ''
 				};
 
@@ -119,6 +120,7 @@ var Search = React.createClass({
 				newState.age = result.data[i].age;
 				newState.gender = result.data[i].gender;
 				newState.instrument = result.data[i].instruments;
+				newState.photo = result.data[i].profilePic;
 				newState.key = Date.now() + i;
 				
 				//set state
@@ -231,12 +233,16 @@ var Search = React.createClass({
 							<button type="submit" className="btn btn-lg" id="musicianBtn">Submit</button>
 						</form>
 
-						<div id="musicianSearchResults">
+						<div className="panel-body" id="musicianSearchResults">
+							{/*<Route path="/user/events/search" component={Results}/>*/}
+							<div id="loadingImg" style={{display: 'none', margin: '0 auto'}}>
+									<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+							</div>
 							{this.state.usersByRadius.map(function(user) {
 									return (
 									<div className="resultSearch" key={user.key} data-key={user.key} style={{overflow: 'hidden'}}>
 										<h3 className="eventTitle">{user.firstName + " " + user.lastName}</h3>
-										{/*<img className="imgResponsive col-xs-4" style={{height:'180px' , float:'left'}}src={user.img}/>*/}
+										<img className="imgResponsive col-xs-2" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
 										{/*<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="userDesc">{user.description}</p>*/}
 									</div>
 								);

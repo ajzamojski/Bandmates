@@ -43,7 +43,7 @@ app.get('/', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get('/user', function(req,res) {
+app.get('/user/?', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 

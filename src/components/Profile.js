@@ -8,9 +8,6 @@
 
 var React = require('react');
 
-// Including the Link component from React Router to navigate within our application without full page reloads
-var Link = require("react-router").Link;
-
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
@@ -56,11 +53,9 @@ var Profile = React.createClass ({
   },
 	render: function () {
 		return (
-
-			<div >
+			<div>
 				<div className="container">
-					<div className="container">
-
+					<div className="row">
 						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
 							<h1 className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
 						</div>
