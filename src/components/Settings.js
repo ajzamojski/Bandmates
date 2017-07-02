@@ -50,13 +50,13 @@ var Settings = React.createClass ({
 	},
 	render: function() {
 		return (
-			<div className ="container">
+			<div className ="container contentWrapper">
 				<div className="row">
-					<div className="jumbotron">
-						<h1>Settings</h1>
-					</div>
-
-					<div className="col-md-10 col-md-offset-1">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Settings</h2>
+				</div>
+				<div className="row">
+					<h2>Settings</h2>
+				<div className="col-md-10 col-md-offset-1">
 				<form id="editForm" onSubmit={this.handleUpdate}>
 					<div className="form-group">
 						<label htmlFor="firstName">First Name:</label>
@@ -82,7 +82,7 @@ var Settings = React.createClass ({
 						<br />
 						<div className="form-group">
 							<label htmlFor="state">State:</label>
-							<select className="form-control" id="state" name="stateLocation" value={event.target.value} onChange={this.handleChange}>
+							<select className="form-control" id="state" name="stateLocation" value={this.state.stateLocation} onChange={this.handleChange}>
 								{
 									states.map(function(el) {
 										return <option key ={el}

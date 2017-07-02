@@ -33,7 +33,8 @@ var Main = React.createClass ({
         return {
             main: "Main State",
 			user: {
-				firstName: 'Kevin'
+				firstName: 'Kevin',
+				lastName: 'Lee'
 			},
 			userRoutes : [
 				{ path: '/',
@@ -79,7 +80,11 @@ var Main = React.createClass ({
 				<div>
 					<nav className ="container col-xs-4" id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
-							<li className="nav-header text-center">MENU</li>
+							<li className="nav-header text-center active btn-group">
+								{/*{this.state.user.firstName + " " + this.state.user.lastName}*/}
+								MENU
+							</li>
+							{/*<li className="nav-header text-center">MENU</li>*/}
 							<li><NavLink to="/"><i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>
 							<li><NavLink exact to="/user" className="selected"><i className="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Main</NavLink></li>
 							<li><NavLink to="/user/search" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Search</NavLink></li>
@@ -87,6 +92,7 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
 							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
+							<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 						</ul>
 					</nav>
 
@@ -104,13 +110,13 @@ var Main = React.createClass ({
 			<div id="content">
 				
 				{/*Top Navbar*/}
-				<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
+				{/*<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
 					<div className="container">
-						<div className="navbar-toggleable-xs">
+						<div className="navbar-toggleable-xs">*/}
 							{/*<!--Navbar Brand-->*/}
-							<a className="navbar-brand">Home</a>
+							{/*<a className="navbar-brand">Home</a>*/}
 							{/*<!--Links-->*/}
-							<ul className="nav navbar-nav" style={{float: 'right'}}>
+							{/*<ul className="nav navbar-nav" style={{float: 'right'}}>
 								<li className="nav-item active btn-group">
 									<a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged in as {this.state.user.firstName}</a>
 									<div className="dropdown-menu" aria-labelledby="dropdownMenu">
@@ -120,7 +126,7 @@ var Main = React.createClass ({
 							</ul>
 						</div>
 					</div>
-            	</nav>
+            	</nav>*/}
 				
 				<div>
 				<Route render={({location, history, match}) => {

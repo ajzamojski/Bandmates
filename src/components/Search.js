@@ -175,7 +175,10 @@ var Search = React.createClass({
 	render () {
 
 		return (
-			<div className ="container">
+			<div className ="container contentWrapper">
+				<div className="row">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Search</h2>
+				</div>
 				<div className="row">
 					<div id="searchForm" className="jumbotron">
 

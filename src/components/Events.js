@@ -131,8 +131,10 @@ var Events = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className ="container jumbotron" style={{paddingLeft: '50px', paddingRight:'50px'}}>
-				
+			<div className ="container contentWrapper">
+				<div className="row">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Events</h2>
+				</div>
 				<div id="eventFilter" className="row">
 					
 					<h1 id="eventHeader">Events</h1>

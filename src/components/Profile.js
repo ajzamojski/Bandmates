@@ -11,8 +11,8 @@ var React = require('react');
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
-            firstName: null,
-            lastName: null,
+            firstName: 'Kevin',
+            lastName: 'Lee',
             city: "Edison",
             state: "NJ",
             zipcode: "08854",
@@ -54,7 +54,10 @@ var Profile = React.createClass ({
 	render: function () {
 		return (
 			<div>
-				<div className="container">
+				<div className="container contentWrapper">
+					<div className="row">
+						<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Profile</h2>
+					</div>
 					<div className="row">
 						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
 							<h1 className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
