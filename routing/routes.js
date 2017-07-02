@@ -49,7 +49,7 @@ module.exports = function (app) {
 		req.logout();
 		console.log(req.user);
 		console.log(req.isAuthenticated());
-		res.redirect('/login');
+		res.json({result: req.isAuthenticated});
 
 	});
 

@@ -69,6 +69,16 @@ var Main = React.createClass ({
 			]
         }
   },
+  logout: function() {
+
+  	console.log("test worked");
+  	$.get('/logout', function(data) {
+  		console.log(data);
+  		console.log('successfully logged out')
+  	});
+
+  },
+
 	printData: function(a) {
 		console.log("i made it" + a);
 	},
@@ -126,7 +136,6 @@ var Main = React.createClass ({
 				<Route render={({location, history, match}) => {
 
 					return (
-
 						<div>
 						{this.state.userRoutes.map((route, index) => (
 							<RouteTransition 

@@ -62,7 +62,7 @@ var Profile = React.createClass ({
 
 						<div className="row" style={{ height:'40em', border: 'solid 1px black'}}>
 							<div className="container col-xs-4" id="" style={{display: 'block', height:'100%', border: 'solid 1px black'}}>
-								<h3 className="text-center">Left Side</h3>
+								<h3 className="text-center">Profile</h3>
 								<div> <img className="img-responsive" id="displayPic"src="/img/default_pic.jpg" /></div> <br></br>
 								<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
 								<div className="infoProfile">{this.state.city} {this.state.state} {this.state.zipcode}</div> 
@@ -70,7 +70,7 @@ var Profile = React.createClass ({
 							</div>
 						
 							<div className="container col-xs-8" id="" style={{display: 'block', height:'100%', border: 'solid 1px black'}}>
-								<h3 className="text-center">Right Side</h3>
+								<h3 className="text-center">About Me</h3>
 								<div className="rightProfile"><strong>Information: </strong>{this.state.musicianInfo}</div> <br></br>
 								<div className="rightProfile"><strong>Profession: </strong>{this.state.profession}</div> <br></br>
 								<div className="rightProfile"><strong>Instrument: </strong>{this.state.instrument}</div> <br></br>
@@ -80,7 +80,7 @@ var Profile = React.createClass ({
 						</div>
 						<div className="row" >
 							<div className="container col-xs-12" id="" style={{height:'25em', border: 'solid 1px black'}}>
-								<h3 className="text-center">Bottom</h3>
+								<h3 className="text-center">My Links</h3>
 							</div>
 						</div>
 					</div>
