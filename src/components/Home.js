@@ -9,6 +9,12 @@
 var Helpers = require('./utils/helpers');
 var React = require('react');
 import Modal from 'react-modal';
+import { 
+    BrowserRouter as Router, 
+    Route,
+    Redirect,
+    Link 
+} from "react-router-dom";
 
 var signupModal = document.getElementById('signupModal');
 var loginModal = document.getElementById('loginModal')
@@ -37,7 +43,8 @@ var Home = React.createClass({
       inputLogInPassword: "",
       inputConfirm: "",
       isLogged: false,
-      modalIsOpen: false
+      modalIsOpen: false,
+      fireRedirect: false
         };
     },
     //------------------- MODAL FUNCTIONS -------------------
@@ -187,6 +194,10 @@ var Home = React.createClass({
                 else {
                 
                 console.log(result);
+                window.location.href = "/user";
+                // localStorage.setItem('isLogged', result.data.userAuthenticated);
+                // this.setState({fireRedirect: true })
+                console.log(result.data.userAuthenticated);
                 document.getElementById("logInSuccess").style.display = "block";
                 }
 
@@ -203,6 +214,9 @@ var Home = React.createClass({
 
     },
 	render: function() {
+
+        const { from } = this.props.location.state || '/'
+        const { fireRedirect } = this.state
 
         return (
 		<div>
@@ -223,7 +237,91 @@ var Home = React.createClass({
                         </li>
 
                         <li>
-                            <a className="page-scroll" data-toggle="modal" data-target="#signupModal">Sign up / Login</a>
+
+                            <a className="page-scroll" id="signupTog" onClick={this.openModal}>Sign up / Login</a>
+                            
+                            <Modal className={"col-xs-10 col-xs-offset-1"} 
+                                isOpen={this.state.modalIsOpen}
+                                onAfterOpen={this.afterOpenModal}
+                                onRequestClose={this.closeModal}
+                                style={customStyles}
+                                contentLabel="Sign Up">
+                                
+                            <div className="col-xs-8">
+                                <h2 ref={subtitle => this.subtitle = subtitle}>Sign Up</h2>
+                                <p>We just need some info</p>
+                                <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
+                                        <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="firstName">First Name: </label>
+                                            <input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                        </div>
+
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="lastName">Last Name: </label>
+                                            <input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
+                                            <p className="help-block text-danger"></p>
+                                             <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="lastName">Username: </label>
+                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Last Name *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="email">Email: </label>
+                                            <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="password">Password: </label>
+                                            <input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
+                                            <p className="help-block text-danger"></p>
+                                            <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                                        </div>
+                                        <div className="form-group col-xs-6">
+                                            <label htmlFor="confirmpw">Confirm Password: </label>
+
+                                            <input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
+
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
+                                        <br></br>
+                                         <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>                                   
+                                        <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
+                                    </form>
+								</div>
+                                <div className="col-xs-4">
+                                    <h2>Login</h2>
+                                   <form id="loginForm" onSubmit={this.logInUser} >
+                                        <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
+                                        <div className="form-group col-xs-12">
+                                            <label htmlFor="email">Email: </label>
+                                            <input type="email" value={this.state.inputLogInUser} onChange={this.handleChange} className="form-control" placeholder="Email *" id="inputLogInUser" data-validation-required-message="Please enter a username."/>
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+                                        <div className="form-group col-xs-12">
+                                            <label htmlFor="userpw">Password: </label>
+                                            <input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
+                                            <p className="help-block text-danger"></p>
+                                        </div>
+                                        <button type="submit" className="btn btn-primary" id="logInBtn" to="/user">Login</button>
+                                         <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                                         <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                                         <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
+                                         <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
+                                         
+                                    </form>
+
+                                </div>
+                                <button onClick={this.closeModal}>close</button>
+                        </Modal>
+
                         </li>              
                         <li>
                             <a className="page-scroll" href="#about">About</a>

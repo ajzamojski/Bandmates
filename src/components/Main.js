@@ -70,6 +70,20 @@ var Main = React.createClass ({
 			]
         }
   },
+  logout: function() {
+
+  	console.log("test worked");
+  	$.get('/logout', function(data) {
+  		console.log(data);
+  		console.log('successfully logged out')
+  	});
+
+  },
+
+  something: function() {
+  	console.log("this is triggereed");
+  },
+
 	printData: function(a) {
 		console.log("i made it" + a);
 	},
@@ -92,7 +106,10 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
 							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
-							<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+
+							//<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+
 						</ul>
 					</nav>
 
@@ -108,31 +125,10 @@ var Main = React.createClass ({
 				</div>
 
 			<div id="content">
-				
-				{/*Top Navbar*/}
-				{/*<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
-					<div className="container">
-						<div className="navbar-toggleable-xs">*/}
-							{/*<!--Navbar Brand-->*/}
-							{/*<a className="navbar-brand">Home</a>*/}
-							{/*<!--Links-->*/}
-							{/*<ul className="nav navbar-nav" style={{float: 'right'}}>
-								<li className="nav-item active btn-group">
-									<a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged in as {this.state.user.firstName}</a>
-									<div className="dropdown-menu" aria-labelledby="dropdownMenu">
-										<NavLink to="/">Logout</NavLink>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-            	</nav>*/}
-				
 				<div>
 				<Route render={({location, history, match}) => {
 
 					return (
-
 						<div>
 						{this.state.userRoutes.map((route, index) => (
 							<RouteTransition 
@@ -158,7 +154,7 @@ var Main = React.createClass ({
 					);
 
 				}} />
-				</div>
+
 			</div>
 
 			</div>
