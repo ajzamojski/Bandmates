@@ -4,6 +4,7 @@ var axios = require("axios");
 // Geocoder API
 var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
 var eventbriteAPIToken = 'ZOVDW3APCGKQD5SCX75S';
+// var googleMapsAPIKey = 'AIzaSyCoyi5AORiKLaxUyJiqEdBgpX-B4zIF4Nk';
 
 // Helper functions for making API Calls
 var helper = {
@@ -30,7 +31,9 @@ var helper = {
         return result;
       });
   },
-
+  getUsers: function() {
+    return axios.get("/api/musicians");
+  },
   // This function serves our purpose of running the query to geolocate.
   runQuery: function(location) {
 
@@ -68,8 +71,8 @@ var helper = {
     '&location.within=' + radius + 
     '&location.latitude=' + lat.toString() +
     '&location.longitude=' + lng.toString() +
-    '&start_date.range_start=' + startDate + 'T13:00:00'+ 
-    '&start_date.range_end=' + endDate + 'T13:00:00'+
+    '&start_date.range_start=' + startDate + 'T01:00:00'+ 
+    '&start_date.range_end=' + endDate + 'T23:00:00'+
      '&token=ZOVDW3APCGKQD5SCX75S';
     
     return axios.get(queryURL, function(err,data) {
@@ -86,7 +89,6 @@ var helper = {
   getHistory: function() {
     return axios.get("/api");
   },
-
   // This function posts new searches to our database.
   postHistory: function(location) {
     return axios.post("/api", { location: location });

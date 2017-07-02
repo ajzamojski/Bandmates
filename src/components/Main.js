@@ -16,6 +16,9 @@ import {
     Link 
 } from "react-router-dom";
 import {NavLink} from "react-router-dom";
+// var CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
+import { RouteTransition } from 'react-router-transition';
+import {Switch} from 'react-router-dom';
 
 //User Features 
 var Home = require("./Home.js");
@@ -28,8 +31,10 @@ var Settings = require("./Settings.js");
 var Main = React.createClass ({
 	getInitialState: function() {
         return {
-
             main: "Main State",
+			user: {
+				firstName: 'Kevin'
+			},
 			userRoutes : [
 				{ path: '/',
 					exact: true,
@@ -82,62 +87,81 @@ var Main = React.createClass ({
 			<div>
 			{/*Sidebar*/}
 				<div>
-					<nav className ="container col-xs-4"id="sidebar">
+					<nav className ="container col-xs-4" id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
 							<li className="nav-header text-center">MENU</li>
-							<li><NavLink to="/">Home</NavLink></li>
-							<li><NavLink to="/user">Main</NavLink></li>
-							<li><NavLink to="/user/search">Search</NavLink></li>
-							<li><NavLink to="/user/messenger">Messenger</NavLink></li>
-							<li><NavLink to="/user/events/">Events</NavLink></li>
-							<li><NavLink to="/user/profile">Profile</NavLink></li>
-							<li><NavLink to="/user/settings">Settings</NavLink></li>
+							<li><NavLink to="/"><i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>
+							<li><NavLink exact to="/user" className="selected"><i className="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Main</NavLink></li>
+							<li><NavLink to="/user/search" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Search</NavLink></li>
+							<li><NavLink to="/user/messenger" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Messenger</NavLink></li>
+							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
+							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
+							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 						</ul>
 					</nav>
-					
+
 					{this.state.userRoutes.map((route, index) => (
 						<Route
 							key={index}
 							path={route.path}
 							exact={route.exact}
 							component={route.sidebar}
-
 						/>
-					))}
+					))}		
+					
 				</div>
 
-			<div id="content" style={{ flex: 2}}>
+			<div id="content">
+				
+				{/*Top Navbar*/}
 				<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
+					<div className="container">
+						<div className="navbar-toggleable-xs">
+							{/*<!--Navbar Brand-->*/}
+							<a className="navbar-brand">Home</a>
+							{/*<!--Links-->*/}
+							<ul className="nav navbar-nav" style={{float: 'right'}}>
+								<li className="nav-item active btn-group">
+									<a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged in as {this.state.user.firstName}</a>
+									<div className="dropdown-menu" aria-labelledby="dropdownMenu">
+										<NavLink to="/">Logout</NavLink>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+            	</nav>
+				
+				<div>
+				<Route render={({location, history, match}) => {
 
-                <div className="container">
+					return (
+						<div>
+						{this.state.userRoutes.map((route, index) => (
+							<RouteTransition 
+							pathname={location.pathname}
+							atEnter={{ opacity: 0 }}
+							atLeave={{ opacity: 0 }}
+							atActive={{ opacity: 1 }}
+							className="transition-wrapper"
+							runOnMount={true}>
+								<Switch key={location.key} location={location}>
+								<Route
+									key={index}
+									path={route.path}
+									exact={route.exact}
+									component={route.main}
+									randomData = {this.getData}
+								/>
+								</Switch>
+							</RouteTransition>
+						))}
+						</div>
 
-                    <div className="navbar-toggleable-xs">
-                        {/*<!--Navbar Brand-->*/}
-                        <a className="navbar-brand">Home</a>
-                        {/*<!--Links-->*/}
-                        <ul className="nav navbar-nav" style={{float: 'right'}}>
-                            
-                            <li className="nav-item active btn-group">
-                                <a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged In As *USER*</a>
-                                <div className="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <NavLink onClick={this.logout()} to="/">Logout</NavLink>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+					);
 
-                </div>
-
-            </nav>
-				{this.state.userRoutes.map((route, index) => (
-					<Route
-						key={index}
-						path={route.path}
-						exact={route.exact}
-						component={route.main}
-						randomData = {this.getData}
-					/>
-				))}
+				}} />
+				</div>
 			</div>
 
 			</div>

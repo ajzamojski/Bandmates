@@ -207,18 +207,12 @@ var Home = React.createClass({
 
     handleLogChange: function() {
 
-
     },
 
     handleSubmit: function() {
 
 
     },
-
-        // return (
-        //     <div id="sidebar">
-        //         <Sidebar />
-        //     </div>
 	render: function() {
 
         const { from } = this.props.location.state || '/'
@@ -243,6 +237,7 @@ var Home = React.createClass({
                         </li>
 
                         <li>
+
                             <a className="page-scroll" id="signupTog" onClick={this.openModal}>Sign up / Login</a>
                             
                             <Modal className={"col-xs-10 col-xs-offset-1"} 
@@ -326,36 +321,11 @@ var Home = React.createClass({
                                 </div>
                                 <button onClick={this.closeModal}>close</button>
                         </Modal>
-                        </li>              
-                      
-                            {/*<Modal
-                            isOpen={this.state.modalIsOpen}
-                            onAfterOpen={this.afterOpenModal}
-                            onRequestClose={this.closeModal}
-                            contentLabel="Login">
 
-                            <div className="col-lg-8 col-lg-offset-2">
-									<h2 ref={subtitle => this.subtitle = subtitle}>Login</h2>
-                                    <button onClick={this.closeModal}>close</button>
-									<form id="loginForm">
-									<div className="form-group col-xs-12">
-										<label htmlFor="username">Username: </label>
-										<input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
-										<p className="help-block text-danger"></p>
-									</div>
-									<div className="form-group col-xs-12">
-										<label htmlFor="userpw">Password: </label>
-										<input type="text" className="form-control" placeholder="Password *" id="userpw" required data-validation-required-message="Please enter a password."/>
-										<p className="help-block text-danger"></p>
-									</div>
-									<button type="button" className="btn btn-primary">Login</button>
-									</form>
-								</div>
-                        </Modal>*/}
+                        </li>              
                         <li>
                             <a className="page-scroll" href="#about">About</a>
                         </li>
-                        
                         <li>
                             <a className="page-scroll" href="#team">Team</a>
                         </li>
@@ -366,6 +336,89 @@ var Home = React.createClass({
                 </div>
             </div>
         </nav>
+        <div className="modal fade" id="signupModal" role="dialog">
+        <div className="modal-dialog" style={{width:'800px',fontFamily:'Roboto', backgroundColor: 'white', borderRadius: '10px', boxShadow:'0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}>
+            
+            <div className="col-xs-12">
+                <h2 className="text-center">Sign Up</h2>
+                <p className="text-center">We just need some info</p>
+                <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
+                    <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
+                    <div className="form-group col-xs-6">
+                        <label htmlFor="firstName">First Name: </label>
+                        <input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
+                        <p className="help-block text-danger"></p>
+                        <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                    </div>
+
+                    <div className="form-group col-xs-6">
+                        <label htmlFor="lastName">Last Name: </label>
+                        <input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
+                        <p className="help-block text-danger"></p>
+                            <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
+                    </div>
+                    <div className="form-group col-xs-6">
+                        <label htmlFor="lastName">Username: </label>
+                        <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Username *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
+                        <p className="help-block text-danger"></p>
+                        <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
+                    </div>
+                    <div className="form-group col-xs-6">
+                        <label htmlFor="email">Email: </label>
+                        <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Enter Email *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
+                        <p className="help-block text-danger"></p>
+                        <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
+                    </div>
+                    <div className="form-group col-xs-6">
+                        <label htmlFor="password">Password: </label>
+                        <input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
+                        <p className="help-block text-danger"></p>
+                        <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                    </div>
+                    <div className="form-group col-xs-6">
+                        <label htmlFor="confirmpw">Confirm Password: </label>
+
+                        <input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
+
+                        <p className="help-block text-danger"></p>
+                    </div>
+                    <button type="submit" className="btn btn-lg" id="signUpBtn">SIGN UP</button>
+                    <br></br>
+                        <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>                                   
+                    <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
+                </form>
+                <hr />
+            </div>
+            
+            <div className="col-xs-12">
+                <h2 className="text-center">Login</h2>
+                <p className="text-center">Welcome back!</p>
+                <form id="loginForm" onSubmit={this.logInUser} >
+                    <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
+                    <div className="form-group col-xs-12">
+                        <label htmlFor="email">Email: </label>
+                        <input type="email" value={this.state.inputLogInUser} onChange={this.handleChange} className="form-control" placeholder="Email *" id="inputLogInUser" data-validation-required-message="Please enter a username."/>
+                        <p className="help-block text-danger"></p>
+                    </div>
+                    <div className="form-group col-xs-12">
+                        <label htmlFor="userpw">Password: </label>
+                        <input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
+                        <p className="help-block text-danger"></p>
+                    </div>
+                    <button type="submit" className="btn btn-lg" id="logInBtn">LOGIN</button>
+                        <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
+                        <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
+                        <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
+                        <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
+                </form>
+            </div>
+            
+            <div className="modal-footer">
+                <button type="button" className="btn btn-lg" id="modalCloseBtn" data-dismiss="modal">CLOSE</button>
+            </div>
+        </div>
+        </div>
+
 
         {/*Header*/}
         <header>
@@ -697,9 +750,9 @@ var Home = React.createClass({
                     </div>
                     <div className="col-md-4">
                         <ul className="list-inline quicklinks">
-                            <li><a href="#">Privacy Policy</a>
+                            <li><a href="#" style={{color: 'black'}}>Privacy Policy</a>
                             </li>
-                            <li><a href="#">Terms of Use</a>
+                            <li><a href="#" style={{color: 'black'}}>Terms of Use</a>
                             </li>
                         </ul>
                     </div>

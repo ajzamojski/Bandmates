@@ -48,8 +48,14 @@ var Events = React.createClass({
 	postEvents: function(data) {
 		Helpers.postQueryEvents(data);
 	},
+	showLoading: function() {
+		var loading = document.getElementById('loadingImg');
+		loading.show();
+	},
 	handleSearch: function(e) {
 		e.preventDefault();
+
+		$('#loadingImg').fadeIn( "slow");
 
 		var a = this.refs.query.value;
 		var b = this.refs.city.value;
@@ -74,13 +80,17 @@ var Events = React.createClass({
 				var res = result.data.events;
 
 				console.log(res);
-
+				
+				$('#loadingImg').css('display', 'none');
+				
 				for(var i = 0; i < (res.length/2); i++) {
 					var newState = {
 						eventName: '',
 						url: '',
 						key: '',
 						img: '',
+						start: '',
+						end: ''
 					};
 					
 					newState.eventName = res[i].name.text;
@@ -88,7 +98,10 @@ var Events = React.createClass({
 					newState.url = res[i].url;
 					newState.key = res[i].id;
 					newState.isFree = res[i].is_free;
-					console.log(res[i].logo);
+					var dateslice1 = res[i].start.local
+					var dateslice2 = res[i].end.local
+					newState.start = dateslice1.slice(0,10);
+					newState.end = dateslice2.slice(0,10);
 
 					if(res[i].logo == null) {
 						newState.img = "";
@@ -124,7 +137,7 @@ var Events = React.createClass({
 					
 					<h1 id="eventHeader">Events</h1>
 					
-					<div className="panel panel-primary">
+					<div className="panel">
 						<div className="panel-heading">
                             SEARCH FILTER
                         </div>
@@ -132,16 +145,13 @@ var Events = React.createClass({
 						<form id="eventSearch" onSubmit={this.handleSearch} style={{padding: '10px'}}>
 							<div className = "container">
 								<div className="md-form container col-xs-2">
-									
-									<input type="text" name="query" ref="query" className="form-control"/>
 									<label htmlFor="query">  Type of Event:</label>
-									
+									<input type="text" name="query" ref="query" className="form-control"/>
 								</div>
 
 								<div className="md-form container col-xs-2">
-									<input type="text" name="city" ref="city" className="form-control"/>
 									<label htmlFor="city">  City:</label>
-									
+									<input type="text" name="city" ref="city" className="form-control"/>	
 								</div>
 
 								<div className="md-form container col-xs-2">
@@ -158,12 +168,12 @@ var Events = React.createClass({
 								</div>
 								
 								
-								<div className="md-form container col-xs-3">	
+								<div className="container col-xs-3">	
 									<label htmlFor="startDate">Event Start Date Range:</label>				
 									<input className="form-control" type="text" placeholder="2017-01-01" name="startDate" ref="startDate"/>
-									{/*<label htmlFor="startDate">Event Start Date Range:</label>*/}
-									<p className="col text-center">to</p>
-									<input className="col" type="text" placeholder="2017-02-01" name="endDate" ref="endDate"/>
+									
+									<p style={{fontSize: '15px'}}className="col text-center">to</p>
+									<input className="form-control" type="text" placeholder="2017-02-01" name="endDate" ref="endDate"/>
 								</div>
 
 								<div className="md-form container col-xs-2">
@@ -180,28 +190,32 @@ var Events = React.createClass({
 
 							</div>
 
-							<button className="btn btn-yellow waves-effect" value="Search" id="searchBtn" onSubmit={this.handleSearch}>
-								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />Search</button>
+							<button style={{color: 'white',backgroundColor: '#FED136'}}className="btn btn-lg" value="Search" id="eventsBtn" onSubmit={this.handleSearch}>
+								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />SEARCH</button>
 						</form>
 						</div>
 					</div>
 				</div>
 				<div id="eventResults" className="row">
-					<div className="panel panel-primary">
+					<div className="panel">
                         <div className="panel-heading">
                             SEARCH RESULTS
                         </div>
                         <div className="panel-body" id="results">
                             <Route path="/user/events/search" component={Results}/>
+								<div id="loadingImg" style={{display: 'none', marginLeft: '0 auto'}}>
+									<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+								</div>
 								<div><p>{this.state.resultsFound}</p></div>
 								{this.state.currentEvents.map(function(event) {
 									return (
 									<div className="resultEvents" key={event.key} data-key={event.key} style={{overflow: 'hidden'}}>
-										<h2 className="eventTitle">{event.eventName}</h2>
+										<h3 className="eventTitle">{event.eventName}</h3>
+										<p>Start Date: {event.start}  |  End Date: {event.end}</p>
 										<img className="imgResponsive col-xs-4" style={{height:'180px' , float:'left'}}src={event.img}/>
-										<p className="eventDesc col-xs-7">{event.description}</p>
+										<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="eventDesc col-xs-7">{event.description}</p>
 										<br />
-										<a className="eventLink" href={event.url} target="_blank" alt="buy-tickets" style={{float: 'right'}}>{event.isFree == true ? "This Event is Free!" : "Buy Tickets Here"}</a>
+										<a className="eventLink" href={event.url} target="_blank" alt="buy-tickets" style={{float: 'right'}}>{event.isFree == true ? "THIS EVENT IS FREE!" : "BUY TICKETS HERE"}</a>
 										
 									</div>
 								);

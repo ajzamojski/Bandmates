@@ -1097,7 +1097,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: white;
   text-decoration: none;
 }
 a:hover,
@@ -5459,6 +5459,8 @@ button.list-group-item-danger.active:focus {
   padding: 15px;
 }
 .panel-heading {
+  color: white;
+  background-color:#37474F;
   padding: 10px 15px;
   border-bottom: 1px solid transparent;
   border-top-left-radius: 3px;

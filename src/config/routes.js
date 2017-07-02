@@ -1,5 +1,4 @@
 const React = require('react');
-const router = require('react-router');
 import {Switch} from 'react-router-dom';
 import { BrowserRouter } from 'react-router-dom'
 import { 
@@ -8,6 +7,7 @@ import {
     Redirect,
     Link 
 } from "react-router-dom";
+import { RouteTransition } from 'react-router-transition';
 
 var Home = require("../components/Home.js");
 var Main = require("../components/Main.js");
@@ -44,7 +44,6 @@ loggedIn();
 //Export routes
 module.exports = (
 
-
     // The high level component is the Router component
     <BrowserRouter>
             <Switch>
@@ -66,8 +65,6 @@ module.exports = (
                 }} />
             </Switch>
             {/* If user selects User show the appropriate component */}
-
         {/* If user selects any other path... we get the Main Route */}
-        
     </BrowserRouter>
 );
