@@ -64,6 +64,16 @@ var Main = React.createClass ({
 			]
         }
   },
+  logout: function() {
+
+  	console.log("test worked");
+  	$.get('/logout', function(data) {
+  		console.log(data);
+  		console.log('successfully logged out')
+  	});
+
+  },
+
 	printData: function(a) {
 		console.log("i made it" + a);
 	},
@@ -110,7 +120,7 @@ var Main = React.createClass ({
                             <li className="nav-item active btn-group">
                                 <a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged In As *USER*</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <NavLink to="/">Logout</NavLink>
+                                    <NavLink onClick={this.logout()} to="/">Logout</NavLink>
                                 </div>
                             </li>
                         </ul>

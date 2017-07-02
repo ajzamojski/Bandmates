@@ -11,8 +11,9 @@ import {
 
 var Home = require("../components/Home.js");
 var Main = require("../components/Main.js");
-var retrievedItem = false;
+var isLogged = false;
 
+//function to check if user is logged in
 function loggedIn(callback){
 
     $.ajax({
@@ -21,55 +22,24 @@ function loggedIn(callback){
         success: function(result) {
             console.log(result.userAuthenticated);
             if (result.userAuthenticated == 'undefined') {
-                retrievedItem = false;
-                return retrievedItem;
+                isLogged = false;
+                return isLogged;
             }
              else {
-            retrievedItem = result.userAuthenticated;
-            // callback(retrievedItem);
-            return retrievedItem;
+            isLogged = result.userAuthenticated;
+            // callback(isLogged);
+            return isLogged;
 
             }
 
         }
     });
-}
+};
 
-    // $.get("/loggedin").then(function(data) {
+//assigning vavriable for router to handle a true variable
+isLogged = loggedIn();
 
-    //     // console.log(data);
-    //     var isLogged = data.userAuthenticated;
-    //     localStorage.setItem('isLogged', isLogged);
-    //     // console.log(isLogged);
-    //     // return isLogged;
-    //     // callback(isLogged);
-    // })
-  // };
-  // loggedIn(function(callback) { 
-  //   return callback; }
-  //   );
-  // loggedIn();
-retrievedItem = loggedIn();
-// isLogged = loggedIn(function(callback) { 
-//         console.log(isLogged);
-//         return callback; 
-//     });
-
-function checkLoginStorage() {
-    retrievedItem = localStorage.getItem('isLogged');
-    if (retrievedItem === 'undefined') {
-        retrievedItem = false;
-    }
-    console.log(retrievedItem);
-    return retrievedItem;
-}
 loggedIn();
-// checkLoginStorage();
-
-// function nothingGood() {
-//     var returningSomething = false;
-//     return returningSomething;
-// }
 
 //Export routes
 module.exports = (
@@ -82,7 +52,7 @@ module.exports = (
                 <Route exact path="/" component={Home}/>
 
                 <Route path="/user" render={() => (
-                    retrievedItem ? (
+                    isLogged ? (
                     <Main/>
                     
                   ) : (
