@@ -55,6 +55,10 @@ h6 {
 }
 h1#searchHeader {
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 300 !important;
+  font-size: 48px;
+  text-transform: none;
 }
 .img-centered {
   margin: 0 auto;
@@ -144,7 +148,7 @@ fieldset[disabled] .btn-primary.active {
   padding: 5px;
 }
 .eventTitle {
-  font-family: 'Raleway', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 18px !important;
   text-transform: none;
 }
@@ -228,6 +232,7 @@ fieldset[disabled] .btn-xl.active {
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus {
   color: #fed136;
+  background-color: transparent;
   outline: none;
 }
 .navbar-custom .navbar-nav > .active > a {
@@ -349,12 +354,12 @@ section h2.section-heading {
   margin-bottom: 15px;
 }
 section h3.section-subheading {
-  font-size: 21px;
-  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-family: 'Merriweather', serif;
   text-transform: none;
   font-style: italic;
   font-weight: 400;
-  line-height: 30px;
+  line-height: 20px;
   margin-bottom: 75px;
 }
 @media (min-width: 768px) {
@@ -425,6 +430,40 @@ section h3.section-subheading {
 }
 #login * {
   z-index: 2;
+}
+#messengerContent {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+#contactsList {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  margin: 1em;
+  border-radius: 5px;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#contactsList > .item{
+  order: 1;
+  flex: 0 1 auto;
+}
+#messageApp {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0;
+  margin: 1em;
+  border-radius: 5px;
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+#messageApp > .item{
+  order: 1;
+  flex: 0 1 auto;
 }
 @media (min-width: 767px) {
   #login .login-item {
@@ -675,6 +714,9 @@ section#contact :-ms-input-placeholder {
 section#contact .text-danger {
   color: #e74c3c;
 }
+section#team {
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
 footer {
   padding: 25px 0;
   text-align: center;
@@ -811,11 +853,14 @@ img::-moz-selection {
 body {
   webkit-tap-highlight-color: #fed136;
 }
-#searchForm {
-  margin: 100px;
+#searchForm form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
 }
 #eventHeader {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300 !important;
   font-size: 48px;
   text-transform: none;
@@ -869,4 +914,10 @@ body {
   font-family: 'Quicksand', sans-serif;
   font-size: 1.5em;
   background-color:#37474F !important;
+}
+#hardWord {
+  font-size: 40px;
+  font-family:'Merriweather', sans-serif;
+  text-transform: 'none';
+  text-shadow: 9px 8px 0px rgba(0,0,0,0.15);
 }

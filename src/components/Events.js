@@ -9,6 +9,7 @@
 // 3. validation
 // -------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------
+
 const Results = ({match}) => {
 	return <div>
 				<h1></h1>
@@ -25,6 +26,8 @@ var noResults;
 var React = require('react');
 // Including the Link component from React Router to navigate within our application without full page reloads
 var Helpers = require('./utils/helpers');
+import Validation, {Validator} from 'rc-form-validation';
+
 import { 
     BrowserRouter as Router, 
     Route, 
@@ -56,8 +59,18 @@ var Events = React.createClass({
 	handleSearch: function(e) {
 		e.preventDefault();
 
+		//if statement to validate all fields are inputted
+		const validation = this.refs.validation;
+		validation.validate((valid) => {
+		if (!valid) {
+			window.alert("Please fill all required fields.")
+			console.log('error in form');
+			return;
+		}
+		console.log('submit');
 		$('#loadingImg').fadeIn( "slow");
-
+		
+	
 		var a = this.refs.query.value;
 		var b = this.refs.city.value;
 		var c = this.refs.state.value;
@@ -84,7 +97,7 @@ var Events = React.createClass({
 				
 				$('#loadingImg').css('display', 'none');
 				
-				for(var i = 0; i < (res.length/2); i++) {
+				for(var i = 0; i < (res.length); i++) {
 					var newState = {
 						eventName: '',
 						url: '',
@@ -126,13 +139,12 @@ var Events = React.createClass({
 			}.bind(this));
 
 		}.bind(this))
-
-		
-		
+		});
 	},
 	render: function() {
 		return (
 			<div className ="container contentWrapper">
+				{/*BreadCrumb*/}
 				<div className="row">
 					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Events</h2>
 				</div>
@@ -145,22 +157,29 @@ var Events = React.createClass({
                             SEARCH FILTER
                         </div>
 						<div className="panel-body">
+						<p>Find events in your area</p>
 						<form id="eventSearch" onSubmit={this.handleSearch} style={{padding: '10px'}}>
+							<Validation ref="validation" onValidate={this.onValidate}>
 							<div className = "container">
 								<div className="md-form container col-xs-2">
 									<label htmlFor="query">  Type of Event:</label>
+									<Validator rules={[{required: true}]}>
 									<input type="text" name="query" ref="query" className="form-control"/>
+									</Validator>
 								</div>
 
 								<div className="md-form container col-xs-2">
 									<label htmlFor="city">  City:</label>
-									<input type="text" name="city" ref="city" className="form-control"/>	
+									<Validator rules={[{required: true}]}>
+									<input type="text" name="city" ref="city" className="form-control"/>
+									</Validator>
 								</div>
 
 								<div className="md-form container col-xs-2">
 									
 									<label htmlFor="state">State:</label>
 									<br />
+									<Validator rules={[{required: true}]}>
 									<select style={{marginLeft:'35px', width: '80%'}} className="form-control" id="state" name="state" ref="state">
 										{
 											states.map(function(el) {
@@ -168,6 +187,7 @@ var Events = React.createClass({
 											})
 										}
 									</select>
+									</Validator>
 								</div>
 								
 								
@@ -195,6 +215,7 @@ var Events = React.createClass({
 
 							<button style={{color: 'white',backgroundColor: '#FED136'}}className="btn btn-lg" value="Search" id="eventsBtn" onSubmit={this.handleSearch}>
 								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />&nbsp;SEARCH</button>
+						</Validation>
 						</form>
 						</div>
 					</div>
@@ -202,12 +223,12 @@ var Events = React.createClass({
 				<div id="eventResults" className="row">
 					<div className="panel">
                         <div className="panel-heading">
-                            SEARCH RESULTS
+                            RESULTS
                         </div>
                         <div className="panel-body" id="results">
                             <Route path="/user/events/search" component={Results}/>
-								<div id="loadingImg" style={{display: 'none', marginLeft: '0 auto'}}>
-									<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+								<div id="loadingImg" style={{display: 'none'}}>
+									<img style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
 								</div>
 								<div><p>{this.state.resultsFound}</p></div>
 								{this.state.currentEvents.map(function(event) {
@@ -218,8 +239,7 @@ var Events = React.createClass({
 										<img className="imgResponsive col-xs-4" style={{height:'180px' , float:'left'}}src={event.img}/>
 										<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="eventDesc col-xs-7">{event.description}</p>
 										<br />
-										<a className="eventLink" href={event.url} target="_blank" alt="buy-tickets" style={{float: 'right'}}>{event.isFree == true ? "THIS EVENT IS FREE!" : "BUY TICKETS HERE"}</a>
-										
+										<a className="eventLink" href={event.url} target="_blank" alt="buy-tickets" style={{width: '200px',float: 'right'}}>{event.isFree == true ? "THIS EVENT IS FREE!" : "BUY TICKETS HERE"}</a>
 									</div>
 								);
 								},this)}

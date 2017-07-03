@@ -337,7 +337,7 @@ var Home = React.createClass({
             </div>
         </nav>
         <div className="modal fade" id="signupModal" role="dialog">
-        <div className="modal-dialog" style={{width:'800px',fontFamily:'Roboto', backgroundColor: 'white', borderRadius: '10px', boxShadow:'0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}>
+        <div className="modal-dialog" style={{width:'800px',fontFamily:'Roboto, sans-serif', backgroundColor: 'white', borderRadius: '10px', boxShadow:'0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}>
             
             <div className="col-xs-12">
                 <h2 className="text-center">Sign Up</h2>
@@ -440,8 +440,10 @@ var Home = React.createClass({
                 <div className="row">
                     <div className="col-lg-12 text-center">
                         <h2 className="section-heading">WE KNOW THE STRUGGLE</h2>
-                        <h3 className="section-subheading text-muted">Looking for a gig? Need a new voice for your hot mixtape? Want to promote a jam session?
+                        <h3 className="section-subheading text-muted" style={{width:'100%'}}>Looking for a gig?  Need a new voice for your hot mixtape?  Want to promote a jam session?
+                            <br/><br />
                             Do it through here. Bandmates is your social platform specifically for connecting musicians, singers and producers alike. 
+                            <br/><br />
                             Our aim is to help people find & distribute talent both locally & globally.
                         </h3>
                     </div>
@@ -475,118 +477,13 @@ var Home = React.createClass({
             </div>
         </section>
 
-         {/*Login Grid Section*/}
-        {/*<section id="login" className="bg-light-gray">
-            <div className="container">*/}
-                {/*<div className="row">
-                    <div className="text-center">
-                        <h2 className="section-heading">Signup or Login</h2>
-                    </div>
-                </div>*/}
-                {/*<div className="row">
-                    <div className="col-xs-6 login-item">
-                        <div className="container">
-							<div className="row">
-								{/*Sign up*/}
-								{/*<div className="col-lg-8 col-lg-offset-2">
-										<h2>Sign Up</h2>
-										<p>We just need some info</p>
-										<form id="signupForm" onSubmit={this.validFields} action="/somewhere">
-                                        <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
-										<div className="form-group col-xs-6">
-											<label htmlFor="firstName">First Name: </label>
-											<input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
-											<p className="help-block text-danger"></p>
-										</div>
-										<div className="form-group col-xs-6">
-											<label htmlFor="lastName">Last Name: </label>
-											<input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
-											<p className="help-block text-danger"></p>
-										</div>
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="lastName">Username: </label>
-                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Last Name *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
-                                            <p className="help-block text-danger"></p>
-                                        </div>
-										<div className="form-group col-xs-6">
-											<label htmlFor="email">Email: </label>
-											<input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
-											<p className="help-block text-danger"></p>
-										</div>
-										<div className="form-group col-xs-6">
-											<label htmlFor="password">Password: </label>
-
-											<input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
-
-											<p className="help-block text-danger"></p>
-										</div>
-										<div className="form-group col-xs-6">
-											<label htmlFor="confirmpw">Confirm Password: </label>
-
-											<input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
-
-											<p className="help-block text-danger"></p>
-										</div>
-										<button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
-                                        <br></br>
-                                        <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
-                                        <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
-                                        <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
-                                        <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
-                                        <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
-                                        <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>
-                                        <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
-										</form>
-								</div>*/}
-
-								{/*Log In*/}
-								{/*<div className="col-lg-8 col-lg-offset-2">
-									<h2>Login</h2>
-									<form id="loginForm" onSubmit={this.logInUser} >
-                                        <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
-    									<div className="form-group col-xs-12">
-    										<label htmlFor="email">Email: </label>
-    										<input type="email" value={this.state.inputLogInUser} onChange={this.handleChange} className="form-control" placeholder="Email *" id="inputLogInUser" data-validation-required-message="Please enter a username."/>
-    										<p className="help-block text-danger"></p>
-    									</div>
-    									<div className="form-group col-xs-12">
-    										<label htmlFor="userpw">Password: </label>
-    										<input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
-    										<p className="help-block text-danger"></p>
-    									</div>
-    									<button type="submit" className="btn btn-primary" id="logInBtn">Login</button>
-                                         <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
-                                         <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
-                                         <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
-                                         <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
-                                         
-									</form>
-								</div>
-							</div>
-						</div>*/}
-                        
-						{/*<div>
-							<a href="#signupModal" className="login-link" data-toggle="modal">
-
-								<div className="login-hover">
-									<div className="login-hover-content">
-										<i className="fa fa-plus fa-3x"></i>
-									</div>
-								</div>
-							</a>
-						</div>
-                	</div>
-            	</div>
-			</div>
-        </section>*/}
-
         {/*Team Section*/}
         <section id="team" className="bg-light-gray">
             <div className="container">
                  <div className="row">
                     <div className="col-lg-12 text-center">
-                        <h2 className="section-heading">Our Amazing Team</h2>
-                        <h3 className="section-subheading text-muted">Lorem ipsum dolor sit amet consectetur.</h3>
+                        <h2 className="section-heading">The Developers</h2>
+                        <h3 className="section-subheading text-muted">Connect With Us!</h3>
                     </div>
                 </div>
                 <div className="row">
@@ -601,7 +498,7 @@ var Home = React.createClass({
                               <a href="#"></a>
                             </figure>
                             <ul className="list-inline social-buttons">
-                                <li><a href="#"><i className="fa fa-twitter"></i></a>
+                                <li><a href="#"><i className="fa fa-github"></i></a>
                                 </li>
                                 <li><a href="#"><i className="fa fa-facebook"></i></a>
                                 </li>
@@ -620,7 +517,7 @@ var Home = React.createClass({
                               <a href="#"></a>
                             </figure>
                             <ul className="list-inline social-buttons">
-                                <li><a href="#"><i className="fa fa-twitter"></i></a>
+                                <li><a href="#"><i className="fa fa-github"></i></a>
                                 </li>
                                 <li><a href="#"><i className="fa fa-facebook"></i></a>
                                 </li>
@@ -639,7 +536,7 @@ var Home = React.createClass({
                               <a href="#"></a>
                             </figure>
                             <ul className="list-inline social-buttons">
-                                <li><a href="#"><i className="fa fa-twitter"></i></a>
+                                <li><a href="#"><i className="fa fa-github"></i></a>
                                 </li>
                                 <li><a href="#"><i className="fa fa-facebook"></i></a>
                                 </li>
@@ -651,7 +548,8 @@ var Home = React.createClass({
                 </div>
                 <div className="row">
                     <div className="col-lg-8 col-lg-offset-2 text-center">
-                        <p className="large text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+                        <h2 className="large text-muted" style={{fontFamily:'Merriweather, sans-serif',textTransform: 'none'}}>We work 
+                            <b className="tada" id="hardWord"> hard</b>  , we promise!</h2>
                     </div>
                 </div>
             </div>

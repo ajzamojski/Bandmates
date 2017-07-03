@@ -53,9 +53,11 @@ var Settings = React.createClass ({
 	render: function() {
 		return (
 			<div className ="container contentWrapper">
+				{/*BreadCrumb*/}
 				<div className="row">
 					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Settings</h2>
 				</div>
+				{/*Settings*/}
 				<div className="row">
 					<h2>Settings</h2>
 				<div className="col-md-10 col-md-offset-1">

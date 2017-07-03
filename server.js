@@ -102,6 +102,19 @@ app.get("/api/musicians", function(req, res) {
     });
 });
 
+app.get("/api/contacts/:userId", function(req,res) {
+    var query = req.params.userId;
+    db.Contacts.findAll({
+        where: {
+            user_id: query
+        }
+    }).then(function(data) {
+        res.json(data);
+        console.log(data);
+        res.end();
+    })
+});
+
 //get route for param filter
 app.get("/api/musicFilter?", function(req, res) {
     var query = req.params.musicFilter;
@@ -135,9 +148,9 @@ app.get("/api/musicFilter?", function(req, res) {
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({}).then(function() {
     
-    io.sockets.on('connection', function(socket) {
+    io.on('connection', function(socket) {
         socket.on('message', function(body) {
-            io.sockets.emit('message', {
+            io.emit('message', {
                 body,
                 from: socket.id.slice(8)
             })

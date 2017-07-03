@@ -56,9 +56,11 @@ var Profile = React.createClass ({
 		return (
 			<div>
 				<div className="container contentWrapper">
+					{/*BreadCrumb*/}
 					<div className="row">
 						<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Profile</h2>
 					</div>
+					{/*Profile*/}
 					<div className="row">
 						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
 							<h1 className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
