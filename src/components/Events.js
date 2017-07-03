@@ -33,6 +33,7 @@ import {
 var Events = React.createClass({
 	getInitialState: function() {
         return {
+			user: undefined,
 			currentEvents: [],
 			searchParams:{},
 			resultsFound: ""
@@ -42,7 +43,7 @@ var Events = React.createClass({
 		console.log('component mounted - events');
 		// Syntax to reference props *******************************************
 		var a = "yes"
-		this.props.something(a)
+		this.setState({user: this.props.theUser});
 		this.setState({currentEvents: []});
 	},
 	postEvents: function(data) {
@@ -193,7 +194,7 @@ var Events = React.createClass({
 							</div>
 
 							<button style={{color: 'white',backgroundColor: '#FED136'}}className="btn btn-lg" value="Search" id="eventsBtn" onSubmit={this.handleSearch}>
-								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />SEARCH</button>
+								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />&nbsp;SEARCH</button>
 						</form>
 						</div>
 					</div>

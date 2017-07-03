@@ -11,6 +11,7 @@ var React = require('react');
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
+			user: undefined,
             firstName: 'Kevin',
             lastName: 'Lee',
             city: "Edison",
@@ -27,7 +28,7 @@ var Profile = React.createClass ({
   	},
 
    componentDidMount() {
-
+	this.setState({user: this.props.theUser});
    	 $.get("/loggedin", function(data) {
 
    	 	console.log(data);
@@ -46,8 +47,8 @@ var Profile = React.createClass ({
   		}
   		console.log(this.state.firstName);
   	}.bind(this));
+	  
    },
-
   getProfile: function () {
 
   },

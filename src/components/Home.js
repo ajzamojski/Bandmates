@@ -238,16 +238,16 @@ var Home = React.createClass({
 
                         <li>
 
-                            <a className="page-scroll" id="signupTog" onClick={this.openModal}>Sign up / Login</a>
+                            <a className="page-scroll" id="signupTog" data-toggle="modal" data-target="#signupModal">Sign up / Login</a>
                             
-                            <Modal className={"col-xs-10 col-xs-offset-1"} 
+                            {/*<Modal className={"col-xs-10 col-xs-offset-1"} 
                                 isOpen={this.state.modalIsOpen}
                                 onAfterOpen={this.afterOpenModal}
                                 onRequestClose={this.closeModal}
                                 style={customStyles}
-                                contentLabel="Sign Up">
+                                contentLabel="Sign Up">*/}
                                 
-                            <div className="col-xs-8">
+                            {/*<div className="col-xs-8">
                                 <h2 ref={subtitle => this.subtitle = subtitle}>Sign Up</h2>
                                 <p>We just need some info</p>
                                 <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
@@ -320,7 +320,7 @@ var Home = React.createClass({
 
                                 </div>
                                 <button onClick={this.closeModal}>close</button>
-                        </Modal>
+                        </Modal>*/}
 
                         </li>              
                         <li>

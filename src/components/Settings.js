@@ -16,6 +16,7 @@ const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID"
 var Settings = React.createClass ({
 	getInitialState: function() {
         return {
+			user: undefined,
 			firstName: 'Kevin',
 			lastName: 'Lee',
 			email: 'zapetou@gmail.com',
@@ -47,6 +48,7 @@ var Settings = React.createClass ({
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
+		this.setState({user: this.props.theUser});
 	},
 	render: function() {
 		return (

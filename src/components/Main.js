@@ -16,7 +16,6 @@ import {
     Link 
 } from "react-router-dom";
 import {NavLink} from "react-router-dom";
-// var CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
 import { RouteTransition } from 'react-router-transition';
 import {Switch} from 'react-router-dom';
 
@@ -32,10 +31,7 @@ var Main = React.createClass ({
 	getInitialState: function() {
         return {
             main: "Main State",
-			user: {
-				firstName: 'Kevin',
-				lastName: 'Lee'
-			},
+			user: undefined,
 			userRoutes : [
 				{ path: '/',
 					exact: true,
@@ -49,48 +45,50 @@ var Main = React.createClass ({
 				{ path: '/user/events',
 					sidebar: () => <div></div>,
 					// Syntax to reference props *******************************************
-					main: () => <Events something= {this.printData} />
+					main: () => <Events theUser={this.state.user} />
 				},
 				{ path: '/user/search',
 					sidebar: () => <div></div>,
-					main: () => <Search />
+					main: () => <Search theUser={this.state.user}/>
 				},
 				{ path: '/user/messenger',
 					sidebar: () => <div></div>,
-					main: () => <Messenger />
+					main: () => <Messenger theUser={this.state.user}/>
 				},
 				{ path: '/user/profile',
 					sidebar: () => <div></div>,
-					main: () => <Profile />
+					main: () => <Profile theUser={this.state.user}/>
 				},
 				{ path: '/user/settings',
 					sidebar: () => <div></div>,
-					main: () => <Settings />
+					main: () => <Settings theUser={this.state.user}/>
 				}
 			]
         }
-  },
-  logout: function() {
+	},
+	logout: function() {
 
-  	console.log("test worked");
-  	$.get('/logout', function(data) {
-  		console.log(data);
-  		console.log('successfully logged out')
-  	});
+		console.log("test worked");
+		$.get('/logout', function(data) {
+			console.log(data);
+			console.log('successfully logged out')
+		});
 
-  },
-
-  something: function() {
-  	console.log("this is triggereed");
-  },
-
+	},
+	componentDidMount: function() {
+		console.log(this.props.dbUserObject.userData);
+		this.setState({user: this.props.dbUserObject.userData})
+	},
+	something: function() {
+		console.log('triggered');
+	},
 	printData: function(a) {
 		console.log("i made it" + a);
 	},
 	render: function() {
 		return (
 			<div>
-			{/*Sidebar*/}
+				{/*Sidebar*/}
 				<div>
 					<nav className ="container col-xs-4" id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
@@ -107,12 +105,11 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 
-							//<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
-							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							{/*<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>*/}
+							<li onClick={this.something}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} ><i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 
 						</ul>
 					</nav>
-
 					{this.state.userRoutes.map((route, index) => (
 						<Route
 							key={index}
@@ -121,10 +118,10 @@ var Main = React.createClass ({
 							component={route.sidebar}
 						/>
 					))}		
-					
 				</div>
 
-			<div id="content">
+				{/*Content*/}
+				<div id="content">
 				<div>
 				<Route render={({location, history, match}) => {
 
@@ -132,6 +129,7 @@ var Main = React.createClass ({
 						<div>
 						{this.state.userRoutes.map((route, index) => (
 							<RouteTransition 
+							key={index}
 							pathname={location.pathname}
 							atEnter={{ opacity: 0 }}
 							atLeave={{ opacity: 0 }}
@@ -150,13 +148,10 @@ var Main = React.createClass ({
 							</RouteTransition>
 						))}
 						</div>
-
 					);
-
 				}} />
-
-			</div>
-
+				</div>
+				</div>
 			</div>
 		)
 	}
