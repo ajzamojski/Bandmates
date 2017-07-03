@@ -4,7 +4,6 @@ var axios = require("axios");
 // Geocoder API
 var geocodeAPI = "35e5548c618555b1a43eb4759d26b260";
 var eventbriteAPIToken = 'ZOVDW3APCGKQD5SCX75S';
-// var googleMapsAPIKey = 'AIzaSyCoyi5AORiKLaxUyJiqEdBgpX-B4zIF4Nk';
 
 // Helper functions for making API Calls
 var helper = {

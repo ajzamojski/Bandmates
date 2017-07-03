@@ -12,6 +12,7 @@ import { RouteTransition } from 'react-router-transition';
 var Home = require("../components/Home.js");
 var Main = require("../components/Main.js");
 var isLogged = false;
+var passLoggedInUser;
 
 //function to check if user is logged in
 function loggedIn(callback){
@@ -21,6 +22,7 @@ function loggedIn(callback){
         async: false,
         success: function(result) {
             console.log(result.userAuthenticated);
+            passLoggedInUser = result;
             if (result.userAuthenticated == 'undefined') {
                 isLogged = false;
                 return isLogged;
@@ -52,7 +54,7 @@ module.exports = (
 
                 <Route path="/user" render={() => (
                     isLogged ? (
-                    <Main/>
+                    <Main dbUserObject={passLoggedInUser}/>
                     
                   ) : (
                   

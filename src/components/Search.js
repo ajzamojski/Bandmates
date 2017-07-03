@@ -25,6 +25,7 @@ var Helpers = require('./utils/helpers');
 var Search = React.createClass({
 	getInitialState: function() {
         return {
+			user: undefined,
 			currentUsers: [],
 			usersByRadius: []
 			// firstName: '',
@@ -171,6 +172,7 @@ var Search = React.createClass({
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Search');
+		this.setState({user: this.props.theUser});
 	},
 	render () {
 

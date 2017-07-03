@@ -117,20 +117,20 @@ app.get("/api/musicFilter?", function(req, res) {
     });
 });
 //-------------------------------------------------------
-app.post('/user/messenger', (req, res) => {
-  const { Body, From, MediaUrl0 } = req.body
-  const message = {
-    body: Body,
-    from: From.slice(8),
-    img: MediaUrl0
-  }
-  io.emit('message', message)
-  res.send(`
-           <Response>
-            <Message>Thanks for texting!</Message>
-           </Response>
-    `)
-})
+// app.post('/user/messenger', (req, res) => {
+//   const { Body, From, MediaUrl0 } = req.body
+//   const message = {
+//     body: Body,
+//     from: From.slice(8),
+//     img: MediaUrl0
+//   }
+//   io.emit('message', message)
+//   res.send(`
+//            <Response>
+//             <Message>Thanks for texting!</Message>
+//            </Response>
+//     `)
+// })
 
 // Syncing our sequelize models and then starting our express app
 db.sequelize.sync({}).then(function() {

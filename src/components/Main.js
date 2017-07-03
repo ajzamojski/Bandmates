@@ -16,7 +16,6 @@ import {
     Link 
 } from "react-router-dom";
 import {NavLink} from "react-router-dom";
-// var CSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
 import { RouteTransition } from 'react-router-transition';
 import {Switch} from 'react-router-dom';
 
@@ -32,10 +31,7 @@ var Main = React.createClass ({
 	getInitialState: function() {
         return {
             main: "Main State",
-			user: {
-				firstName: 'Kevin',
-				lastName: 'Lee'
-			},
+			user: undefined,
 			userRoutes : [
 				{ path: '/',
 					exact: true,
@@ -49,48 +45,50 @@ var Main = React.createClass ({
 				{ path: '/user/events',
 					sidebar: () => <div></div>,
 					// Syntax to reference props *******************************************
-					main: () => <Events something= {this.printData} />
+					main: () => <Events theUser={this.state.user} />
 				},
 				{ path: '/user/search',
 					sidebar: () => <div></div>,
-					main: () => <Search />
+					main: () => <Search theUser={this.state.user}/>
 				},
 				{ path: '/user/messenger',
 					sidebar: () => <div></div>,
-					main: () => <Messenger />
+					main: () => <Messenger theUser={this.state.user}/>
 				},
 				{ path: '/user/profile',
 					sidebar: () => <div></div>,
-					main: () => <Profile />
+					main: () => <Profile theUser={this.state.user}/>
 				},
 				{ path: '/user/settings',
 					sidebar: () => <div></div>,
-					main: () => <Settings />
+					main: () => <Settings theUser={this.state.user}/>
 				}
 			]
         }
-  },
-  logout: function() {
+	},
+	logout: function() {
 
-  	console.log("test worked");
-  	$.get('/logout', function(data) {
-  		console.log(data);
-  		console.log('successfully logged out')
-  	});
+		console.log("test worked");
+		$.get('/logout', function(data) {
+			console.log(data);
+			console.log('successfully logged out')
+		});
 
-  },
-
-  something: function() {
-  	console.log("this is triggereed");
-  },
-
+	},
+	componentDidMount: function() {
+		console.log(this.props.dbUserObject.userData);
+		this.setState({user: this.props.dbUserObject.userData})
+	},
+	something: function() {
+		console.log('triggered');
+	},
 	printData: function(a) {
 		console.log("i made it" + a);
 	},
 	render: function() {
 		return (
 			<div>
-			{/*Sidebar*/}
+				{/*Sidebar*/}
 				<div>
 					<nav className ="container col-xs-4" id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
@@ -106,21 +104,12 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
 							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
-<<<<<<< HEAD
-<<<<<<< HEAD
-							<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
-=======
-							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
->>>>>>> 1b08230b07b9434cdc4e19f935a638dac48be3e8
-=======
 
-							//<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
-							<li><NavLink to="/" onClick={this.something()} className="" ><i className="fa fa-cog"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							{/*<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>*/}
+							<li onClick={this.something}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} ><i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 
->>>>>>> a6272ce5b234f14f5cc1a4c07a725cd9b5fc9b52
 						</ul>
 					</nav>
-
 					{this.state.userRoutes.map((route, index) => (
 						<Route
 							key={index}
@@ -129,37 +118,10 @@ var Main = React.createClass ({
 							component={route.sidebar}
 						/>
 					))}		
-					
 				</div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			<div id="content">
-				
-				{/*Top Navbar*/}
-				{/*<nav className="navbar navbar-toggleable-md navbar-dark scrolling-navbar" id="userBar">
-					<div className="container">
-						<div className="navbar-toggleable-xs">*/}
-							{/*<!--Navbar Brand-->*/}
-							{/*<a className="navbar-brand">Home</a>*/}
-							{/*<!--Links-->*/}
-							{/*<ul className="nav navbar-nav" style={{float: 'right'}}>
-								<li className="nav-item active btn-group">
-									<a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged in as {this.state.user.firstName}</a>
-									<div className="dropdown-menu" aria-labelledby="dropdownMenu">
-										<NavLink to="/">Logout</NavLink>
-									</div>
-								</li>
-							</ul>
-						</div>
-					</div>
-            	</nav>*/}
-				
-=======
->>>>>>> 1b08230b07b9434cdc4e19f935a638dac48be3e8
-=======
-			<div id="content">
->>>>>>> a6272ce5b234f14f5cc1a4c07a725cd9b5fc9b52
+				{/*Content*/}
+				<div id="content">
 				<div>
 				<Route render={({location, history, match}) => {
 
@@ -167,6 +129,7 @@ var Main = React.createClass ({
 						<div>
 						{this.state.userRoutes.map((route, index) => (
 							<RouteTransition 
+							key={index}
 							pathname={location.pathname}
 							atEnter={{ opacity: 0 }}
 							atLeave={{ opacity: 0 }}
@@ -185,13 +148,10 @@ var Main = React.createClass ({
 							</RouteTransition>
 						))}
 						</div>
-
 					);
-
 				}} />
-
-			</div>
-
+				</div>
+				</div>
 			</div>
 		)
 	}
