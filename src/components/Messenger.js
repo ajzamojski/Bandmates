@@ -30,8 +30,15 @@ var Messenger = React.createClass ({
 			console.log(message);
 			this.setState({messages: [message, ...this.state.messages] })
 		}.bind(this))
-		
+		this.getContacts();
 		//on initial load, user's connections should be shown under contacts
+	},
+	getContacts: function() {
+		//grab user's id
+		var userID = this.props.theUser.id;
+		console.log(userID);
+		//with id, query for user's connections/contacts under the friends table
+		//grab each contact_id, and with that, grab each contact's name/username/profession+role and append to contacts list
 	},
 	handleSubmit: function(event) {
 		event.preventDefault();
@@ -39,9 +46,8 @@ var Messenger = React.createClass ({
 		if(event.keyCode === 13 && body) {
 			const message = {
 				body,
-				from: this.socket.id.slice(8)
+				from: 'Me'
 			}
-			this.setState({ messages: [message, ...this.state.messages] })
 			this.socket.emit('message', body)
 			event.target.value='';
 		}
@@ -51,7 +57,7 @@ var Messenger = React.createClass ({
 			const img = message.img ? <img src={message.img} width='100px' /> : null
 			return <li style={{listStyleType:'none'}} key={index}><b>{message.from}:</b>{message.body}</li>
 		})
-		const contacts = this.state.usersContacts.map((users, index) => {
+		const contacts = this.state.usersContacts.map((user, index) => {
 			return (
 				<div>
 					<h4>{user.firstName + " " + user.lastName}</h4>
@@ -61,33 +67,39 @@ var Messenger = React.createClass ({
 		})
 		return (
 			<div className ="container contentWrapper">
+				{/*BreadCrumb*/}
 				<div className="row">
 					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}> Main > Messenger</h2>
 				</div>
+				{/*Messenger Feature*/}
 				<div className="row" style={{height: "800px"}}>
-					<div className="container-fluid">
+					<div id="messengerContent">
 
 						{/*Contacts/Friends List*/}
-						<div className="container col-xs-4" style={{border:"solid black 1px", height: "550px", margin: "1em"}}>
-							<h3 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Contacts</h3>
-							<div className="container">
-
+						<div id="contactsList" style={{height: "550px", width:'40%'}}>
+							<div className="item" style={{width: '100%',backgroundColor: '#37474F'}}>
+							<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Contacts</h3>
+							</div>
+							<div className="container item">
+								{contacts}
 							</div>
 						</div>
 
 						{/*Messaging*/}
-						<div className="container col-xs-7" style={{border:"solid black 1px", height: "550px", margin: "1em"}}>
+						<div id="messageApp" style={{height: "550px", width:'50%'}}>
+							<div className="item" style={{width: '100%',backgroundColor: '#37474F'}}>
+								<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Message</h3>
+							</div>
+							<div className="item" id="chatBox">
 							<div id="messagesWrapper" style={{display: 'block'}}>
-							<h3 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Message</h3>
-							<div id="chatBox">
-								{/*messages are shown here*/}
+							{/*messages are shown here*/}
 								{messages}
 							</div>
-							<form onSubmit={this.handleSubmit}>
-								<input type='text' size='70' placeholder="Enter a message..." onKeyUp={this.handleSubmit}/>
-								<button className="btn btn-md" type="submit" onSubmit={this.handleSubmit}>Send</button>
-							</form>
 							</div>
+							<form className="item" onClick={this.handleSubmit}>
+								<input style={{margin: '0 1em',padding: '0.75em'}} type='text' size="55" placeholder="Enter a message..." onKeyUp={this.handleSubmit}/>
+								<button style={{color: 'white'}} id="sendBtn" className="btn btn-lg" onClick={this.handleSubmit}>Send</button>
+							</form>
 						</div>
 					</div>
 				</div>

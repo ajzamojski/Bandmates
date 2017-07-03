@@ -10,12 +10,14 @@
 
 var React = require('react');
 
-const instruments = ['Ajaeng', 'Clarinet', 'Disc Jockey','Guitar','Flute', 'Harp', 'Keyboard', 'Percussion','Piano', 
-'Trombone', 'Trumpet', 'Tuba', 'Ukelele', 'Violin', 'Voice', 'Xylophone'];
+const instruments = ['Ajaeng', 'Bag Pipes','Bassoon', 'Beatboxing', 'Baritone', 'Clarinet', 'Disc Jockey','Drums','Electronic Instrument', 
+'Flute', 'French Horn', 'Guitar', 'Harmonica', 'Harp', 'Keyboard', 'Oboe', 'Percussion','Piano', 'Piccolo','Pipe Organ', 'Recorder', 
+'Saxophone', 'Sousaphone', 'Trombone', 'Trumpet', 'Tuba', 'Ukelele', 'Vibraphone', 'Viola', 'Violin', 'Voice', 'Xylophone', 'Other'];
 
 const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID","IL","IN","KS",
 "KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM",
 "NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
+
 var address;
 var latInst;
 var lngInst;
@@ -28,16 +30,6 @@ var Search = React.createClass({
 			user: undefined,
 			currentUsers: [],
 			usersByRadius: []
-			// firstName: '',
-			// lastName: '',
-			// city: '',
-			// stateLocation: '',
-			// zip: '',
-			// age: '',
-			// gender: '',
-			// instrument: '',
-			// education: '',
-			// radius: ''
         };
   	},
 	filterUsersByRadius(fixedGeoLat, fixedGeoLng, radius) {
@@ -50,16 +42,11 @@ var Search = React.createClass({
 			var loc = (this.state.currentUsers[i].city + ", " + this.state.currentUsers[i].state);
 			var newUser = this.state.currentUsers[i];
 
-			Helpers.runQuery(loc)
+			Helpers.runQuery(loc, newUser)
 			.then(function(res) {
-				console.log(res)
 				var c = res.lat;
 				var d = res.lng;
-
-				console.log("a: " + a);
-				console.log("b: " + b);
-				console.log("c: " + c);
-				console.log("d: " + d);
+				console.log(res);
 
 				// get difference (in mi.) between the 2 geolocations
 				var from = new google.maps.LatLng(a, b);
@@ -69,19 +56,18 @@ var Search = React.createClass({
 				var distMiles;
 
 				distMiles = (dist / 1609.344);
-				console.log("distMiles: " + distMiles);
+				// console.log("distMiles: " + distMiles);
 
-				console.log(newUser)
 				//if difference below the radius, append to this.state.usersByradius array
 				if (distMiles <= radius) {
-					console.log("in range")
+					// console.log("in range")
 					
 					this.setState({
-						usersByRadius: this.state.usersByRadius.concat(newUser)
+						usersByRadius: this.state.usersByRadius.concat(res.user)
 					})
-					console.log(this.state.usersByRadius[0]);
+					
 				} else {
-					console.log("not in range") 
+					// console.log("not in range") 
 				}
 
 			}.bind(this))
@@ -96,7 +82,6 @@ var Search = React.createClass({
 		//get users in the database
 		Helpers.getUsers()
 		.then(function(result) {
-			console.log(result)
 			
 			//build new state for each user, concat to currentUsers state array
 			for(var i = 0; i < (result.data.length); i++) {
@@ -138,10 +123,8 @@ var Search = React.createClass({
 
 			//fixed point geolocation saved into 'lat' + 'lng'
 			var location1 = (city + ", " + state);
-			console.log('85: ' + location1);
 			Helpers.runQuery(location1)
 			.then(function(result) {
-				console.log("88: " + result)
 				ab = result.lat;
 				cd = result.lng;
 				this.filterUsersByRadius(ab,cd,radius)
@@ -178,81 +161,107 @@ var Search = React.createClass({
 
 		return (
 			<div className ="container contentWrapper">
+				{/*BreadCrumb*/}
 				<div className="row">
 					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Search</h2>
 				</div>
-				<div className="row">
-					<div id="searchForm" className="jumbotron">
 
-						<h1 id="searchHeader">Musician Search</h1>
-						<h2>Find musicians in your area</h2>
-						<form style={{width: '50%'}}name="filter" method="get" onSubmit={this.handleSubmit}>
-							<div className="form-group">
-								<label htmlFor="profession">Profession/Role:</label>
-								<input placeholder="Musician/Drummer/Singer" type="text" className="form-control" id="professionFilt" name="professionFilt" ref="professionFilt"/>
-								
-								<label htmlFor="instrumentFilt">Instrument:</label>
-								<select className="form-control" id="instrumentFilt" name="instrumentFilt" ref="instrumentFilt">
+				{/*Search Filter*/}
+				<div id="searchForm" className="row">
+
+					<h1 id="searchHeader">Musician Search</h1>
+					
+					<div className="panel">
+					<div className="panel-heading">
+                        SEARCH FILTER
+                    </div>
+
+					<div className="panel-body">
+					<p>Find musicians in your area</p>
+					<form name="filter" method="get" onSubmit={this.handleSubmit}>
+						
+						<div className="form-group">
+							
+							<label htmlFor="profession">Profession/Role:</label>
+							<input placeholder="Musician/Drummer/Singer" type="text" className="form-control" id="professionFilt" name="professionFilt" ref="professionFilt"/>
+							
+						</div>
+
+						<div className="form-group">
+							<label htmlFor="instrumentFilt">Instrument:</label>
+							<select className="form-control" id="instrumentFilt" name="instrumentFilt" ref="instrumentFilt">
+								{
+									instruments.map(function(el) {
+										return <option key ={el}value={el}>{el}</option>
+									})
+								}
+							</select>
+						</div>
+
+						<div className="form-group">
+							<div style={{width: '110%'}}>
+								<label htmlFor="cityFilt">City:</label>
+								<input placeholder="City" type="text" className="form-control" id="cityFilt" name="cityFilt" ref="cityFilt"/>
+							</div>
+						</div>
+
+						<div className="form-group">
+							<div>
+								<label htmlFor="stateFilt">State:</label>
+								<select className="form-control" id="stateFilt" name="stateFilt" ref="stateFilt">
 									{
-										instruments.map(function(el) {
+										states.map(function(el) {
 											return <option key ={el}value={el}>{el}</option>
 										})
 									}
 								</select>
-								<div className="row form-group" style={{marginLeft: '1px'}}>
-									<div style={{width: '66%', float: 'left'}}>
-										<label htmlFor="cityFilt">City:</label>
-										<input placeholder="City" type="text" className="form-control" id="cityFilt" name="cityFilt" ref="cityFilt"/>
-									</div>
-									<div style={{width: '30%', float: 'left', marginLeft: '5px'}}>
-										<label htmlFor="stateFilt">State:</label>
-										<select className="form-control" id="stateFilt" name="stateFilt" ref="stateFilt">
-											{
-												states.map(function(el) {
-													return <option key ={el}value={el}>{el}</option>
-												})
-											}
-										</select>
-									</div>
-								</div>
-
-								<div className="form-group">
-								<label htmlFor="gender">Gender:</label>
-								<select className="form-control col-xs-3" id="gender" name="gender" ref="gender">
-										<option key="MALE" value="MALE">Male</option>
-										<option key="FEMALE" value="FEMALE">Female</option>
-								</select>
-								</div>
-
-								<div className="form-group">
-								<label htmlFor="radius">Radius (mi.):</label>
-								<select className="form-control" id="radiusFilt" name="radiusFilt" ref="radiusFilt">
-									<option value={5}>5</option>
-									<option value={10}>10</option>
-									<option value={15}>15</option>
-									<option value={25}>25</option>
-									<option value={40}>40</option>
-								</select>
-								</div>
 							</div>
-							<button type="submit" className="btn btn-lg" id="musicianBtn">Submit</button>
-						</form>
-
-						<div className="panel-body" id="musicianSearchResults">
-							{/*<Route path="/user/events/search" component={Results}/>*/}
-							<div id="loadingImg" style={{display: 'none', margin: '0 auto'}}>
-									<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
-							</div>
-							{this.state.usersByRadius.map(function(user) {
-									return (
-									<div className="resultSearch" key={user.key} data-key={user.key} style={{overflow: 'hidden'}}>
-										<h3 className="eventTitle">{user.firstName + " " + user.lastName}</h3>
-										<img className="imgResponsive col-xs-2" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
-										{/*<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="userDesc">{user.description}</p>*/}
-									</div>
-								);
-							},this)}
 						</div>
+
+						<div className="form-group">
+						<label htmlFor="gender">Gender:</label>
+						<select className="form-control col-xs-3" id="gender" name="gender" ref="gender">
+								<option key="MALE" value="MALE">Male</option>
+								<option key="FEMALE" value="FEMALE">Female</option>
+						</select>
+						</div>
+
+						<div className="form-group">
+						<label htmlFor="radius">Radius (mi.):</label>
+						<select className="form-control" id="radiusFilt" name="radiusFilt" ref="radiusFilt">
+							<option value={5}>5</option>
+							<option value={10}>10</option>
+							<option value={15}>15</option>
+							<option value={25}>25</option>
+							<option value={40}>40</option>
+						</select>
+						</div>
+						
+						<button type="submit" className="btn btn-lg" id="musicianBtn">Submit</button>
+					</form>
+					</div>
+					</div>
+
+					<div className="panel">
+					<div className="panel-heading">
+                        RESULTS
+                    </div>
+					<div className="panel-body" id="musicianSearchResults">
+						{/*<Route path="/user/events/search" component={Results}/>*/}
+						<div id="loadingImg" style={{display: 'none', margin: '0 auto'}}>
+								<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+						</div>
+						{this.state.usersByRadius.map(function(user) {
+								return (
+								<div className="resultSearch" key={user.key} data-key={user.key} style={{overflow: 'hidden'}}>
+									<h3 className="musicName">{user.firstName + " " + user.lastName}</h3>
+									<img className="imgResponsive col-xs-2" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
+									{/*<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="userDesc">{user.description}</p>*/}
+								</div>
+							);
+						},this)}
+						
+					</div>
 					</div>
 				</div>
 			</div>

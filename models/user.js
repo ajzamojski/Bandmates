@@ -16,10 +16,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     username: {
       type: DataTypes.STRING,
-      allowNull: false
+      unique: true,
+      allowNull: false,
     },
     email:{
       type: DataTypes.STRING,
+      unique: true,
       allowNull: false,
       validate: {
         len:[1]
@@ -100,7 +102,19 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-  });
+  }, {
+      classMethods: {
+        associate: function(models) {
+          User.hasMany(models.Contacts, {
+            foreignKey: {
+              name: 'userContact_id',
+              onDelete: "cascade"
+            }
+          })
+        }
+      }
+  }
+  );
   return User;
 };
 
