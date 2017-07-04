@@ -55,7 +55,7 @@ var Main = React.createClass ({
 					sidebar: () => <div></div>,
 					main: () => <Messenger theUser={this.state.user}/>
 				},
-				{ path: '/user/profile',
+				{ path: '/user/profile/:username',
 					sidebar: () => <div></div>,
 					main: () => <Profile theUser={this.state.user}/>
 				},
@@ -102,7 +102,7 @@ var Main = React.createClass ({
 							<li><NavLink to="/user/search" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Search</NavLink></li>
 							<li><NavLink to="/user/messenger" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Messenger</NavLink></li>
 							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
-							<li><NavLink to="/user/profile" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
+							<li><NavLink to={"/user/profile/" + this.props.dbUserObject.userData.username} className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 
 							{/*<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>*/}
@@ -142,7 +142,6 @@ var Main = React.createClass ({
 									path={route.path}
 									exact={route.exact}
 									component={route.main}
-									randomData = {this.getData}
 								/>
 								</Switch>
 							</RouteTransition>

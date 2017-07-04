@@ -59,7 +59,7 @@ app.get('/user/search', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get('/user/profile', function(req,res) {
+app.get('/user/profile/:username', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 

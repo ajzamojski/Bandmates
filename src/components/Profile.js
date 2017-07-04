@@ -28,6 +28,7 @@ var Profile = React.createClass ({
   	},
 
    componentDidMount() {
+	console.log(this);
 	this.setState({user: this.props.theUser});
    	 $.get("/loggedin", function(data) {
 
