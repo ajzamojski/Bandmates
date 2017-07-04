@@ -67,27 +67,35 @@ var Profile = React.createClass ({
 							<h1 className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
 						</div>
 
-						<div className="row" style={{ height:'40em', border: 'solid 1px black'}}>
-							<div className="container col-xs-4" id="" style={{display: 'block', height:'100%', border: 'solid 1px black'}}>
-								<h3 className="text-center">Profile</h3>
-								<div> <img className="img-responsive" id="displayPic"src="/img/default_pic.jpg" /></div> <br></br>
-								<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
-								<div className="infoProfile">{this.state.city} {this.state.state} {this.state.zipcode}</div> 
-								<div className="infoProfile">{this.state.email}</div> 
+						<div className="row" style={{ height:'40em'}}>
+							<div className="panel col-xs-3" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
+								<div className="panel-heading">Profile</div>
+								<div className="panel-body">
+									<div> <img className="img-responsive" id="displayPic"src="/img/default_pic.jpg" /></div> <br></br>
+									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
+									<div className="infoProfile">{this.state.city} {this.state.state} {this.state.zipcode}</div> 
+									<div className="infoProfile">{this.state.email}</div> 
+								</div>
 							</div>
 						
-							<div className="container col-xs-8" id="" style={{display: 'block', height:'100%', border: 'solid 1px black'}}>
-								<h3 className="text-center">About Me</h3>
-								<div className="rightProfile"><strong>Information: </strong>{this.state.musicianInfo}</div> <br></br>
-								<div className="rightProfile"><strong>Profession: </strong>{this.state.profession}</div> <br></br>
-								<div className="rightProfile"><strong>Instrument: </strong>{this.state.instrument}</div> <br></br>
-								<div className="rightProfile"><strong>Experience: </strong>{this.state.experience}</div> <br></br>
-
+							<div className="panel col-xs-7" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
+								<div className="panel-heading">About Me</div>
+								<div className="panel-body">
+									<div className="rightProfile"><em>Information: </em>{this.state.musicianInfo}</div> <br></br>
+									<div className="rightProfile"><em>Profession: </em>{this.state.profession}</div> <br></br>
+									<div className="rightProfile"><em>Instrument: </em>{this.state.instrument}</div> <br></br>
+									<div className="rightProfile"><em>Experience: </em>{this.state.experience}</div> <br></br>
+								</div>
 							</div>
 						</div>
 						<div className="row" >
-							<div className="container col-xs-12" id="" style={{height:'25em', border: 'solid 1px black'}}>
-								<h3 className="text-center">My Links</h3>
+							<div className="panel col-xs-12" id="" style={{padding: '0px', height:'30em'}}>
+								<div className="panel-heading">My Links</div>
+								<div className="panel-body">
+									<iframe width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
+									frameborder="0" allowfullscreen></iframe>
+
+								</div>
 							</div>
 						</div>
 					</div>
