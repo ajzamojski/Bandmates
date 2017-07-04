@@ -81,7 +81,7 @@ var Profile = React.createClass ({
 							<div className="panel col-xs-7" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
 								<div className="panel-heading">About Me</div>
 								<div className="panel-body">
-									<div className="rightProfile"><em>Information: </em>{this.state.musicianInfo}</div> <br></br>
+									<div className="rightProfile" id="rightProfile"><em>Information: </em>{this.state.musicianInfo}</div> <br></br>
 									<div className="rightProfile"><em>Profession: </em>{this.state.profession}</div> <br></br>
 									<div className="rightProfile"><em>Instrument: </em>{this.state.instrument}</div> <br></br>
 									<div className="rightProfile"><em>Experience: </em>{this.state.experience}</div> <br></br>
