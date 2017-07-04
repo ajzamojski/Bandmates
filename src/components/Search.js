@@ -21,7 +21,11 @@ const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID"
 var address;
 var latInst;
 var lngInst;
-
+import { 
+    BrowserRouter as Router, 
+    Route, 
+    Link 
+} from "react-router-dom";
 var Helpers = require('./utils/helpers');
 
 var Search = React.createClass({
@@ -73,8 +77,6 @@ var Search = React.createClass({
 			}.bind(this))
 
 		}
-		
-		//append to results div the usersByRadius array state
 
 	},
 	getMusicians(prof,inst,city,state,radius) {
@@ -82,30 +84,42 @@ var Search = React.createClass({
 		//get users in the database
 		Helpers.getUsers()
 		.then(function(result) {
-			
+			console.log(result.data)
 			//build new state for each user, concat to currentUsers state array
 			for(var i = 0; i < (result.data.length); i++) {
 				var newState = {
 					firstName: '',
 					lastName: '',
+					username: '',
 					city: '',
 					state: '',
 					zip: '',
 					age: '',
 					gender: '',
-					instrument: '',
+					instruments: '',
 					photo: '',
+					specifics: '',
 					key: ''
 				};
 
 				newState.firstName = result.data[i].firstName;
 				newState.lastName = result.data[i].lastName;
+				newState.username = result.data[i].username;
 				newState.city = result.data[i].city;
 				newState.state = result.data[i].state;
-				newState.zip = result.data[i].zip;
+				if(result.data[i].zip == undefined) {
+					newState.zip = '';
+				} else {
+					newState.zip = result.data[i].zip;
+				}
 				newState.age = result.data[i].age;
 				newState.gender = result.data[i].gender;
-				newState.instrument = result.data[i].instruments;
+				newState.instruments = result.data[i].instruments;
+				if(result.data[i].styles == null) {
+					newState.specifics = '';
+				} else {
+					newState.specifics = result.data[i].styles;
+				}
 				newState.photo = result.data[i].profilePic;
 				newState.key = Date.now() + i;
 				
@@ -254,8 +268,15 @@ var Search = React.createClass({
 						{this.state.usersByRadius.map(function(user) {
 								return (
 								<div className="resultSearch" key={user.key} data-key={user.key} style={{overflow: 'hidden'}}>
-									<h3 className="musicName">{user.firstName + " " + user.lastName}</h3>
-									<img className="imgResponsive col-xs-2" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
+									
+									<img className="imgResponsive" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
+									<div style={{display: 'flex', flexDirection: 'column', float: 'left'}}>
+										<h3 className="musicName"><Link to={"/user/profile/" + user.username}><a style={{color: 'black'}} data-username ={user.username}>{user.firstName + " " + user.lastName}</a></Link></h3>
+										<p style={{fontSize: '18px'}}>{user.instruments}{user.specifics == null || undefined ? "" : (": " + user.specifics)}</p>
+										<p style={{fontSize: '18px'}}>{user.city + " " + user.state}{" " + user.zip}</p>
+									</div>
+									<div>
+									</div>
 									{/*<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="userDesc">{user.description}</p>*/}
 								</div>
 							);
