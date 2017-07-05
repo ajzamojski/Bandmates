@@ -188,6 +188,9 @@ var Home = React.createClass({
                 
                 console.log(result);
                 document.getElementById("logInSuccess").style.display = "block";
+                <Redirect to="/user"/>
+
+
                 }
 
             }.bind(this));

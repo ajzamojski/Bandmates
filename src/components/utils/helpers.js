@@ -31,6 +31,17 @@ var helper = {
       });
   },
 
+  updateUser: function(data) {
+
+    console.log(data);
+    let queryURL = "/users/update";
+    return axios.put(queryURL, data).then(function(result) {
+        console.log("updating user");
+        console.log(result);
+        return result;
+    })
+  },
+
   // This function serves our purpose of running the query to geolocate.
   runQuery: function(location) {
 

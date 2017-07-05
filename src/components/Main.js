@@ -108,9 +108,9 @@ var Main = React.createClass ({
                         <ul className="nav navbar-nav" style={{float: 'right'}}>
                             
                             <li className="nav-item active btn-group">
-                                <a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Logged In As *USER*</a>
+                                <a className="nav-link dropdown-toggle" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{"Logged In As " + this.state.firstName}</a>
                                 <div className="dropdown-menu" aria-labelledby="dropdownMenu">
-                                    <NavLink to="/">Logout</NavLink>
+                                    <NavLink to="/" >Logout</NavLink>
                                 </div>
                             </li>
                         </ul>
