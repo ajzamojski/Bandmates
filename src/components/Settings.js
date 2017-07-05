@@ -16,21 +16,22 @@ const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID"
 var Settings = React.createClass ({
 	getInitialState: function() {
         return {
-			// firstName: {this.state.firstName},
-			// lastName: 'Lee',
-			// email: 'zapetou@gmail.com',
-			// password: '*****',
-			// passwordVer: '*****',
-			// photo: '',
-			// city: 'Edison',
-			// stateLocation: 'NJ',
-			// zip: '08854',
-			// age: '25',
-			// phone: '999-999-9999',
-			// gender: 'Male',
-			// instrument: 'Trumpet',
-			// education: 'Rutgers U.',
-			// exp: 'Played trumpet in high school.'
+			user: undefined,
+			firstName: 'Kevin',
+			lastName: 'Lee',
+			email: 'zapetou@gmail.com',
+			password: '*****',
+			passwordVer: '*****',
+			photo: '',
+			city: 'Edison',
+			stateLocation: 'NJ',
+			zip: '08854',
+			age: '25',
+			phone: '999-999-9999',
+			gender: 'Male',
+			instrument: 'Trumpet',
+			education: 'Rutgers U.',
+			exp: 'Played trumpet in high school.'
         };
   	},
 	handleChange: function(event) {
@@ -41,65 +42,27 @@ var Settings = React.createClass ({
 	},
 	handleUpdate: function(event) {
 		event.preventDefault();
-		//save new state to mySQL DB
-
-		// var firstName = req.body.firstName;
-  //       var lastName = req.body.lastName;
-		// var username = req.body.userName;
-		// var email = req.body.email;
-		// var password = generateHash(req.body.password);
-		// var photoURL
-		// var city
-		// var state
-		// var zipcode
-		// var age
-		// var phone
-		// var gender
-		// var instrument
-		// var education
-		// var experience
-		// var lat
-		// var long
-		// console.log(req.body);
-
-		// 	// var newUserMysql = new Object();
-		// 	// newUserMysql.email    = email;
-		// 	// newUserMysql.password = password;
-		// 	// console.log(newUserMysql);
-
-	 //    db.User.update({firstName: firstName, lastName: lastName, username: username, email: email, password: password, photoURL: photoURL, city: city})
-		// 	.done(function(data) {
-		// 			// if (err) {
-		// 			// 	return done(err);
-		// 			// }
-		// 			// newUserMysql.id = data.insertId;
-
-		// 		console.log("the final data");
-		// 		console.log(data);
-		// 		return done(null, data, req.flash('signupMessage', 'You are now registered'));
-		// 	};
-
-		// var a = this.refs.query.value;
-		// var b = this.refs.city.value;
-		// var c = this.refs.state.value;
-		// var d = this.refs.startDate.value;
-		// var e = this.refs.endDate.value;
-		// var f = this.refs.radius.value;
-		// var lat;
-		// var lng;
-
-		// var loc = b + ", " + c;
 
 		var userRegData = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
-                userName: this.state.username,
+                username: this.state.username,
                 email: this.state.email,
                 password: this.state.password,
+                profilePic: this.state.photo,
+                city: this.state.city,
+                state: this.state.stateLocation,
+                zipcode: this.state.zip,
+                age: this.state.age,
+                phone: this.state.phone,
+                gender: this.state.gender,
+                instruments: this.state.instrument,
+                education: this.state.education,
+                experience: this.state.exp,
                 
             }
 
-		 Helpers.logInUser(userData).then(function(result){
+		 Helpers.updateUser(userData).then(function(result){
 
                 if (result.data.loginError) {
                     if (result.data.loginError[0] === 'User not found') {
@@ -113,44 +76,24 @@ var Settings = React.createClass ({
                 else {
                 
                 console.log(result);
-                document.getElementById("logInSuccess").style.display = "block";
-                <Redirect to="/user"/>
-
-		// <Redirect to="/user/profile"/>
+                <Redirect to="/user/profile"/>
 
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
-
-		$.get("/loggedin", function(data) {
-
-   	 	console.log(data);
-   	 	console.log(data.notAuthenticated == true);
-   	 	console.log(!(data.notAuthenticated == true));
-  		if (!(data.notAuthenticated === true)) {
-
-  			this.setState({
-  				firstName: data.userData.firstName,
-  				lastName: data.userData.lastName,
-  				userName: data.userData.username,
-  				email: data.userData.email,
-
-
-  			})
-  		}
-  		console.log(this.state.firstName);
-  	}.bind(this));
-
+		this.setState({user: this.props.theUser});
 	},
 	render: function() {
 		return (
-			<div className ="container">
+			<div className ="container contentWrapper">
+				{/*BreadCrumb*/}
 				<div className="row">
-					<div className="jumbotron">
-						<h1>Settings</h1>
-					</div>
-
-					<div className="col-md-10 col-md-offset-1">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Settings</h2>
+				</div>
+				{/*Settings*/}
+				<div className="row">
+					<h2>Settings</h2>
+				<div className="col-md-10 col-md-offset-1">
 				<form id="editForm" onSubmit={this.handleUpdate}>
 					<div className="form-group">
 						<label htmlFor="firstName">First Name:</label>
@@ -176,7 +119,7 @@ var Settings = React.createClass ({
 						<br />
 						<div className="form-group">
 							<label htmlFor="state">State:</label>
-							<select className="form-control" id="state" name="stateLocation" value={event.target.value} onChange={this.handleChange}>
+							<select className="form-control" id="state" name="stateLocation" value={this.state.stateLocation} onChange={this.handleChange}>
 								{
 									states.map(function(el) {
 										return <option key ={el}

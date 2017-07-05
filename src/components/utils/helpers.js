@@ -42,17 +42,24 @@ var helper = {
     })
   },
 
+  getUsers: function() {
+    return axios.get("/api/musicians");
+  },
   // This function serves our purpose of running the query to geolocate.
-  runQuery: function(location) {
-
-    console.log(location);
-
+  runQuery: function(location, newUser) {
+    
     // Figure out the geolocation
     var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + geocodeAPI;
+    var returnObj = {}
+    returnObj.user = newUser;
+
     return axios.get(queryURL).then(function(response) {
+      
       // If get get a result, return that result's formatted address property
       if (response.data.results[0]) {
-        return response.data.results[0].geometry;
+        returnObj.lat = response.data.results[0].geometry.lat;
+        returnObj.lng = response.data.results[0].geometry.lng;
+        return returnObj;
       }
       // If we don't get any results, return an empty string
       return "";
@@ -79,8 +86,8 @@ var helper = {
     '&location.within=' + radius + 
     '&location.latitude=' + lat.toString() +
     '&location.longitude=' + lng.toString() +
-    '&start_date.range_start=' + startDate + 'T13:00:00'+ 
-    '&start_date.range_end=' + endDate + 'T13:00:00'+
+    '&start_date.range_start=' + startDate + 'T01:00:00'+ 
+    '&start_date.range_end=' + endDate + 'T23:00:00'+
      '&token=ZOVDW3APCGKQD5SCX75S';
     
     return axios.get(queryURL, function(err,data) {
@@ -97,7 +104,6 @@ var helper = {
   getHistory: function() {
     return axios.get("/api");
   },
-
   // This function posts new searches to our database.
   postHistory: function(location) {
     return axios.post("/api", { location: location });

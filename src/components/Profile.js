@@ -8,23 +8,28 @@
 
 var React = require('react');
 
-// Including the Link component from React Router to navigate within our application without full page reloads
-var Link = require("react-router").Link;
-
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
-            firstName: null,
-            lastName: null,
+			user: undefined,
+            firstName: 'Kevin',
+            lastName: 'Lee',
+            city: "Edison",
+            state: "NJ",
+            zipcode: "08854",
             userName: null,
             email: null,
             picture: null,
-            address: null,
+            musicianInfo: "Alex Honeysett is a Brand and Marketing Strategist who partners with CEOs, executives and solopreneurs to grow their personal and professional brands, human-to-human. After spending nearly a decade working in PR and marketing for multimillion dollar brands and startups, Alex knows what truly drives conversions, sold-out launches and New York Times interviews—and it’s not mastering the marketing flavor of the week. It’s how well you connect with the heart-beating people you’re trying to help and communicate your understanding back to them. Alex has landed coverage in print and broadcast outlets around the world, including the Today Show, Wall Street Journal, Mashable, BBC, NPR and CNN. Her own articles have been featured in The Muse, Forbes, Inc., Mashable, DailyWorth and Newsweek. In addition to her extensive PR and marketing experience, Alex is a trained business coach Alex holds a BA in communications and journalism from the University of Delaware.",
+            profession: "Backup Dancer",
+            instrument: "Trumpet Player",
+            experience: "Alex has years of experience playing the trumpet and sounding awesome"
         }
   	},
 
    componentDidMount() {
-
+	console.log(window.location.href);
+	this.setState({user: this.props.theUser});
    	 $.get("/loggedin", function(data) {
 
    	 	console.log(data);
@@ -37,39 +42,63 @@ var Profile = React.createClass ({
   				lastName: data.userData.lastName,
   				userName: data.userData.username,
   				email: data.userData.email,
+  				picture: data.userData.profilePic
 
   			})
   		}
   		console.log(this.state.firstName);
   	}.bind(this));
+	  
    },
-
   getProfile: function () {
 
   },
 	render: function () {
 		return (
-
-			<div >
-				<div className="container">
-					<div className="container">
-
+			<div>
+				<div className="container contentWrapper">
+					{/*BreadCrumb*/}
+					<div className="row">
+						<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Profile</h2>
+					</div>
+					{/*Profile*/}
+					<div className="row">
 						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
-							<h1 className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
+							<h1 className="" id="nameDisplay">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
 						</div>
 
-						<div className="row" style={{ height:'40em', border: 'solid 1px black'}}>
-							<div className="container col-xs-4" id="" style={{display: 'block', height:'100%', border: 'solid 1px black'}}>
-								<h3 className="text-center">Left Side</h3>
+						<div className="row" style={{ height:'40em'}}>
+							<div className="panel col-xs-3" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
+								<div className="panel-heading">Profile</div>
+								<div className="panel-body">
+									<div> <img className="img-responsive" id="displayPic"src="/img/default_pic.jpg" /></div> <br></br>
+									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
+									<div className="infoProfile">{this.state.city} {this.state.state} {this.state.zipcode}</div> 
+									<div className="infoProfile">{this.state.email}</div> 
+								</div>
 							</div>
 						
-							<div className="container col-xs-8" id="" style={{display: 'block', height:'100%', border: 'solid 1px black'}}>
-								<h3 className="text-center">Right Side</h3>
+							<div className="panel col-xs-7" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
+								<div className="panel-heading">About Me</div>
+								<div className="panel-body">
+									<div className="rightProfile" id="rightProfile"><em>Information: </em>{this.state.musicianInfo}</div> <br></br>
+									<div className="rightProfile"><em>Profession: </em>{this.state.profession}</div> <br></br>
+									<div className="rightProfile"><em>Instrument: </em>{this.state.instrument}</div> <br></br>
+									<div className="rightProfile"><em>Experience: </em>{this.state.experience}</div> <br></br>
+								</div>
 							</div>
 						</div>
 						<div className="row" >
-							<div className="container col-xs-12" id="" style={{height:'25em', border: 'solid 1px black'}}>
-								<h3 className="text-center">Bottom</h3>
+							<div className="panel col-xs-12" id="" style={{padding: '0px', minHeight:'30em'}}>
+								<div className="panel-heading">My Links</div>
+								<div className="panel-body">
+									<a href="https://www.youtube.com/channel/UC8HV_9oHzfB9kw76Yj69wqg" target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
+									<a href="https://soundcloud.com" target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
+									<div style={{clear: "left"}} ><iframe style={{marginTop: "18px"}}width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
+										frameBorder="0" allowFullScreen></iframe>
+									</div>
+
+								</div>
 							</div>
 						</div>
 					</div>

@@ -10,68 +10,279 @@
 
 var React = require('react');
 
+const instruments = ['Ajaeng', 'Bag Pipes','Bassoon', 'Beatboxing', 'Baritone', 'Clarinet', 'Disc Jockey','Drums','Electronic Instrument', 
+'Flute', 'French Horn', 'Guitar', 'Harmonica', 'Harp', 'Keyboard', 'Oboe', 'Percussion','Piano', 'Piccolo','Pipe Organ', 'Recorder', 
+'Saxophone', 'Sousaphone', 'Trombone', 'Trumpet', 'Tuba', 'Ukelele', 'Vibraphone', 'Viola', 'Violin', 'Voice', 'Xylophone', 'Other'];
+
+const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID","IL","IN","KS",
+"KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM",
+"NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
+
+var address;
+var latInst;
+var lngInst;
+import { 
+    BrowserRouter as Router, 
+    Route, 
+    Link 
+} from "react-router-dom";
+var Helpers = require('./utils/helpers');
+
 var Search = React.createClass({
 	getInitialState: function() {
         return {
-			firstName: 'Kevin',
-			lastName: 'Lee',
-			email: 'zapetou@gmail.com',
-			city: 'Edison',
-			stateLocation: 'NJ',
-			zip: '08854',
-			age: '25',
-			gender: 'Male',
-			instrument: 'Trumpet',
-			education: 'Rutgers U.',
-			radius: undefined
+			user: undefined,
+			currentUsers: [],
+			usersByRadius: []
         };
   	},
+	filterUsersByRadius(fixedGeoLat, fixedGeoLng, radius) {
+
+		var a = parseFloat(fixedGeoLat);
+		var b = parseFloat(fixedGeoLng);
+
+		//iterate through the currentUsers array and grab each lat/lng
+		for (var i = 0; i < this.state.currentUsers.length; i++) {
+			var loc = (this.state.currentUsers[i].city + ", " + this.state.currentUsers[i].state);
+			var newUser = this.state.currentUsers[i];
+
+			Helpers.runQuery(loc, newUser)
+			.then(function(res) {
+				var c = res.lat;
+				var d = res.lng;
+				console.log(res);
+
+				// get difference (in mi.) between the 2 geolocations
+				var from = new google.maps.LatLng(a, b);
+				var to = new google.maps.LatLng(c, d);
+
+				var dist = google.maps.geometry.spherical.computeDistanceBetween(from, to);
+				var distMiles;
+
+				distMiles = (dist / 1609.344);
+				// console.log("distMiles: " + distMiles);
+
+				//if difference below the radius, append to this.state.usersByradius array
+				if (distMiles <= radius) {
+					// console.log("in range")
+					
+					this.setState({
+						usersByRadius: this.state.usersByRadius.concat(res.user)
+					})
+					
+				} else {
+					// console.log("not in range") 
+				}
+
+			}.bind(this))
+
+		}
+
+	},
+	getMusicians(prof,inst,city,state,radius) {
+			
+		//get users in the database
+		Helpers.getUsers()
+		.then(function(result) {
+			console.log(result.data)
+			//build new state for each user, concat to currentUsers state array
+			for(var i = 0; i < (result.data.length); i++) {
+				var newState = {
+					firstName: '',
+					lastName: '',
+					username: '',
+					city: '',
+					state: '',
+					zip: '',
+					age: '',
+					gender: '',
+					instruments: '',
+					photo: '',
+					specifics: '',
+					key: ''
+				};
+
+				newState.firstName = result.data[i].firstName;
+				newState.lastName = result.data[i].lastName;
+				newState.username = result.data[i].username;
+				newState.city = result.data[i].city;
+				newState.state = result.data[i].state;
+				if(result.data[i].zip == undefined) {
+					newState.zip = '';
+				} else {
+					newState.zip = result.data[i].zip;
+				}
+				newState.age = result.data[i].age;
+				newState.gender = result.data[i].gender;
+				newState.instruments = result.data[i].instruments;
+				if(result.data[i].styles == null) {
+					newState.specifics = '';
+				} else {
+					newState.specifics = result.data[i].styles;
+				}
+				newState.photo = result.data[i].profilePic;
+				newState.key = Date.now() + i;
+				
+				//set state
+				this.setState({
+					currentUsers: this.state.currentUsers.concat(newState)
+				})
+			}
+			console.log(this.state.currentUsers)
+			
+
+			//declare lat/lng variables here
+			var ab;
+			var cd;
+
+			//fixed point geolocation saved into 'lat' + 'lng'
+			var location1 = (city + ", " + state);
+			Helpers.runQuery(location1)
+			.then(function(result) {
+				ab = result.lat;
+				cd = result.lng;
+				this.filterUsersByRadius(ab,cd,radius)
+
+			}.bind(this))
+
+		}.bind(this))	
+	},  	
 	handleSubmit: function(event) {
-		const name = event.target.name;
-		const value = event.target.value;
-		this.setState({[name] : value});
+		event.preventDefault();
 		
+		//clear currentUsers array
+		//clear usersByRadius array
+
+		this.setState({
+			currentUsers : [],
+			usersByRadius: []
+		});
+
+		var prof = this.refs.professionFilt.value;
+		var inst = this.refs.instrumentFilt.value;;
+		var city = this.refs.cityFilt.value;
+		var state = this.refs.stateFilt.value;
+		var gender = this.refs.gender.value;
+		var radius = this.refs.radiusFilt.value;
+
+		this.getMusicians(prof,inst,city,state,radius);
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Search');
+		this.setState({user: this.props.theUser});
 	},
 	render () {
 
 		return (
-			<div className ="container">
+			<div className ="container contentWrapper">
+				{/*BreadCrumb*/}
 				<div className="row">
-					<div className="jumbotron">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Search</h2>
+				</div>
 
-						<h1>Musician Search</h1>
-							<h2 className="text-center">What type of musician are you looking for?</h2>
-							<form name="filter" method="get" onSubmit={this.handleSubmit}>
-								<div className="form-group">
-									<label htmlFor="profession">Profession/Role:</label>
-									<input placeholder="Musician/Drummer/Singer" type="text" className="form-control" id="professionFilt" name="professionFilt"/>
+				{/*Search Filter*/}
+				<div id="searchForm" className="row">
+
+					<h1 id="searchHeader">Musician Search</h1>
+					
+					<div className="panel">
+					<div className="panel-heading">
+                        SEARCH FILTER
+                    </div>
+
+					<div className="panel-body">
+					<p>Find musicians in your area</p>
+					<form name="filter" method="get" onSubmit={this.handleSubmit}>
+						
+						<div className="form-group">
+							
+							<label htmlFor="profession">Profession/Role:</label>
+							<input placeholder="Musician/Drummer/Singer" type="text" className="form-control" id="professionFilt" name="professionFilt" ref="professionFilt"/>
+							
+						</div>
+
+						<div className="form-group">
+							<label htmlFor="instrumentFilt">Instrument:</label>
+							<select className="form-control" id="instrumentFilt" name="instrumentFilt" ref="instrumentFilt">
+								{
+									instruments.map(function(el) {
+										return <option key ={el}value={el}>{el}</option>
+									})
+								}
+							</select>
+						</div>
+
+						<div className="form-group">
+							<div style={{width: '110%'}}>
+								<label htmlFor="cityFilt">City:</label>
+								<input placeholder="City" type="text" className="form-control" id="cityFilt" name="cityFilt" ref="cityFilt"/>
+							</div>
+						</div>
+
+						<div className="form-group">
+							<div>
+								<label htmlFor="stateFilt">State:</label>
+								<select className="form-control" id="stateFilt" name="stateFilt" ref="stateFilt">
+									{
+										states.map(function(el) {
+											return <option key ={el}value={el}>{el}</option>
+										})
+									}
+								</select>
+							</div>
+						</div>
+
+						<div className="form-group">
+						<label htmlFor="gender">Gender:</label>
+						<select className="form-control col-xs-3" id="gender" name="gender" ref="gender">
+								<option key="MALE" value="MALE">Male</option>
+								<option key="FEMALE" value="FEMALE">Female</option>
+						</select>
+						</div>
+
+						<div className="form-group">
+						<label htmlFor="radius">Radius (mi.):</label>
+						<select className="form-control" id="radiusFilt" name="radiusFilt" ref="radiusFilt">
+							<option value={5}>5</option>
+							<option value={10}>10</option>
+							<option value={15}>15</option>
+							<option value={25}>25</option>
+							<option value={40}>40</option>
+						</select>
+						</div>
+						
+						<button type="submit" className="btn btn-lg" id="musicianBtn">Submit</button>
+					</form>
+					</div>
+					</div>
+
+					<div className="panel">
+					<div className="panel-heading">
+                        RESULTS
+                    </div>
+					<div className="panel-body" id="musicianSearchResults">
+						{/*<Route path="/user/events/search" component={Results}/>*/}
+						<div id="loadingImg" style={{display: 'none', margin: '0 auto'}}>
+								<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+						</div>
+						{this.state.usersByRadius.map(function(user) {
+								return (
+								<div className="resultSearch" key={user.key} data-key={user.key} style={{overflow: 'hidden'}}>
 									
-									<label htmlFor="instrument">Instrument/Tool:</label>
-									<select className="form-control" id="instrumentFilt" name="instrumentFilt"></select>
-
-									<div className="form-group">
-										<label htmlFor="cityFilter">City:</label>
-										<input placeholder="City" type="text" className="form-control" id="cityFilt" name="cityFilt"/>
-										<label htmlFor="state">State:</label>
-										<select className="form-control" id="stateFilt" name="stateFilt"></select>
+									<img className="imgResponsive" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
+									<div style={{display: 'flex', flexDirection: 'column', float: 'left'}}>
+										<h3 className="musicName"><Link to={"/user/profile/" + user.username}><a style={{color: 'black'}} data-username ={user.username}>{user.firstName + " " + user.lastName}</a></Link></h3>
+										<p style={{fontSize: '18px'}}>{user.instruments}{user.specifics == null || undefined ? "" : (": " + user.specifics)}</p>
+										<p style={{fontSize: '18px'}}>{user.city + " " + user.state}{" " + user.zip}</p>
 									</div>
-
-									<input placeholder="Gender" type="text" className="form-control" id="genderFilt" name="genderFilt"/>
-
-									<label htmlFor="radius">Radius:</label>
-									<select className="form-control" id="radiusFilt" name="radiusFilt" defaultValue="" value={this.state.radius}>
-										<option value={5}>5</option>
-										<option value={10}>10</option>
-										<option value={20}>15</option>
-										<option value={30}>25</option>
-										<option value={45}>40</option>
-									</select>
+									<div>
+									</div>
+									{/*<p style={{maxHeight:'200px', overflow: 'scroll', overflowX:'hidden'}}className="userDesc">{user.description}</p>*/}
 								</div>
-								<button type="submit" className="btn btn-lg" id="SearchBtn">Submit</button>
-							</form>
+							);
+						},this)}
+						
+					</div>
 					</div>
 				</div>
 			</div>
