@@ -144,10 +144,12 @@ var Events = React.createClass({
 	render: function() {
 		return (
 			<div className ="container contentWrapper">
+				
 				{/*BreadCrumb*/}
 				<div className="row">
 					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Events</h2>
 				</div>
+
 				<div id="eventFilter" className="row">
 					
 					<h1 id="eventHeader">Events</h1>

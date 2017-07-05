@@ -641,7 +641,7 @@ var Home = React.createClass({
                         <ul className="list-inline social-buttons">
                             <li><a href="http://www.twitter.com"><i className="fa fa-twitter"></i></a>
                             </li>
-                            <li><a href="http://www.facebook.com"><i className="fa fa-facebook"></i></a>
+                            <li><a href="https://www.facebook.com/Bandmates-313555295756900/"><i className="fa fa-facebook"></i></a>
                             </li>
                             <li><a href="http://www.linkedin.com"><i className="fa fa-linkedin"></i></a>
                             </li>
