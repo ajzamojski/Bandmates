@@ -3,7 +3,7 @@
     "username": "root",
     "password": "test",
     "database": "band_db",
-    "host": "127.0.0.1",
+    "host": "123456",
     "dialect": "mysql"
   },
   "test": {
@@ -16,8 +16,9 @@
   "production": {
     "username": "gyeqr38crqt8mugk",
     "password": "h77lv08t6578o7nz",
-    "database": "band_db",
+    "database": "m4icgeutls2x0gsc",
     "host": "ko86t9azcob3a2f9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "port": 3306
   }
 }
