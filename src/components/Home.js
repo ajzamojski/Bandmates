@@ -199,6 +199,9 @@ var Home = React.createClass({
                 // this.setState({fireRedirect: true })
                 console.log(result.data.userAuthenticated);
                 document.getElementById("logInSuccess").style.display = "block";
+                <Redirect to="/user"/>
+
+
                 }
 
             }.bind(this));

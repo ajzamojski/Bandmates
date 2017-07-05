@@ -30,6 +30,18 @@ var helper = {
         return result;
       });
   },
+
+  updateUser: function(data) {
+
+    console.log(data);
+    let queryURL = "/users/update";
+    return axios.put(queryURL, data).then(function(result) {
+        console.log("updating user");
+        console.log(result);
+        return result;
+    })
+  },
+
   getUsers: function() {
     return axios.get("/api/musicians");
   },
