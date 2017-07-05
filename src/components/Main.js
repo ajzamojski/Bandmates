@@ -88,37 +88,28 @@ var Main = React.createClass ({
 	render: function() {
 		return (
 			<div>
-				        <nav id="mainNav" className="navbar navbar-default navbar-custom navbar-fixed-top" style={{backgroundColor: 'black'}}>
-            <div className="container">
-                
-                <div className="navbar-header page-scroll">
-                    <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                        <span className="sr-only">Toggle navigation</span> Menu <i className="fa fa-bars"></i>
-                    </button>
-                    <a className="navbar-brand page-scroll" href="/">Bandmates</a>
-                </div>
-                
-            </div>
-        </nav>
+				<nav id="appNav" className="navbar navbar-default navbar-custom navbar-fixed-top" style={{backgroundColor: 'black', height: '55px', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19)'}}>
+					<div style={{width: '200px', display: 'block', padding: '0px', marginRight: '0px', color: '#fec503',fontSize: '5em', position: 'relative', left: '41px', bottom: '38px', fontFamily: '"Painting in the Sunlight", "Helvetica Neue", Helvetica, Arial, cursive'}}>Bandmates</div>
+				</nav>
 				{/*Sidebar*/}
 				<div>
 					<nav className ="container col-xs-4" id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
-							<li className="nav-header text-center active btn-group">
+							<li style={{height: '100px'}}></li>
+								{/*<li className="nav-header text-center active btn-group">MENU</li>*/}
 								{/*{this.state.user.firstName + " " + this.state.user.lastName}*/}
-								MENU
-							</li>
-							{/*<li className="nav-header text-center">MENU</li>*/}
-							<li><NavLink to="/"><i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>
-							<li><NavLink exact to="/user" className="selected"><i className="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Main</NavLink></li>
-							<li><NavLink to="/user/search" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Search</NavLink></li>
-							<li><NavLink to="/user/messenger" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Messenger</NavLink></li>
-							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
-							<li><NavLink to={"/user/profile/" + this.props.dbUserObject.userData.username} className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
-							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
+								{/*<li className="nav-header text-center">MENU</li>*/}
+							<li style={{fontSize: '17px', color: '#5F5F5F'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-tachometer" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Dashboard</li>
+							<li><NavLink to="/">&nbsp;&nbsp;&nbsp;<i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>
+							<li><NavLink exact to="/user" className="selected">&nbsp;&nbsp;&nbsp;<i className="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Main</NavLink></li>
+							<li><NavLink to="/user/search" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Search</NavLink></li>
+							<li><NavLink to="/user/messenger" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Messenger</NavLink></li>
+							<li><NavLink to="/user/events/" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Events</NavLink></li>
+							<li><NavLink to={{pathname: "/user/profile/" + this.props.dbUserObject.userData.username, state: {username: this.props.dbUserObject.userData.username}}} className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
+							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 
 							{/*<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>*/}
-							<li onClick={this.something}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} ><i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							<li onClick={this.something}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} >&nbsp;&nbsp;&nbsp;<i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 
 						</ul>
 					</nav>

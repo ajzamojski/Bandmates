@@ -102,33 +102,57 @@ app.get("/api/musicians", function(req, res) {
     });
 });
 
-app.get("/api/contacts/:userId", function(req,res) {
-    var query = req.params.userId;
+//get contacts by userid
+app.get("/api/contacts/:userID", function(req,res) {
+    var query = req.params.userID;
     db.Contacts.findAll({
         where: {
             user_id: query
         }
     }).then(function(data) {
         res.json(data);
-        console.log(data);
         res.end();
     })
 });
 
-//get route for param filter
-app.get("/api/musicFilter?", function(req, res) {
-    var query = req.params.musicFilter;
-    console.log(query);
+//get userinfo by id
+app.get("/api/userContacts/:userID", function(req,res) {
+    var query = req.params.userID;
     db.User.findAll({
-    //   where: {
-    //     study_subject: query
-    //   }
+        where: {
+            id: query
+        }
+    }).then(function(data) {
+        res.json(data);
+        res.end();
+    })
+});
+
+//post new contact by userid + contactID
+app.post("/api/newContact/:userID/:contactID", function(req, res) {
+    db.Contacts.create({
+        user_id: req.params.userID,
+        contact_id: req.params.contactID,
+        timestamp: Date.now()
+    }).then(function(data) {
+      res.json(data);
+    });
+});
+
+//get route for username param filter
+app.get("/api/user/:username", function(req, res) {
+    var query = req.params.username;
+    db.User.findOne({
+      where: {
+        username: query
+      }
     }).then(function(data) {
       res.json(data);
       console.log(data);
       res.end();
     });
 });
+
 //-------------------------------------------------------
 // app.post('/user/messenger', (req, res) => {
 //   const { Body, From, MediaUrl0 } = req.body

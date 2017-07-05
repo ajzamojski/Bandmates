@@ -442,10 +442,12 @@ section h3.section-subheading {
   flex-flow: row wrap;
   justify-content: flex-start;
   align-items: flex-start;
+  align-content: flex-start;
   padding: 0;
   margin: 1em;
   border-radius: 5px;
   box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow-y: auto;
 }
 #contactsList > .item{
   order: 1;
@@ -716,6 +718,8 @@ section#contact .text-danger {
 }
 section#team {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 footer {
   padding: 25px 0;
