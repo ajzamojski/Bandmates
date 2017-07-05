@@ -42,8 +42,41 @@ var Settings = React.createClass ({
 	},
 	handleUpdate: function(event) {
 		event.preventDefault();
-		//save new state to mySQL DB
 
+		var userRegData = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                username: this.state.username,
+                email: this.state.email,
+                password: this.state.password,
+                profilePic: this.state.photo,
+                city: this.state.city,
+                state: this.state.stateLocation,
+                zipcode: this.state.zip,
+                age: this.state.age,
+                phone: this.state.phone,
+                gender: this.state.gender,
+                instruments: this.state.instrument,
+                education: this.state.education,
+                experience: this.state.exp,
+                
+            }
+
+		 Helpers.updateUser(userData).then(function(result){
+
+                if (result.data.loginError) {
+                    if (result.data.loginError[0] === 'User not found') {
+                        document.getElementById("logInUserNotFound").style.display = "block";
+                    }
+
+                    if (result.data.loginError[0] === 'Password is incorrect') {
+                        document.getElementById("logInPassIncorrect").style.display = "block";
+                    }  
+                }
+                else {
+                
+                console.log(result);
+                <Redirect to="/user/profile"/>
 
 	},
 	componentDidMount: function() {

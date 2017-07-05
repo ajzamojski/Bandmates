@@ -107,10 +107,7 @@ passport.use('local-login', new LocalStrategy({
 	    	return bCrypt.compareSync(password, testUser);
 
 			};
-			// var passedPassword = generateHash(req.body.password);
-   //  	var dbPassword = logUser.password.toString();
-    	//  console.log(passedPassword);
-    	// console.log(dbPassword);
+
 
     	if (!logUser) {
     		console.log("user was not found");
@@ -126,3 +123,4 @@ passport.use('local-login', new LocalStrategy({
     	return done(null, logUser, req.flash('loginMessage', 'Login Successfull'));
 	});
 }));
+

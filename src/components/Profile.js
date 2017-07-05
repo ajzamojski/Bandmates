@@ -118,7 +118,9 @@ var Profile = React.createClass ({
 					{/*Profile*/}
 					<div className="row">
 						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
+
 							<h1 style={{fontFamily: 'Roboto, sans-serif !important', textTransform: 'none'}} className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
+
 						</div>
 
 						<div className="row" style={{ height:'40em'}}>
@@ -149,11 +151,15 @@ var Profile = React.createClass ({
 							</div>
 						</div>
 						<div className="row" >
-							<div className="panel col-xs-12" id="" style={{padding: '0px', height:'30em'}}>
+							<div className="panel col-xs-12" id="" style={{padding: '0px', minHeight:'30em'}}>
 								<div className="panel-heading">My Links</div>
 								<div className="panel-body">
-									<iframe width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
-									frameBorder="0" allowFullScreen></iframe>
+
+									<a href="https://www.youtube.com/channel/UC8HV_9oHzfB9kw76Yj69wqg" target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
+									<a href="https://soundcloud.com" target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
+									<div style={{clear: "left"}} ><iframe style={{marginTop: "18px"}}width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
+										frameBorder="0" allowFullScreen></iframe>
+									</div>
 
 								</div>
 							</div>
