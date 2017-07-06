@@ -32,7 +32,7 @@ class HeaderSlider extends React.Component {
   render() {
     return (
     	<div>
-       	<Carousel framePadding={"100px 0px 0px 0px"} wrapAround={true} autoplay={true} autoplayInterval={3500}>
+       	<Carousel framePadding={"0px 0px 0px 0px"} wrapAround={true} autoplay={true} autoplayInterval={3500}>
           <img  src='./img/slider-images/stock1.jpg' />
           <img  src='./img/slider-images/stock2.jpg' />
           <img  src='./img/slider-images/stock3.jpg' />
@@ -60,18 +60,6 @@ var Home = React.createClass({
       modalIsOpen: false,
       fireRedirect: false
         };
-    },
-    //------------------- MODAL FUNCTIONS -------------------
-    openModal: function() {
-        this.setState({modalIsOpen: true});
-    },
-    afterOpenModal: function() {
-        // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#393939';
-    },
-
-    closeModal: function() {
-        this.setState({modalIsOpen: false});
     },
 //--------------------------------------------------------
     handleChange: function(event) {
@@ -236,7 +224,7 @@ var Home = React.createClass({
 
         return (
 		<div>
-        <nav id="mainNav" className="navbar navbar-default navbar-custom navbar-fixed-top" style={{backgroundColor: 'black'}}>
+        <nav id="mainNav" className="navbar navbar-default navbar-custom navbar-fixed-top">
             <div className="container">
                 
                 <div className="navbar-header page-scroll">
@@ -274,7 +262,7 @@ var Home = React.createClass({
         <div className="modal-dialog" style={{width:'800px',fontFamily:'Roboto, sans-serif', backgroundColor: 'white', borderRadius: '10px', boxShadow:'0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}>
             
             <div className="col-xs-12">
-                <h2 className="text-center">Sign Up</h2>
+                <h2 className="text-center" style={{fontFamily:'Roboto, sans-serif', textTransform: 'none'}}>Sign Up</h2>
                 <p className="text-center">We just need some info</p>
                 <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
                     <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
@@ -325,7 +313,7 @@ var Home = React.createClass({
             </div>
             
             <div className="col-xs-12">
-                <h2 className="text-center">Login</h2>
+                <h2 className="text-center" style={{fontFamily:'Roboto, sans-serif', textTransform: 'none'}}>Login</h2>
                 <p className="text-center">Welcome back!</p>
                 <form id="loginForm" onSubmit={this.logInUser} >
                     <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
@@ -568,11 +556,9 @@ var Home = React.createClass({
                     </div>
                     <div className="col-md-4">
                         <ul className="list-inline social-buttons">
-                            <li><a href="http://www.twitter.com"><i className="fa fa-twitter"></i></a>
+                            <li><a href="https://twitter.com/bandmates_"><i className="fa fa-twitter"></i></a>
                             </li>
                             <li><a href="https://www.facebook.com/Bandmates-313555295756900/"><i className="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="http://www.linkedin.com"><i className="fa fa-linkedin"></i></a>
                             </li>
                             <li><a href="https://github.com/ajzamojski/Bandmates"><i className="fa fa-github"></i></a>
                             </li>

@@ -83,6 +83,7 @@ var Settings = React.createClass ({
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
 		this.setState({user: this.props.theUser});
+		
 	},
 	render: function() {
 		return (

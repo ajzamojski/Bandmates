@@ -46,8 +46,8 @@ var helper = {
     })
   },
 
-  getUsers: function() {
-    return axios.get("/api/musicians");
+  getUsers: function(inst, gender) {
+    return axios.get("/api/musicians/" + inst + "/" + gender );
   },
   getUserByUsername: function(query) {
     return axios.get("/api/user/" + query);
