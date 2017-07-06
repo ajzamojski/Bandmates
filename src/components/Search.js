@@ -197,16 +197,16 @@ var Search = React.createClass({
 	render () {
 
 		return (
-			<div className ="container contentWrapper">
+			<div>
 				{/*BreadCrumb*/}
-				<div className="row">
-					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Search</h2>
+				<div className="row breadcrumb">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}>Main > Search</h2>
 				</div>
-
+			<div className ="container contentWrapper">
 				{/*Search Filter*/}
 				<div id="searchForm" className="row">
 
-					<h1 id="searchHeader">Musician Search</h1>
+					<h1 className="contentHeader">Musician Search</h1>
 					
 					<div className="panel">
 					<div className="panel-heading">
@@ -312,7 +312,7 @@ var Search = React.createClass({
 					</div>
 				</div>
 			</div>
-
+			</div>
 			)
 	}
 });
