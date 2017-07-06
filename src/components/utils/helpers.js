@@ -35,10 +35,10 @@ var helper = {
       });
   },
 
-  updateUser: function(data) {
+  updateUser: function(query,data) {
 
     console.log(data);
-    let queryURL = "/users/update";
+    let queryURL = "/users/" + query;
     return axios.put(queryURL, data).then(function(result) {
         console.log("updating user");
         console.log(result);

@@ -9,15 +9,18 @@
 // -------------------------------------------------------------------------------------------------
 
 var React = require('react');
+var Helpers = require('./utils/helpers');
+
 const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID","IL","IN","KS",
 "KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM",
 "NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
 
 var Settings = React.createClass ({
+
 	getInitialState: function() {
         return {
-			user: undefined,
-			firstName: 'Kevin',
+			user: 'KLee',
+			firstName: "Kevin",
 			lastName: 'Lee',
 			email: 'zapetou@gmail.com',
 			password: '*****',
@@ -34,16 +37,18 @@ var Settings = React.createClass ({
 			exp: 'Played trumpet in high school.'
         };
   	},
+
 	handleChange: function(event) {
 		const name = event.target.name;
 		const value = event.target.value;
 		this.setState({[name] : value});
-		
 	},
+
 	handleUpdate: function(event) {
 		event.preventDefault();
 
-		var userRegData = {
+		var userData = {
+				username: this.state.username,
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 username: this.state.username,
@@ -58,11 +63,18 @@ var Settings = React.createClass ({
                 gender: this.state.gender,
                 instruments: this.state.instrument,
                 education: this.state.education,
-                experience: this.state.exp,
-                
-            }
+                experience: this.state.exp,         
+        };
+        console.log("the user:" + this.state.username);
 
-		 Helpers.updateUser(userData).then(function(result){
+        var query = this.state.username;
+
+        componentWillReceiveProps: function(){
+		console.log('Component Updating - Settings');
+
+		},
+
+		Helpers.updateUser(query,userData).then(function(result){
 
                 if (result.data.loginError) {
                     if (result.data.loginError[0] === 'User not found') {
@@ -77,12 +89,19 @@ var Settings = React.createClass ({
                 
                 console.log(result);
                 <Redirect to="/user/profile"/>
+            	}
 
+            
+		})
 	},
+
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
 		this.setState({user: this.props.theUser});
 	},
+
+	
+
 	render: function() {
 		return (
 			<div className ="container contentWrapper">
@@ -96,6 +115,9 @@ var Settings = React.createClass ({
 				<div className="col-md-10 col-md-offset-1">
 				<form id="editForm" onSubmit={this.handleUpdate}>
 					<div className="form-group">
+						<label htmlFor="firstName">Username:</label>
+						<input type="text" className="form-control" id="username" name="username" value={this.state.username} onChange={this.handleChange}/>
+						<br />
 						<label htmlFor="firstName">First Name:</label>
 						<input type="text" className="form-control" id="firstName" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
 						<br />
@@ -165,6 +187,7 @@ var Settings = React.createClass ({
 			</div>
 
 			)
+		
 	}
 });
 
