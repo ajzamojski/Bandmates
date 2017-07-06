@@ -109,11 +109,13 @@ var Messenger = React.createClass ({
 			)
 		})
 		return (
+			<div>
+			{/*BreadCrumb*/}
+			<div className="row breadcrumb">
+				<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}> Main > Messenger</h2>
+			</div>
 			<div className ="container contentWrapper">
-				{/*BreadCrumb*/}
-				<div className="row">
-					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}> Main > Messenger</h2>
-				</div>
+				
 				{/*Messenger Feature*/}
 				<div className="row" style={{height: "800px"}}>
 					<div id="messengerContent">
@@ -121,7 +123,7 @@ var Messenger = React.createClass ({
 						{/*Contacts/Friends List*/}
 						<div id="contactsList" style={{height: "550px", width:'40%'}}>
 							<div className="item" style={{width: '100%',backgroundColor: '#37474F'}}>
-							<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Contacts</h3>
+							<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontWeight: '300', fontFamily: 'Quicksand, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Contacts</h3>
 							</div>
 							<div className="container item">
 								{contacts}
@@ -131,7 +133,7 @@ var Messenger = React.createClass ({
 						{/*Messaging*/}
 						<div id="messageApp" style={{height: "550px", width:'50%'}}>
 							<div className="item" style={{width: '100%',backgroundColor: '#37474F'}}>
-								<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Message</h3>
+								<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontWeight: '300', fontFamily: 'Quicksand, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Message</h3>
 							</div>
 							<div className="item" id="chatBox">
 							<div id="messagesWrapper" style={{display: 'block'}}>
@@ -146,6 +148,7 @@ var Messenger = React.createClass ({
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		)
 	}

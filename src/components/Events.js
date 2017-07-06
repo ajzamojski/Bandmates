@@ -144,16 +144,15 @@ var Events = React.createClass({
 	},
 	render: function() {
 		return (
-			<div className ="container contentWrapper">
-				
+			<div>
 				{/*BreadCrumb*/}
-				<div className="row">
-					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Events</h2>
+				<div className="row breadcrumb">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}>Main > Events</h2>
 				</div>
-
+			<div className ="container contentWrapper">
 				<div id="eventFilter" className="row">
 					
-					<h1 id="eventHeader">Events</h1>
+					<h1 className="contentHeader">Events</h1>
 					
 					<div className="panel">
 						<div className="panel-heading">
@@ -249,6 +248,7 @@ var Events = React.createClass({
                         </div>
                     </div>
 				</div>
+			</div>
 			</div>
 		)
 	}
