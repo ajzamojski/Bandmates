@@ -78,7 +78,7 @@ var Settings = React.createClass ({
                 console.log(result);
                 <Redirect to="/user/profile"/>
 				}
-		 });
+		 	});
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');

@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "r0flman29",
+    "password": "test",
     "database": "band_db",
-    "host": "127.0.0.1",
+    "host": "123456",
     "dialect": "mysql"
   },
   "test": {
@@ -14,10 +14,11 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "gyeqr38crqt8mugk",
+    "password": "h77lv08t6578o7nz",
+    "database": "m4icgeutls2x0gsc",
+    "host": "ko86t9azcob3a2f9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "dialect": "mysql",
+    "port": 3306
   }
 }
