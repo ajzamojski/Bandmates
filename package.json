@@ -23,6 +23,7 @@
     "morgan": "^1.8.2",
     "mysql": "^2.13.0",
     "mysql2": "^1.3.5",
+    "nuka-carousel": "^2.0.4",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
@@ -33,6 +34,7 @@
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
     "react-router-transition": "^0.1.1",
+    "react-slick": "^0.14.11",
     "react-transition-group": "^1.2.0",
     "sequelize": "^4.2.0",
     "socket.io": "^2.0.3"
@@ -48,10 +50,12 @@
     "webpack": "^2.6.1"
   },
   "scripts": {
-    "start": "webpack -w & node server",
-    "build": "react-scripts build",
+    "start": "node server",
+    "dev": "webpack -w & nodemon server",
+    "build": "webpack",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm i -g webpack; webpack"
   },
   "description": "A site where people could link up with fellow musicians",
   "main": "index.js",

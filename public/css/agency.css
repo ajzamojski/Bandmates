@@ -3,6 +3,7 @@
  * Copyright 2013-2016 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
+
 .ReactModal__Body--open {
   overflow: none;
   height: 500px;
@@ -274,7 +275,7 @@ fieldset[disabled] .btn-xl.active {
   }
 }
 header {
-  background-image: url('../img/header-bg.jpg');
+  /*background-image: url('../img/header-bg.jpg');*/
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -569,6 +570,19 @@ section h3.section-subheading {
   margin-bottom: 0;
 }
 @media (min-width: 768px) {
+  #profileInfo {
+    overflow: auto;
+    max-height: 100px;
+  }
+  .infoProfile {
+    font-size: 14px !important;
+  }
+  #rightProfile {
+    font-size: 14px !important;
+    display: flex;
+    flex-flow: column nowrap;
+
+  }
   .timeline:before {
     left: 50%;
   }
@@ -600,6 +614,12 @@ section h3.section-subheading {
   }
 }
 @media (min-width: 992px) {
+  .infoProfile {
+    font-size: 15px !important;
+  }
+  #rightProfile {
+    font-size: 14px !important;
+  }
   .timeline > li {
     min-height: 150px;
   }
@@ -621,6 +641,12 @@ section h3.section-subheading {
   }
 }
 @media (min-width: 1200px) {
+  .infoProfile {
+    font-size: 18px !important;
+  }
+  #rightProfile {
+    font-size: 15px !important;
+  }
   .timeline > li {
     min-height: 170px;
   }
@@ -863,7 +889,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-#eventHeader {
+.contentHeader {
   font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 300 !important;
   font-size: 48px;
@@ -934,4 +960,114 @@ body {
   font-family:'Merriweather', sans-serif;
   text-transform: 'none';
   text-shadow: 9px 8px 0px rgba(0,0,0,0.15);
+}
+.breadcrumb {
+    z-index: 1;
+    padding: 10px;
+    margin: 52px 0px 0px 2px;
+    border-bottom: solid 0.5px #858C93;
+    border-radius: 0px;
+}
+#sidebar {
+    z-index: 4;
+    padding-left:0;
+    padding-right: 0;
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    color: white;
+    background-color: black;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-width: 180px;
+    /*background-image: -webkit-gradient(to right,#14191e,#1a1f26, #29323c);
+    background-image: -moz-linear-gradient(to right,#14191e,#1a1f26, #29323c);
+    background-image: -o-linear-gradient(to right,#14191e,#1a1f26, #29323c);
+    background-image: linear-gradient(to right,#14191e,#1a1f26, #29323c);*/
+}
+#userBar {
+    box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.2);
+    background-color: #49606b;
+    width: 100%;
+}
+#settingsDiv {
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+}
+#chatBox {
+    height: 400px;
+    width: 100%;
+    margin-left: 1em;
+    margin-right: 1em;
+}
+#content {
+    font-family: Roboto,sans-serif;
+    min-width: 80%;
+    width: 80%;
+    height: auto;
+    position: absolute;
+    right: 0;
+}
+.contentWrapper {
+    margin-top: 1em;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.contactItem {
+    flex: 0 1 auto;
+    padding: 5px;
+    margin: 5px 0px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.nav-header {
+  font-size: 21px;
+  padding: 10px;
+  height: 50px;
+  /*color: #3d3c3c;*/
+  /*font-weight: 700;*/
+  background-color: #49606b;
+}
+#registerSuccess {
+    margin: 5px 0px 10px 0px;
+}
+#logInSuccess {
+    margin: 5px 0px 10px 0px;
+}
+.ReactModal__Overlay--after-open {
+    overflow: scroll;
+}
+#displayPic {
+    max-height: 240px;
+    margin: 0 auto;
+}
+.infoProfile {
+    font-weight: inherit;
+    /*font-size: 18px;*/
+    line-height: 2em;
+}
+.selected {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.selected:hover {
+    background-color: #FED136;
+}
+.transition-wrapper {
+  position: relative;
+}
+
+#profileInfo {
+    height: 210px;
+    max-height: 210px;
+    overflow: auto;
+}
+/*#rightProfile {
+    padding: 2em;
+    font-size: 12px !important;
+}*/
+.rightProfileItem {
+}
+#nameDisplay {
+    font-family: "Painting in the Sunlight", "Helvetica Neue", "Helvetica", "Arial", "cursive";
+    font-size: 3em;
+    letter-spacing: 4px;
 }

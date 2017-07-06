@@ -12,6 +12,7 @@ var Helpers = require('./utils/helpers');
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
+			contactBtn: false,
 			user: undefined,
             firstName: undefined,
             lastName: undefined,
@@ -31,7 +32,7 @@ var Profile = React.createClass ({
 			id: undefined,
         }
   	},
-	getUsernameInfo() {
+	getUsernameInfo: function() {
 
 		var res = window.location.href.split('/');
 		var param = res[res.length-1]
@@ -47,7 +48,7 @@ var Profile = React.createClass ({
 					username : result.data.username,
 					city : result.data.city,
 					state : result.data.state,
-					zipcode : result.data.zip,
+					zipcode : result.data.zipcode,
 					email : result.data.email,
 					age : result.data.age,
 					profilePic : result.data.profilePic,
@@ -56,18 +57,37 @@ var Profile = React.createClass ({
 					specifics : result.data.styles,
 					id: result.data.id
 				})
-				// this.renderAddBtn(result.data.id, this.props.theUser.id);
+				this.renderAddBtn(result.data.id, this.props.theUser.id);
 		}.bind(this));
 	},
-	// renderAddBtn: function(profileID, userID) {
-	// 	console.log(profileID + " " + userID)
-	// 	return (
-	// 		<div>
-	// 			{this.state.id == this.props.theUser.id ?
-	// 				"" : <button className="btn btn-lg" onClick={this.handleContactClick}>Add as a Contact</button>}
-	// 		</div>
-	// 	);
-	// },
+	renderAddBtn: function(profileID, userID) {
+		console.log(profileID + " " + userID);
+		var contactCheck = false;
+
+		Helpers.getContacts(userID)
+		.then(function(result){
+			console.log(result.data);
+			console.log("profileID: " + profileID)
+				//for loop : if profileID matches a contact ID, then return true
+				for (var i = 0; i < result.data.length; i++) {
+					console.log("contact_id: " + result.data[i].contact_id)
+					if(result.data[i].contact_id == profileID) {
+						contactCheck = true;
+					} else {
+						contactCheck = false;
+					}
+				}
+			
+			//if user's page OR if profile is already a contact , do not show button
+			if (profileID == userID || contactCheck == true) {
+				this.setState({contactBtn : false})
+			} else {
+				this.setState({contactBtn : true})
+			}
+
+		}.bind(this));
+
+	},
 	componentDidMount: function() {
 		
 		$.get("/loggedin", function(data) {
@@ -79,19 +99,10 @@ var Profile = React.createClass ({
 				
 				this.setState({user: this.props.theUser});
 				this.getUsernameInfo();
-				// this.renderAddBtn();
-				// this.setState({
-				// 	firstName: data.userData.firstName,
-				// 	lastName: data.userData.lastName,
-				// 	userName: data.userData.username,
-				// 	email: data.userData.email,
-				// 	picture: data.userData.profilePic
-
-				// })
 
 			}
 		}.bind(this));
-		
+		console.log(this.state.user);
 	},
 	handleContactClick: function(event) {
 		event.preventDefault();
@@ -110,47 +121,45 @@ var Profile = React.createClass ({
 	render: function () {
 		return (
 			<div>
+				{/*BreadCrumb*/}
+				<div className="row breadcrumb">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}>Main > Profile</h2>
+				</div>
 				<div className="container contentWrapper">
-					{/*BreadCrumb*/}
-					<div className="row">
-						<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Profile</h2>
-					</div>
 					{/*Profile*/}
 					<div className="row">
-						<div className="container" id="banner" style={{display: 'block', height: '8em'}}>
+						<div id="banner" style={{display: 'block', height: '5em', marginBottom: '15px'}}>
 
-							<h1 style={{fontFamily: 'Roboto, sans-serif !important', textTransform: 'none'}} className="text-center">{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
+							<h1 className="contentHeader" >{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
 
 						</div>
 
-						<div className="row" style={{ height:'40em'}}>
-							<div className="panel col-xs-3" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
+						<div className="row" style={{display: 'flex', height:'40em'}}>
+							<div className="panel" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px',width: '30%'}}>
 								<div className="panel-heading">Profile</div>
 								<div className="panel-body">
 									<div> <img className="img-responsive" id="displayPic"src="/img/default_pic.jpg" /></div> <br></br>
 									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
 									<div className="infoProfile">{this.state.city}, {this.state.state} {this.state.zipcode == undefined ? " " : this.state.zipcode}</div> 
 									<div className="infoProfile">{this.state.email}</div>
-									{/*{this.state.id == this.props.theUser.id ?
-									"" : */}
-									<button className="btn btn-lg" onClick={this.handleContactClick}>Add as a Contact</button>
-									{/*}*/}
-									</div>
+									
+									{this.state.contactBtn ? <button className="btn btn-lg" onClick={this.handleContactClick}>Add to Contacts</button> : ""}
+								</div>
 							</div>
 						
-							<div className="panel col-xs-7" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>
+							<div className="panel" style={{display: 'flex', padding: '0px', display: 'block', height:'100%', margin: '0px 0px 15px 10px',width: '70%'}}>
 								<div className="panel-heading">About Me</div>
-								<div className="panel-body">
-									<div className="rightProfile" id="rightProfile"><em>Information: </em>{this.state.musicianInfo}</div> <br></br>
-									<div className="rightProfile"><em>Age: </em>{this.state.age}</div> 
-									<div className="rightProfile"><em>Gender: </em>{this.state.gender}</div><br></br>
-									<div className="rightProfile"><em>Profession: </em>{this.state.profession}</div> <br></br>
-									<div className="rightProfile"><em>Instrument: </em>{this.state.instrument}</div> <br></br>
-									<div className="rightProfile"><em>Experience: </em>{this.state.experience}</div> <br></br>
+								<div className="panel-body" id="rightProfile">
+									<b>Information: </b><br /><div id="profileInfo">{this.state.musicianInfo}</div> <br></br>
+									<div className="rightProfileItem"><b>Age: </b>{this.state.age}</div><br></br>
+									<div className="rightProfileItem"><b>Gender: </b>{this.state.gender}</div><br></br>
+									<div className="rightProfileItem"><b>Profession: </b>{this.state.profession}</div> <br></br>
+									<div className="rightProfileItem"><b>Instrument: </b>{this.state.instrument}</div> <br></br>
+									<div className="rightProfileItem" style={{maxHeight: '80px'}}><b>Experience: </b>{this.state.experience}</div> <br></br>
 								</div>
 							</div>
 						</div>
-						<div className="row" >
+						<div className="row" style={{marginTop: '20px'}}>
 							<div className="panel col-xs-12" id="" style={{padding: '0px', minHeight:'30em'}}>
 								<div className="panel-heading">My Links</div>
 								<div className="panel-body">

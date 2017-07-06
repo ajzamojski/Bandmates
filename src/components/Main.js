@@ -33,11 +33,11 @@ var Main = React.createClass ({
             main: "Main State",
 			user: undefined,
 			userRoutes : [
-				{ path: '/',
-					exact: true,
-					sidebar: () => <div></div>,
-					main: () => <div></div>
-				},
+				// { path: '/',
+				// 	exact: true,
+				// 	sidebar: () => <div></div>,
+				// 	main: () => <div></div>
+				// },
 				{ path: '/user',
 					sidebar: () => <div></div>,
 					main: () => <div></div>
@@ -45,23 +45,23 @@ var Main = React.createClass ({
 				{ path: '/user/events',
 					sidebar: () => <div></div>,
 					// Syntax to reference props *******************************************
-					main: () => <Events theUser={this.state.user} />
+					main: () => <Events theUser={this.props.dbUserObject.userData} />
 				},
 				{ path: '/user/search',
 					sidebar: () => <div></div>,
-					main: () => <Search theUser={this.state.user}/>
+					main: () => <Search theUser={this.props.dbUserObject.userData}/>
 				},
 				{ path: '/user/messenger',
 					sidebar: () => <div></div>,
-					main: () => <Messenger theUser={this.state.user}/>
+					main: () => <Messenger theUser={this.props.dbUserObject.userData}/>
 				},
 				{ path: '/user/profile/:username',
 					sidebar: () => <div></div>,
-					main: () => <Profile theUser={this.state.user}/>
+					main: () => <Profile theUser={this.props.dbUserObject.userData}/>
 				},
 				{ path: '/user/settings',
 					sidebar: () => <div></div>,
-					main: () => <Settings theUser={this.state.user}/>
+					main: () => <Settings theUser={this.props.dbUserObject.userData}/>
 				}
 			]
         }
@@ -100,7 +100,7 @@ var Main = React.createClass ({
 								{/*{this.state.user.firstName + " " + this.state.user.lastName}*/}
 								{/*<li className="nav-header text-center">MENU</li>*/}
 							<li style={{fontSize: '17px', color: '#5F5F5F'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-tachometer" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Dashboard</li>
-							<li><NavLink to="/">&nbsp;&nbsp;&nbsp;<i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>
+							{/*<li><NavLink to="/">&nbsp;&nbsp;&nbsp;<i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>*/}
 							<li><NavLink exact to="/user" className="selected">&nbsp;&nbsp;&nbsp;<i className="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Main</NavLink></li>
 							<li><NavLink to="/user/search" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-search" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Search</NavLink></li>
 							<li><NavLink to="/user/messenger" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-comments" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Messenger</NavLink></li>

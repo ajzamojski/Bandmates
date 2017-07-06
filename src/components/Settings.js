@@ -90,16 +90,25 @@ var Settings = React.createClass ({
                 
                 console.log(result);
                 <Redirect to="/user/profile"/>
+<<<<<<< HEAD
             	}
 
             
 		})
+=======
+               }
+             });
+>>>>>>> 96dadedd6b29ee7ec4536ad8ed7eb601775eba0f
 	},
 
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
 		this.setState({user: this.props.theUser});
+<<<<<<< HEAD
 		var oguser = this.state.username;
+=======
+		
+>>>>>>> 96dadedd6b29ee7ec4536ad8ed7eb601775eba0f
 	},
 
 	componentWillReceiveProps: function(){
@@ -109,15 +118,20 @@ var Settings = React.createClass ({
 
 	render: function() {
 		return (
-			<div className ="container contentWrapper">
+			<div>
 				{/*BreadCrumb*/}
-				<div className="row">
-					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Main > Settings</h2>
+				<div className="row breadcrumb">
+					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}>Main > Settings</h2>
 				</div>
+				<div className ="container contentWrapper">
+				
 				{/*Settings*/}
+				<div id="settingsDiv">
+
 				<div className="row">
-					<h2>Settings</h2>
+					<h1 className="contentHeader" style={{margin: '30px 0px 25px 60px'}}>Settings</h1>
 				<div className="col-md-10 col-md-offset-1">
+
 				<form id="editForm" onSubmit={this.handleUpdate}>
 					<div className="form-group">
 						<label htmlFor="firstName">Username:</label>
@@ -187,10 +201,11 @@ var Settings = React.createClass ({
 						<button type="submit" value="Submit" className="btn btn-success submit" id="btnUpdate">Save Changes</button>
 					</div>
 				</form>
+				</div>
 			</div>
 				</div>
 			</div>
-
+			</div>
 			)
 		
 	}

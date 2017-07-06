@@ -8,7 +8,9 @@
 // -------------------------------------------------------------------------------------------------
 var Helpers = require('./utils/helpers');
 var React = require('react');
-import Modal from 'react-modal';
+
+import Carousel from 'nuka-carousel';
+
 import { 
     BrowserRouter as Router, 
     Route,
@@ -16,8 +18,6 @@ import {
     Link 
 } from "react-router-dom";
 
-var signupModal = document.getElementById('signupModal');
-var loginModal = document.getElementById('loginModal')
 const customStyles = {
   content : {
     top                   : '17%',
@@ -28,8 +28,22 @@ const customStyles = {
   }
 };
 
-// var SimpleSlider = require('./Slider.js');
-const currentURL = window.location.origin;
+class HeaderSlider extends React.Component {
+  render() {
+    return (
+    	<div>
+       	<Carousel framePadding={"0px 0px 0px 0px"} wrapAround={true} autoplay={true} autoplayInterval={3500}>
+          <img  src='./img/slider-images/stock1.jpg' />
+          <img  src='./img/slider-images/stock2.jpg' />
+          <img  src='./img/slider-images/stock3.jpg' />
+          <img  src='./img/slider-images/stock4.jpg' />
+          <img  src='./img/slider-images/stock5.jpg' />
+          <img  src='./img/slider-images/stock6.jpg' />
+        </Carousel>
+      </div>
+    );
+  }
+};
 
 var Home = React.createClass({
     getInitialState: function() {
@@ -46,18 +60,6 @@ var Home = React.createClass({
       modalIsOpen: false,
       fireRedirect: false
         };
-    },
-    //------------------- MODAL FUNCTIONS -------------------
-    openModal: function() {
-        this.setState({modalIsOpen: true});
-    },
-    afterOpenModal: function() {
-        // references are now sync'd and can be accessed.
-        this.subtitle.style.color = '#393939';
-    },
-
-    closeModal: function() {
-        this.setState({modalIsOpen: false});
     },
 //--------------------------------------------------------
     handleChange: function(event) {
@@ -207,7 +209,6 @@ var Home = React.createClass({
             }.bind(this));
         }
     },
-
     handleLogChange: function() {
 
     },
@@ -223,7 +224,7 @@ var Home = React.createClass({
 
         return (
 		<div>
-        <nav id="mainNav" className="navbar navbar-default navbar-custom navbar-fixed-top" style={{backgroundColor: 'black'}}>
+        <nav id="mainNav" className="navbar navbar-default navbar-custom navbar-fixed-top">
             <div className="container">
                 
                 <div className="navbar-header page-scroll">
@@ -243,88 +244,6 @@ var Home = React.createClass({
 
                             <a className="page-scroll" id="signupTog" data-toggle="modal" data-target="#signupModal">Sign up / Login</a>
                             
-                            {/*<Modal className={"col-xs-10 col-xs-offset-1"} 
-                                isOpen={this.state.modalIsOpen}
-                                onAfterOpen={this.afterOpenModal}
-                                onRequestClose={this.closeModal}
-                                style={customStyles}
-                                contentLabel="Sign Up">*/}
-                                
-                            {/*<div className="col-xs-8">
-                                <h2 ref={subtitle => this.subtitle = subtitle}>Sign Up</h2>
-                                <p>We just need some info</p>
-                                <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
-                                        <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="firstName">First Name: </label>
-                                            <input type="text" className="form-control" value={this.state.inputNameFirst} onChange={this.handleChange} placeholder="Your First Name *" id="inputNameFirst"  data-validation-required-message="Please enter your first name."/>
-                                            <p className="help-block text-danger"></p>
-                                            <div className="alert alert-danger" id="firstNameNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
-                                        </div>
-
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="lastName">Last Name: </label>
-                                            <input type="text" className="form-control" value={this.state.inputNameLast} onChange={this.handleChange} placeholder="Your Last Name *" id="inputNameLast"  data-validation-required-message="Please enter your last name."/>
-                                            <p className="help-block text-danger"></p>
-                                             <div className="alert alert-danger" id="lastNameNotFilled" style={{display: 'none'}}>"Please fill out your last name"</div>
-                                        </div>
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="lastName">Username: </label>
-                                            <input type="text" className="form-control" value={this.state.inputUserName} onChange={this.handleChange} placeholder="Your Last Name *" id="inputUserName"  data-validation-required-message="Please enter your Username."/>
-                                            <p className="help-block text-danger"></p>
-                                            <div className="alert alert-danger" id="userNameNotFilled" style={{display: 'none'}}>"Please fill out your username"</div>
-                                        </div>
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="email">Email: </label>
-                                            <input type="email" className="form-control" value={this.state.inputEmail} onChange={this.handleChange} placeholder="Username *" id="inputEmail"  data-validation-required-message="Please enter a username."/>
-                                            <p className="help-block text-danger"></p>
-                                            <div className="alert alert-danger" id="emailNotFilled" style={{display: 'none'}}>"Please fill out your email"</div>
-                                        </div>
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="password">Password: </label>
-                                            <input type="password" className="form-control" value={this.state.inputPassword} onChange={this.handleChange} placeholder="Password *" id="inputPassword"  data-validation-required-message="Please enter a password."/>
-                                            <p className="help-block text-danger"></p>
-                                            <div className="alert alert-danger" id="passwordNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
-                                        </div>
-                                        <div className="form-group col-xs-6">
-                                            <label htmlFor="confirmpw">Confirm Password: </label>
-
-                                            <input type="password" className="form-control" value={this.state.inputConfirm} onChange={this.handleChange} placeholder="Confirm Password *" id="inputConfirm"  data-validation-required-message="Please confirm/check your password."/>
-
-                                            <p className="help-block text-danger"></p>
-                                        </div>
-                                        <button type="submit" className="btn btn-primary" id="signUpBtn">Sign Up</button>
-                                        <br></br>
-                                         <div className="alert alert-danger" id="passwordNotMatched" style={{display: 'none'}}>"Passwords must match"</div>                                   
-                                        <div className="alert alert-danger" id="emailTaken" style={{display: 'none'}}>"Email is already taken, Pick another"</div>
-                                    </form>
-								</div>
-                                <div className="col-xs-4">
-                                    <h2>Login</h2>
-                                   <form id="loginForm" onSubmit={this.logInUser} >
-                                        <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
-                                        <div className="form-group col-xs-12">
-                                            <label htmlFor="email">Email: </label>
-                                            <input type="email" value={this.state.inputLogInUser} onChange={this.handleChange} className="form-control" placeholder="Email *" id="inputLogInUser" data-validation-required-message="Please enter a username."/>
-                                            <p className="help-block text-danger"></p>
-                                        </div>
-                                        <div className="form-group col-xs-12">
-                                            <label htmlFor="userpw">Password: </label>
-                                            <input type="password" value={this.state.inputLogInPassword} onChange={this.handleChange} className="form-control" placeholder="Password *" id="inputLogInPassword" data-validation-required-message="Please enter a password."/>
-                                            <p className="help-block text-danger"></p>
-                                        </div>
-                                        <button type="submit" className="btn btn-primary" id="logInBtn" to="/user">Login</button>
-                                         <div className="alert alert-danger" id="logInUserNotFilled" style={{display: 'none'}}>"Please fill out your first name"</div>
-                                         <div className="alert alert-danger" id="logInPassNotFilled" style={{display: 'none'}}>"Please fill out your password"</div>
-                                         <div className="alert alert-danger" id="logInUserNotFound" style={{display: 'none'}}>"User Not Found"</div>
-                                         <div className="alert alert-danger" id="logInPassIncorrect" style={{display: 'none'}}>"Password was incorrect"</div>
-                                         
-                                    </form>
-
-                                </div>
-                                <button onClick={this.closeModal}>close</button>
-                        </Modal>*/}
-
                         </li>              
                         <li>
                             <a className="page-scroll" href="#about">About</a>
@@ -343,7 +262,7 @@ var Home = React.createClass({
         <div className="modal-dialog" style={{width:'800px',fontFamily:'Roboto, sans-serif', backgroundColor: 'white', borderRadius: '10px', boxShadow:'0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}>
             
             <div className="col-xs-12">
-                <h2 className="text-center">Sign Up</h2>
+                <h2 className="text-center" style={{fontFamily:'Roboto, sans-serif', textTransform: 'none'}}>Sign Up</h2>
                 <p className="text-center">We just need some info</p>
                 <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
                     <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
@@ -394,7 +313,7 @@ var Home = React.createClass({
             </div>
             
             <div className="col-xs-12">
-                <h2 className="text-center">Login</h2>
+                <h2 className="text-center" style={{fontFamily:'Roboto, sans-serif', textTransform: 'none'}}>Login</h2>
                 <p className="text-center">Welcome back!</p>
                 <form id="loginForm" onSubmit={this.logInUser} >
                     <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
@@ -424,19 +343,17 @@ var Home = React.createClass({
 
 
         {/*Header*/}
-        <header>
-            {/*<SimpleSlider />*/}
-            <div className="container">
-                <div className="intro-text">
-                    <div className="intro-lead-in">Welcome To</div>
-                    <div className="intro-heading">Bandmates</div>
-                    <div className="intro-lead-out">Your hub for musicians, everywhere.</div>
-                    <a href="#about" className="page-scroll btn btn-xl">About Us</a>
-                </div>
+        <header style={{position: 'relative', zIndex: '1'}}>
+            <div className="intro-text" style={{position: 'absolute', zIndex: '4', margin: '0 auto', top: '35%', left: '50%', marginRight: '-50%', transform: 'translate(-50%, -50%)'}}>
+                <div className="intro-lead-in text-center">Welcome To</div>
+                <div className="intro-heading text-center">Bandmates</div>
+                <div className="intro-lead-out text-center">Your hub for musicians, everywhere.</div>
+                <a href="#about" className="page-scroll btn btn-xl">About Us</a>
             </div>
+            <HeaderSlider />
             
         </header>
-
+        
         {/*Services Section*/}
         <section id="about">
             <div className="container">
@@ -639,11 +556,9 @@ var Home = React.createClass({
                     </div>
                     <div className="col-md-4">
                         <ul className="list-inline social-buttons">
-                            <li><a href="http://www.twitter.com"><i className="fa fa-twitter"></i></a>
+                            <li><a href="https://twitter.com/bandmates_"><i className="fa fa-twitter"></i></a>
                             </li>
                             <li><a href="https://www.facebook.com/Bandmates-313555295756900/"><i className="fa fa-facebook"></i></a>
-                            </li>
-                            <li><a href="http://www.linkedin.com"><i className="fa fa-linkedin"></i></a>
                             </li>
                             <li><a href="https://github.com/ajzamojski/Bandmates"><i className="fa fa-github"></i></a>
                             </li>

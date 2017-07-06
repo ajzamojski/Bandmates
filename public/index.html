@@ -26,8 +26,6 @@
     <link href="https://fonts.googleapis.com/css?family=Merriweather:400i" rel="stylesheet">
     
     <!-- Theme CSS -->
-    <!--<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />-->
     <!--<link href="css/agency.min.css" rel="stylesheet">-->
     <link href="/css/agency.css" rel="stylesheet">
     <link href="/css/team.css" rel="stylesheet">
@@ -35,7 +33,7 @@
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -50,96 +48,7 @@
       margin: 0;
       padding: 0;
     }
-    #sidebar {
-        padding-left:0;
-        padding-right: 0;
-        width: 20%;
-        height: 100%;
-        position: fixed;
-        color: white;
-        background-color: black;
-        box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        /*background-image: -webkit-gradient(to right,#14191e,#1a1f26, #29323c);
-        background-image: -moz-linear-gradient(to right,#14191e,#1a1f26, #29323c);
-        background-image: -o-linear-gradient(to right,#14191e,#1a1f26, #29323c);
-        background-image: linear-gradient(to right,#14191e,#1a1f26, #29323c);*/
-    }
-    #userBar {
-        box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.2);
-        background-color: #49606b;
-        width: 100%;
-    }
-    #chatBox {
-        height: 400px;
-        width: 100%;
-        margin-left: 1em;
-        margin-right: 1em;
-    }
-    #content {
-        font-family: Roboto,sans-serif;
-        width: 80%;
-        height: auto;
-        position: absolute;
-        right: 0;
-    }
-    .contentWrapper {
-        margin-top: 100px;
-        padding-left: 4em;
-        padding-right: 4em;
-    }
-    .contactItem {
-        flex: 0 1 auto;
-        padding: 5px;
-        margin: 5px 0px;
-        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2);
-    }
-    .nav-header {
-      font-size: 21px;
-      padding: 10px;
-      height: 50px;
-      /*color: #3d3c3c;*/
-      /*font-weight: 700;*/
-      background-color: #49606b;
-    }
-    #registerSuccess {
-        margin: 5px 0px 10px 0px;
-    }
-    #logInSuccess {
-        margin: 5px 0px 10px 0px;
-    }
-    .ReactModal__Overlay--after-open {
-        overflow: scroll;
-    }
-    #displayPic {
-        max-height: 240px;
-        margin: 0 auto;
-    }
-    .infoProfile {
-        font-weight: inherit;
-        font-size: 18px;
-    }
-    .selected {
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-    .selected:hover {
-        background-color: #FED136;
-    }
-    .transition-wrapper {
-      position: relative;
-    }
 
-    #rightProfile {
-        text-indent:-15px;
-        margin-left:15px;
-    }
-
-    #nameDisplay {
-        font-family: "Painting in the Sunlight", "Helvetica Neue", "Helvetica", "Arial", "cursive";
-        font-size: 3em;
-        letter-spacing: 4px;
-    }
 </style>
 <body id="page-top" class="index">
     <!--<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
@@ -176,6 +85,8 @@
         </nav>-->
     <div id="app"></div>
 
+    <script src="/./bundle.js"></script>
+    
     <!-- jQuery -->
     <script src="/vendor/jquery/jquery.min.js"></script>
 
@@ -191,7 +102,6 @@
 
     <!-- Theme JavaScript -->
     <script src="/js/agency.min.js"></script>
-    <script src="/./bundle.js"></script>
 
     <!--Google Maps API for computing distance-->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCoyi5AORiKLaxUyJiqEdBgpX-B4zIF4Nk&libraries=geometry"></script>
