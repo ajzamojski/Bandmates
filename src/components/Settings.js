@@ -44,21 +44,21 @@ var Settings = React.createClass ({
 		event.preventDefault();
 
 		var userRegData = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
-                username: this.state.username,
-                email: this.state.email,
-                password: this.state.password,
-                profilePic: this.state.photo,
-                city: this.state.city,
-                state: this.state.stateLocation,
-                zipcode: this.state.zip,
-                age: this.state.age,
-                phone: this.state.phone,
-                gender: this.state.gender,
-                instruments: this.state.instrument,
-                education: this.state.education,
-                experience: this.state.exp,
+			firstName: this.state.firstName,
+			lastName: this.state.lastName,
+			username: this.state.username,
+			email: this.state.email,
+			password: this.state.password,
+			profilePic: this.state.photo,
+			city: this.state.city,
+			state: this.state.stateLocation,
+			zipcode: this.state.zip,
+			age: this.state.age,
+			phone: this.state.phone,
+			gender: this.state.gender,
+			instruments: this.state.instrument,
+			education: this.state.education,
+			experience: this.state.exp,
                 
             }
 
@@ -79,7 +79,6 @@ var Settings = React.createClass ({
                 <Redirect to="/user/profile"/>
                }
              });
-
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
