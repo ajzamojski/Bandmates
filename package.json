@@ -53,7 +53,7 @@
     "build": "webpack",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "heroku-postbuild": "npm i -g webpack"
+    "heroku-postbuild": "npm i -g webpack; webpack"
   },
   "description": "A site where people could link up with fellow musicians",
   "main": "index.js",
