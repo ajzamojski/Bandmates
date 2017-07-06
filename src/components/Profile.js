@@ -86,7 +86,7 @@ var Profile = React.createClass ({
 			}
 
 		}.bind(this));
-		
+
 	},
 	componentDidMount: function() {
 		
@@ -151,7 +151,7 @@ var Profile = React.createClass ({
 									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
 									<div className="infoProfile">{this.state.city}, {this.state.state} {this.state.zipcode == undefined ? " " : this.state.zipcode}</div> 
 									<div className="infoProfile">{this.state.email}</div>
-									{/*{this.state.id == this.props.theUser.id ?"" : <button className="btn btn-lg" onClick={this.handleContactClick}>Add as a Contact</button>}*/}
+									
 									{this.state.contactBtn ? <button className="btn btn-lg" onClick={this.handleContactClick}>Add to Contacts</button> : ""}
 								</div>
 							</div>
