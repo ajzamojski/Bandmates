@@ -271,7 +271,7 @@ var Search = React.createClass({
 									
 									<img className="imgResponsive" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
 									<div style={{display: 'flex', flexDirection: 'column', float: 'left'}}>
-										<h3 className="musicName"><Link to={"/user/profile/" + user.username}><a style={{color: 'black'}} data-username ={user.username}>{user.firstName + " " + user.lastName}</a></Link></h3>
+										<h3 className="musicName"><Link to={{pathname: "/user/profile/" + user.username, state: {username: user.username}}}><a style={{color: 'black'}} data-username ={user.username}>{user.firstName + " " + user.lastName}</a></Link></h3>
 										<p style={{fontSize: '18px'}}>{user.instruments}{user.specifics == null || undefined ? "" : (": " + user.specifics)}</p>
 										<p style={{fontSize: '18px'}}>{user.city + " " + user.state}{" " + user.zip}</p>
 									</div>

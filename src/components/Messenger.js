@@ -12,6 +12,7 @@
 
 var React = require('react');
 const io = require('socket.io-client');
+var Helpers = require('./utils/helpers');
 
 var Messenger = React.createClass ({
 	getInitialState: function() {
@@ -24,20 +25,59 @@ var Messenger = React.createClass ({
   	},
 	componentDidMount: function() {
 		
-		this.setState({user: this.props.theUser});
 		this.socket = io().connect();
 		this.socket.on('message', function(message) {
 			console.log(message);
 			this.setState({messages: [message, ...this.state.messages] })
+
 		}.bind(this))
-		this.getContacts();
+		
+		$.get("/loggedin", function(data) {
+
+			console.log(data);
+			console.log(data.notAuthenticated == true);
+			console.log(!(data.notAuthenticated == true));
+			if (!(data.notAuthenticated === true)) {
+				
+				this.setState({user: this.props.theUser});
+
+				//get contact tables with contacts' IDs
+				Helpers.getContacts(this.props.theUser.id)
+				.then(function(result) {
+					console.log(result.data);
+
+					//for each contact ID, get userinfo
+					for (var i = 0; i < result.data.length; i++) {
+						Helpers.getUserById(result.data[i].contact_id) 
+						.then(function(result) {
+							for (var j = 0; j < result.data.length; j++) {
+								var newState = result.data[j];
+								this.setState({
+									usersContacts: this.state.usersContacts.concat(newState)
+								})
+							}
+							console.log(this.state.usersContacts)
+						}.bind(this))
+					}
+				}.bind(this))
+
+			}
+		}.bind(this));
+		
 		//on initial load, user's connections should be shown under contacts
+		// this.getContacts();
 	},
 	getContacts: function() {
 		//grab user's id
 		var userID = this.props.theUser.id;
 		console.log(userID);
+
 		//with id, query for user's connections/contacts under the friends table
+		Helpers.getContacts(userID)
+		.then(function(result) {
+			console.log(result.data);
+		})
+		
 		//grab each contact_id, and with that, grab each contact's name/username/profession+role and append to contacts list
 	},
 	handleSubmit: function(event) {
@@ -59,9 +99,10 @@ var Messenger = React.createClass ({
 		})
 		const contacts = this.state.usersContacts.map((user, index) => {
 			return (
-				<div>
-					<h4>{user.firstName + " " + user.lastName}</h4>
-					<p></p>
+				<div key={index} onClick={this.messageThisContact} className="contactItem" >
+						<img className="imgResponsive" style={{maxHeight:'50px' , float:'left', borderRadius: '25px', padding: '3px'}}src={user.profilePic}/>
+						<h4 style={{fontFamily: 'Roboto, sans-serif', textTransform: 'none'}}>{user.firstName + " " + user.lastName}</h4>
+						<p style={{fontWeight: '300'}}><i>{user.username}</i></p>
 				</div>
 			)
 		})
@@ -96,9 +137,9 @@ var Messenger = React.createClass ({
 								{messages}
 							</div>
 							</div>
-							<form className="item" onClick={this.handleSubmit}>
-								<input style={{margin: '0 1em',padding: '0.75em'}} type='text' size="55" placeholder="Enter a message..." onKeyUp={this.handleSubmit}/>
-								<button style={{color: 'white'}} id="sendBtn" className="btn btn-lg" onClick={this.handleSubmit}>Send</button>
+							<form className="item" style={{width: '100%'}} onClick={this.handleSubmit}>
+								<input style={{margin: '0 1em',padding: '0.75em', width: '70%'}} type='text' placeholder="Enter a message..." onKeyUp={this.handleSubmit}/>
+								<button style={{color: 'white', width: '20%'}} id="sendBtn" className="btn btn-lg" onClick={this.handleSubmit}>Send</button>
 							</form>
 						</div>
 					</div>

@@ -7,9 +7,13 @@ var eventbriteAPIToken = 'ZOVDW3APCGKQD5SCX75S';
 
 // Helper functions for making API Calls
 var helper = {
-
+  addContact: function(userID,contactID) {
+    return axios.post('/api/newContact/' + userID + "/" + contactID);
+  },
+  getContacts: function(userID) {
+    return axios.get('/api/contacts/' + userID);
+  },
   submitNewUser: function(data) {
-
       console.log(data);
       let queryURL = "/users/register";
       return axios.post(queryURL, data).then(function(result) {
@@ -44,6 +48,12 @@ var helper = {
 
   getUsers: function() {
     return axios.get("/api/musicians");
+  },
+  getUserByUsername: function(query) {
+    return axios.get("/api/user/" + query);
+  },
+  getUserById: function(id) {
+    return axios.get("/api/userContacts/" + id);
   },
   // This function serves our purpose of running the query to geolocate.
   runQuery: function(location, newUser) {
