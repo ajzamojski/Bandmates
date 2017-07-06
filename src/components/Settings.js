@@ -11,6 +11,8 @@
 var React = require('react');
 var Helpers = require('./utils/helpers');
 
+
+
 const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID","IL","IN","KS",
 "KY","LA","MA","MD","ME","MI","MN","MO","MS","MT","NC","ND","NE","NH","NJ","NM",
 "NV","NY","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VA","VT","WA","WI","WV","WY"];
@@ -38,6 +40,8 @@ var Settings = React.createClass ({
         };
   	},
 
+  		
+
 	handleChange: function(event) {
 		const name = event.target.name;
 		const value = event.target.value;
@@ -46,6 +50,8 @@ var Settings = React.createClass ({
 
 	handleUpdate: function(event) {
 		event.preventDefault();
+
+		var oguser = this.state.username;
 
 		var userData = {
 				username: this.state.username,
@@ -69,12 +75,7 @@ var Settings = React.createClass ({
 
         var query = this.state.username;
 
-        componentWillReceiveProps: function(){
-		console.log('Component Updating - Settings');
-
-		},
-
-		Helpers.updateUser(query,userData).then(function(result){
+		Helpers.updateUser(oguser,userData).then(function(result){
 
                 if (result.data.loginError) {
                     if (result.data.loginError[0] === 'User not found') {
@@ -98,9 +99,13 @@ var Settings = React.createClass ({
 	componentDidMount: function() {
 		console.log('Component Mounted - Settings');
 		this.setState({user: this.props.theUser});
+		var oguser = this.state.username;
 	},
 
-	
+	componentWillReceiveProps: function(){
+		console.log('Component Updating - Settings');
+
+	},
 
 	render: function() {
 		return (
