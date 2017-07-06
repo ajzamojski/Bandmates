@@ -52,6 +52,7 @@ var Messenger = React.createClass ({
 						.then(function(result) {
 							for (var j = 0; j < result.data.length; j++) {
 								var newState = result.data[j];
+								//concat each user to component state
 								this.setState({
 									usersContacts: this.state.usersContacts.concat(newState)
 								})
@@ -64,8 +65,8 @@ var Messenger = React.createClass ({
 			}
 		}.bind(this));
 		
-		//on initial load, user's connections should be shown under contacts
-		// this.getContacts();
+		
+
 	},
 	getContacts: function() {
 		//grab user's id
@@ -97,6 +98,7 @@ var Messenger = React.createClass ({
 			const img = message.img ? <img src={message.img} width='100px' /> : null
 			return <li style={{listStyleType:'none'}} key={index}><b>{message.from}:</b>{message.body}</li>
 		})
+		//on initial load, user's connections should be shown under contacts
 		const contacts = this.state.usersContacts.map((user, index) => {
 			return (
 				<div key={index} onClick={this.messageThisContact} className="contactItem" >

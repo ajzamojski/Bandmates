@@ -82,19 +82,13 @@ app.get('/user/messenger', function(req,res) {
 
 //------------------- API ROUTES ------------------------
 //get route for all musicians
-app.get("/api/musicians", function(req, res) {
+app.get("/api/musicians/:instrument/:gender", function(req, res) {
     db.User.findAll({
         attributes: { exclude: ['password'] },
-        // where: {
-        //     instruments: {
-            //     $or: {
-                //     $eq: req.params.instrument,
-                //     $eq: null
-                    // }
-            // },
-        //     gender: req.params.gender,
-        //     profession: req.params.profession
-        // }
+        where: {
+            instruments: req.params.instrument,
+            gender: req.params.gender,
+            }
     }).then(function(data) {
       res.json(data);
       console.log(data);

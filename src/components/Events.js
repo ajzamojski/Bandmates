@@ -47,6 +47,7 @@ var Events = React.createClass({
 		// Syntax to reference props *******************************************
 		var a = "yes"
 		this.setState({user: this.props.theUser});
+		console.log(this.state.user);
 		this.setState({currentEvents: []});
 	},
 	postEvents: function(data) {

@@ -12,6 +12,7 @@ var Helpers = require('./utils/helpers');
 var Profile = React.createClass ({
 	getInitialState: function() {
         return {
+			contactBtn: false,
 			user: undefined,
             firstName: undefined,
             lastName: undefined,
@@ -31,7 +32,7 @@ var Profile = React.createClass ({
 			id: undefined,
         }
   	},
-	getUsernameInfo() {
+	getUsernameInfo: function() {
 
 		var res = window.location.href.split('/');
 		var param = res[res.length-1]
@@ -47,7 +48,7 @@ var Profile = React.createClass ({
 					username : result.data.username,
 					city : result.data.city,
 					state : result.data.state,
-					zipcode : result.data.zip,
+					zipcode : result.data.zipcode,
 					email : result.data.email,
 					age : result.data.age,
 					profilePic : result.data.profilePic,
@@ -56,18 +57,37 @@ var Profile = React.createClass ({
 					specifics : result.data.styles,
 					id: result.data.id
 				})
-				// this.renderAddBtn(result.data.id, this.props.theUser.id);
+				this.renderAddBtn(result.data.id, this.props.theUser.id);
 		}.bind(this));
 	},
-	// renderAddBtn: function(profileID, userID) {
-	// 	console.log(profileID + " " + userID)
-	// 	return (
-	// 		<div>
-	// 			{this.state.id == this.props.theUser.id ?
-	// 				"" : <button className="btn btn-lg" onClick={this.handleContactClick}>Add as a Contact</button>}
-	// 		</div>
-	// 	);
-	// },
+	renderAddBtn: function(profileID, userID) {
+		console.log(profileID + " " + userID);
+		var contactCheck = false;
+
+		Helpers.getContacts(userID)
+		.then(function(result){
+			console.log(result.data);
+			console.log("profileID: " + profileID)
+				//for loop : if profileID matches a contact ID, then return true
+				for (var i = 0; i < result.data.length; i++) {
+					console.log("contact_id: " + result.data[i].contact_id)
+					if(result.data[i].contact_id == profileID) {
+						contactCheck = true;
+					} else {
+						contactCheck = false;
+					}
+				}
+			
+			//if user's page OR if profile is already a contact , do not show button
+			if (profileID == userID || contactCheck == true) {
+				this.setState({contactBtn : false})
+			} else {
+				this.setState({contactBtn : true})
+			}
+
+		}.bind(this));
+		
+	},
 	componentDidMount: function() {
 		
 		$.get("/loggedin", function(data) {
@@ -91,7 +111,7 @@ var Profile = React.createClass ({
 
 			}
 		}.bind(this));
-		
+		console.log(this.state.user);
 	},
 	handleContactClick: function(event) {
 		event.preventDefault();
@@ -131,11 +151,9 @@ var Profile = React.createClass ({
 									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
 									<div className="infoProfile">{this.state.city}, {this.state.state} {this.state.zipcode == undefined ? " " : this.state.zipcode}</div> 
 									<div className="infoProfile">{this.state.email}</div>
-									{/*{this.state.id == this.props.theUser.id ?
-									"" : */}
-									<button className="btn btn-lg" onClick={this.handleContactClick}>Add as a Contact</button>
-									{/*}*/}
-									</div>
+									{/*{this.state.id == this.props.theUser.id ?"" : <button className="btn btn-lg" onClick={this.handleContactClick}>Add as a Contact</button>}*/}
+									{this.state.contactBtn ? <button className="btn btn-lg" onClick={this.handleContactClick}>Add to Contacts</button> : ""}
+								</div>
 							</div>
 						
 							<div className="panel col-xs-7" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px'}}>

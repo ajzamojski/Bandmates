@@ -21,6 +21,7 @@ const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID"
 var address;
 var latInst;
 var lngInst;
+
 import { 
     BrowserRouter as Router, 
     Route, 
@@ -33,7 +34,8 @@ var Search = React.createClass({
         return {
 			user: undefined,
 			currentUsers: [],
-			usersByRadius: []
+			usersByRadius: [],
+			noResults: ""
         };
   	},
 	filterUsersByRadius(fixedGeoLat, fixedGeoLng, radius) {
@@ -74,17 +76,37 @@ var Search = React.createClass({
 					// console.log("not in range") 
 				}
 
+				if (this.state.usersByRadius.length > 0) {
+					this.setState({noResults : ""})
+				} else {
+					this.setState({noResults : "No Results Found"})
+				}
+
 			}.bind(this))
 
 		}
 
 	},
-	getMusicians(prof,inst,city,state,radius) {
+	getMusicians(inst,city,state,radius,gender) {
 			
 		//get users in the database
-		Helpers.getUsers()
+		Helpers.getUsers(inst,gender)
 		.then(function(result) {
 			console.log(result.data)
+
+			if (result.data.length > 0 ) {
+				
+				this.setState({noResults : ""}, () => {
+					
+				})
+			} else {
+				
+				this.setState({noResults : "No Results Found"}, () => {
+					console.log('no users')
+				})
+
+			} 
+
 			//build new state for each user, concat to currentUsers state array
 			for(var i = 0; i < (result.data.length); i++) {
 				var newState = {
@@ -142,7 +164,7 @@ var Search = React.createClass({
 				ab = result.lat;
 				cd = result.lng;
 				this.filterUsersByRadius(ab,cd,radius)
-
+				
 			}.bind(this))
 
 		}.bind(this))	
@@ -158,18 +180,19 @@ var Search = React.createClass({
 			usersByRadius: []
 		});
 
-		var prof = this.refs.professionFilt.value;
+		// var prof = this.refs.professionFilt.value;
 		var inst = this.refs.instrumentFilt.value;;
 		var city = this.refs.cityFilt.value;
 		var state = this.refs.stateFilt.value;
 		var gender = this.refs.gender.value;
 		var radius = this.refs.radiusFilt.value;
 
-		this.getMusicians(prof,inst,city,state,radius);
+		this.getMusicians(inst,city,state,radius,gender);
 	},
 	componentDidMount: function() {
 		console.log('Component Mounted - Search');
 		this.setState({user: this.props.theUser});
+		console.log(this.state.user);
 	},
 	render () {
 
@@ -194,16 +217,17 @@ var Search = React.createClass({
 					<p>Find musicians in your area</p>
 					<form name="filter" method="get" onSubmit={this.handleSubmit}>
 						
-						<div className="form-group">
+						{/*<div className="form-group">
 							
 							<label htmlFor="profession">Profession/Role:</label>
 							<input placeholder="Musician/Drummer/Singer" type="text" className="form-control" id="professionFilt" name="professionFilt" ref="professionFilt"/>
 							
-						</div>
+						</div>*/}
 
 						<div className="form-group">
 							<label htmlFor="instrumentFilt">Instrument:</label>
-							<select className="form-control" id="instrumentFilt" name="instrumentFilt" ref="instrumentFilt">
+							<select className="form-control" defaultValue="Please select an instrument" id="instrumentFilt" name="instrumentFilt" ref="instrumentFilt">
+								<option disabled>Please select an instrument</option>
 								{
 									instruments.map(function(el) {
 										return <option key ={el}value={el}>{el}</option>
@@ -222,6 +246,7 @@ var Search = React.createClass({
 						<div className="form-group">
 							<div>
 								<label htmlFor="stateFilt">State:</label>
+								
 								<select className="form-control" id="stateFilt" name="stateFilt" ref="stateFilt">
 									{
 										states.map(function(el) {
@@ -261,6 +286,7 @@ var Search = React.createClass({
                         RESULTS
                     </div>
 					<div className="panel-body" id="musicianSearchResults">
+						{this.state.noResults}
 						{/*<Route path="/user/events/search" component={Results}/>*/}
 						<div id="loadingImg" style={{display: 'none', margin: '0 auto'}}>
 								<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
