@@ -48,7 +48,7 @@
     "webpack": "^2.6.1"
   },
   "scripts": {
-    "start": "webpack -p & node server",
+    "start": "node server",
     "dev": "webpack -w & nodemon server",
     "build": "webpack",
     "test": "react-scripts test --env=jsdom",
