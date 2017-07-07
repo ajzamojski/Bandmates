@@ -13,23 +13,33 @@ var Profile = React.createClass ({
 	getInitialState: function() {
         return {
 			contactBtn: false,
-			user: undefined,
-            firstName: undefined,
-            lastName: undefined,
-			username: undefined,
-            city: undefined,
-            state: undefined,
-            zipcode: undefined,
-            email: undefined,
-			age: undefined,
-			gender: undefined,
-            profilePic: undefined,
-			specifics: undefined,
-            musicianInfo: "Alex Honeysett is a Brand and Marketing Strategist who partners with CEOs, executives and solopreneurs to grow their personal and professional brands, human-to-human. After spending nearly a decade working in PR and marketing for multimillion dollar brands and startups, Alex knows what truly drives conversions, sold-out launches and New York Times interviews—and it’s not mastering the marketing flavor of the week. It’s how well you connect with the heart-beating people you’re trying to help and communicate your understanding back to them. Alex has landed coverage in print and broadcast outlets around the world, including the Today Show, Wall Street Journal, Mashable, BBC, NPR and CNN. Her own articles have been featured in The Muse, Forbes, Inc., Mashable, DailyWorth and Newsweek. In addition to her extensive PR and marketing experience, Alex is a trained business coach Alex holds a BA in communications and journalism from the University of Delaware.",
-            profession: "Backup Dancer",
-            instrument: undefined,
-            experience: "Alex has years of experience playing the trumpet and sounding awesome",
 			id: undefined,
+			username: this.props.theUser.username,
+			firstName: this.props.theUser.firstName,
+			lastName: this.props.theUser.lastName,
+			email: this.props.theUser.email,
+			password: this.props.theUser.password,
+			passwordVer: "*******",
+			profilePic: this.props.theUser.profilePic,
+			city: this.props.theUser.city,
+			state: this.props.theUser.state,
+			zipcode: this.props.theUser.zipcode,
+			aboutyou: this.props.theUser.aboutyou,
+			age: this.props.theUser.age,
+			gender: this.props.theUser.gender,
+			instruments: this.props.theUser.instruments,
+			styles: this.props.theUser.styles,
+			education: this.props.theUser.education,
+			experience: this.props.theUser.experience,
+			profession: this.props.theUser.profession,
+			youtube: this.props.theUser.youtube,
+			soundcloud: this.props.theUser.soundcloud,
+			bandcamp: this.props.theUser.bandcamp,
+			otherURL: this.props.theUser.otherURL,
+			facebook: this.props.theUser.facebook,
+			twitter: this.props.theUser.twitter,
+			instagram: this.props.theUser.instagram
+
         }
   	},
 	getUsernameInfo: function() {
@@ -53,8 +63,9 @@ var Profile = React.createClass ({
 					age : result.data.age,
 					profilePic : result.data.profilePic,
 					gender : result.data.gender,
-					instrument : result.data.instruments,
-					specifics : result.data.styles,
+					instruments : result.data.instruments,
+					profession : result.data.profession,
+					styles : result.data.styles,
 					id: result.data.id
 				})
 				this.renderAddBtn(result.data.id, this.props.theUser.id);
@@ -150,11 +161,12 @@ var Profile = React.createClass ({
 							<div className="panel" style={{display: 'flex', padding: '0px', display: 'block', height:'100%', margin: '0px 0px 15px 10px',width: '70%'}}>
 								<div className="panel-heading">About Me</div>
 								<div className="panel-body" id="rightProfile">
-									<b>Information: </b><br /><div id="profileInfo">{this.state.musicianInfo}</div> <br></br>
+									<b>Information: </b><br /><div id="profileInfo">{this.state.aboutyou}</div> <br></br>
 									<div className="rightProfileItem"><b>Age: </b>{this.state.age}</div><br></br>
 									<div className="rightProfileItem"><b>Gender: </b>{this.state.gender}</div><br></br>
 									<div className="rightProfileItem"><b>Profession: </b>{this.state.profession}</div> <br></br>
-									<div className="rightProfileItem"><b>Instrument: </b>{this.state.instrument}</div> <br></br>
+									<div className="rightProfileItem"><b>Instrument: </b>{this.state.instruments}</div> <br></br>
+									<div className="rightProfileItem"><b>Playstyles: </b>{this.state.styles}</div> <br></br>
 									<div className="rightProfileItem" style={{maxHeight: '80px'}}><b>Experience: </b>{this.state.experience}</div> <br></br>
 								</div>
 							</div>
@@ -164,8 +176,8 @@ var Profile = React.createClass ({
 								<div className="panel-heading">My Links</div>
 								<div className="panel-body">
 
-									<a href="https://www.youtube.com/channel/UC8HV_9oHzfB9kw76Yj69wqg" target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
-									<a href="https://soundcloud.com" target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
+									<a href={this.state.youtube} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
+									<a href={this.state.soundcloud} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
 									<div style={{clear: "left"}} ><iframe style={{marginTop: "18px"}}width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
 										frameBorder="0" allowFullScreen></iframe>
 									</div>
