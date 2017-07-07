@@ -196,7 +196,7 @@ app.post("/users/update/:email", function(req, res) {
 // })
 
 // Syncing our sequelize models and then starting our express app
-db.sequelize.sync({}).then(function() {
+db.sequelize.sync({force: true}).then(function() {
     
     io.on('connection', function(socket) {
         socket.on('message', function(body) {
