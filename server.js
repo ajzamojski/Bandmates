@@ -147,6 +147,43 @@ app.get("/api/user/:username", function(req, res) {
     });
 });
 
+app.post("/users/update/:email", function(req, res) {
+      var updateInfo = {
+        username: req.body.username,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        profilePic: req.body.profilePic,
+        city: req.body.city,
+        state: req.body.state,
+        zipcode: req.body.zipcode,
+        aboutyou: req.body.aboutyou,
+        age: req.body.age,
+        gender: req.body.gender,
+        instruments: req.body.instruments,
+        styles: req.body.styles,
+        education: req.body.education,
+        experience: req.body.experience,
+        profession: req.body.profession,
+        youtube: req.body.youtube,
+        soundcloud: req.body.soundcloud,
+        bandcamp: req.body.bandcamp,
+        otherURL: req.body.otherURL,
+        facebook: req.body.facebook,
+        twitter: req.body.twitter,
+        instagram: req.body.instagram
+      }
+      db.User.update(updateInfo, {
+        where: {
+          email: req.body.email
+        }
+      }).then(function(dbUser) {
+        res.json(dbUser);
+      });
+    });
+
+
 //-------------------------------------------------------
 // app.post('/user/messenger', (req, res) => {
 //   const { Body, From, MediaUrl0 } = req.body

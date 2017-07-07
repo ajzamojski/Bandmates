@@ -38,12 +38,12 @@ var helper = {
   updateUser: function(query,data) {
 
     console.log(data);
-    let queryURL = "/users/" + query;
-    return axios.put(queryURL, data).then(function(result) {
+    // let queryURL = "/users/update/" + query;
+    axios.post("/users/update/" + query, data).then(function(result) {
         console.log("updating user");
         console.log(result);
         return result;
-    })
+    });
   },
 
   getUsers: function(inst, gender) {

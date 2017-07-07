@@ -95,14 +95,70 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     },
-    looking_for: {
+    aboutyou: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
         len: [1]
       }
     },
-    hobbies: {
+    education: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    profession: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    youtube: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    soundcloud: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    bandcamp: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    otherURL: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    facebook: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    twitter: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
+    instagram: {
       type: DataTypes.STRING,
       allowNull: true,
       validate: {
