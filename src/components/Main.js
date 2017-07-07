@@ -26,6 +26,7 @@ var Search = require("./Search.js");
 var Messenger = require("./Messenger.js");
 var Profile = require("./Profile.js");
 var Settings = require("./Settings.js");
+var Welcome = require("./Welcome.js");
 
 var Main = React.createClass ({
 	getInitialState: function() {
@@ -33,14 +34,10 @@ var Main = React.createClass ({
             main: "Main State",
 			user: undefined,
 			userRoutes : [
-				// { path: '/',
-				// 	exact: true,
-				// 	sidebar: () => <div></div>,
-				// 	main: () => <div></div>
-				// },
 				{ path: '/user',
+					exact: true,
 					sidebar: () => <div></div>,
-					main: () => <div></div>
+					main: () => <Welcome theUser={this.props.dbUserObject.userData} />
 				},
 				{ path: '/user/events',
 					sidebar: () => <div></div>,
@@ -79,8 +76,8 @@ var Main = React.createClass ({
 		console.log(this.props.dbUserObject.userData);
 		this.setState({user: this.props.dbUserObject.userData})
 	},
-	something: function() {
-		console.log('triggered');
+	refreshPage: function() {
+		window.location.reload();
 	},
 	printData: function(a) {
 		console.log("i made it" + a);
@@ -95,10 +92,7 @@ var Main = React.createClass ({
 				<div>
 					<nav className ="container col-xs-4" id="sidebar">
 						<ul className="nav nav-list nav-stacked span2">
-							<li style={{height: '100px'}}></li>
-								{/*<li className="nav-header text-center active btn-group">MENU</li>*/}
-								{/*{this.state.user.firstName + " " + this.state.user.lastName}*/}
-								{/*<li className="nav-header text-center">MENU</li>*/}
+							<li style={{height: '80px'}}></li>
 							<li style={{fontSize: '17px', color: '#5F5F5F'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-tachometer" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Dashboard</li>
 							{/*<li><NavLink to="/">&nbsp;&nbsp;&nbsp;<i className="fa fa-home" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Home</NavLink></li>*/}
 							<li><NavLink exact to="/user" className="selected">&nbsp;&nbsp;&nbsp;<i className="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Main</NavLink></li>
@@ -108,8 +102,7 @@ var Main = React.createClass ({
 							<li><NavLink to={{pathname: "/user/profile/" + this.props.dbUserObject.userData.username, state: {username: this.props.dbUserObject.userData.username}}} className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 
-							{/*<li><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}}><i className="fa fa-sign-out" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>*/}
-							<li onClick={this.something}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} >&nbsp;&nbsp;&nbsp;<i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							<li onClick={this.refreshPage}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} >&nbsp;&nbsp;&nbsp;<i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 
 						</ul>
 					</nav>
