@@ -1,15 +1,3 @@
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-// TO DO:
-// 1. User-to-User Messaging with Socket.io
-// 2. Save log of messages to mySQL
-
-// PIE IN THE SKY:
-// 1. Display messages where 'from:' messages on left side, while 'to:' messages on right side
-// 2. Styling
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-
 var React = require('react');
 const io = require('socket.io-client');
 var Helpers = require('./utils/helpers');
@@ -68,12 +56,8 @@ var Messenger = React.createClass ({
 						}.bind(this))
 					}
 				}.bind(this))
-
 			}
 		}.bind(this));
-		
-		
-
 	},
 	getContacts: function() {
 		//grab user's id
@@ -127,6 +111,11 @@ var Messenger = React.createClass ({
 				<div className="row" style={{height: "800px"}}>
 					<div id="messengerContent">
 
+						<div className="contentBanner" style={{width: '100%'}}>
+							<h1 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Messenger</h1>
+							<p>Find your list of contacts and socialize here!</p>
+						</div>
+
 						{/*Contacts/Friends List*/}
 						<div id="contactsList" style={{height: "550px", width:'40%'}}>
 							<div className="item" style={{width: '100%',backgroundColor: '#37474F'}}>
@@ -140,7 +129,7 @@ var Messenger = React.createClass ({
 						{/*Messaging*/}
 						<div id="messageApp" style={{height: "550px", width:'50%'}}>
 							<div className="item" style={{width: '100%',backgroundColor: '#37474F'}}>
-								<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontWeight: '300', fontFamily: 'Quicksand, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Message</h3>
+								<h3 style={{paddingLeft: '1em', paddingBottom: '0.5em', fontWeight: '300', fontFamily: 'Quicksand, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', color: 'white'}}>Chat</h3>
 							</div>
 							<div className="item" id="chatBox">
 							<div id="messagesWrapper" style={{display: 'block'}}>

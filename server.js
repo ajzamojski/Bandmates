@@ -71,11 +71,6 @@ app.get('/user/messenger', function(req,res) {
     res.sendFile(__dirname + "/public/index.html");
 });
 
-// app.post('/api/events', function(req,res) {
-//   console.log('post:' + res);
-//   res.json(res)
-// })
-
 // app.get('*', function(req,res) {
 //     res.sendFile(__dirname + "/public/index.html");
 // });
