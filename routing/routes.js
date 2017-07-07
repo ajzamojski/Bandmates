@@ -67,29 +67,7 @@ module.exports = function (app) {
 			failureFlash: true
 	}));
 
-	app.put("/user/profile", function(req, res) {
-      var updateInfo = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        state: req.body.state,
-        city: req.body.city,
-        age: req.body.age,
-        phoneNumber: req.body.phone,
-        gender: req.body.gender,
-        school: req.body.school,
-        AOS: req.body.aos,
-        study_subject: req.body.study_subject,
-      }
-      db.User.update(updateInfo, {
-        where: {
-          id: req.body.id
-        }
-      }).then(function(dbBuddy) {
-        res.json(dbBuddy);
-      })
-    });
+	
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {

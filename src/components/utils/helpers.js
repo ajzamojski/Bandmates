@@ -35,15 +35,15 @@ var helper = {
       });
   },
 
-  updateUser: function(data) {
+  updateUser: function(query,data) {
 
     console.log(data);
-    let queryURL = "/users/update";
-    return axios.put(queryURL, data).then(function(result) {
+    // let queryURL = "/users/update/" + query;
+    axios.post("/users/update/" + query, data).then(function(result) {
         console.log("updating user");
         console.log(result);
         return result;
-    })
+    });
   },
 
   getUsers: function(inst, gender) {
