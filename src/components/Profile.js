@@ -149,7 +149,7 @@ var Profile = React.createClass ({
 							<div className="panel" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px',width: '30%'}}>
 								<div className="panel-heading">Profile</div>
 								<div className="panel-body">
-									<div> <img className="img-responsive" id="displayPic"src="/img/default_pic.jpg" /></div> <br></br>
+									<div> <img className="img-responsive" id="displayPic" src={this.state.profilePic} /></div> <br></br>
 									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
 									<div className="infoProfile">{this.state.city}, {this.state.state} {this.state.zipcode == undefined ? " " : this.state.zipcode}</div> 
 									<div className="infoProfile">{this.state.email}</div>
