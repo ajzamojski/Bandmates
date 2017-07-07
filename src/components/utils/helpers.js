@@ -23,7 +23,6 @@ var helper = {
 
       });
   },
-
   logInUser: function(data) {
 
     console.log(data);

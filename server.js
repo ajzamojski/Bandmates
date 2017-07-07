@@ -14,7 +14,6 @@ var PORT = process.env.PORT || 3000;
 var http = require('http').createServer(app)
 var io = require('socket.io')(http);
 
-
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
