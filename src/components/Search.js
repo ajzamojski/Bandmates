@@ -1,13 +1,3 @@
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-// TO DO:
-// 1. Retrieve users from DB by filter/params
-// 2. Put in handleSubmit function for saving to DB
-// 3. Integrate geolocation/radius logic
-// 4. Styling
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-
 var React = require('react');
 
 const instruments = ['Ajaeng', 'Bag Pipes','Bassoon', 'Beatboxing', 'Baritone', 'Clarinet', 'Disc Jockey','Drums','Electronic Instrument', 
@@ -206,8 +196,12 @@ var Search = React.createClass({
 				{/*Search Filter*/}
 				<div id="searchForm" className="row">
 
-					<h1 className="contentHeader">Musician Search</h1>
-					
+					{/*<h1 className="contentHeader">Musician Search</h1>*/}
+					<div className="contentBanner">
+						<h1 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Musician Search</h1>
+						<p>Find your contacts and message them</p>
+					</div>
+
 					<div className="panel">
 					<div className="panel-heading">
                         SEARCH FILTER
@@ -289,7 +283,7 @@ var Search = React.createClass({
 						{this.state.noResults}
 						{/*<Route path="/user/events/search" component={Results}/>*/}
 						<div id="loadingImg" style={{display: 'none', margin: '0 auto'}}>
-								<img src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+								<img style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src="http://i65.tinypic.com/24oav6p.gif" />
 						</div>
 						{this.state.usersByRadius.map(function(user) {
 								return (

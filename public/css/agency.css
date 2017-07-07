@@ -964,25 +964,13 @@ body {
 .breadcrumb {
     z-index: 1;
     padding: 10px;
+
     margin: 52px 0px 0px 2px;
     border-bottom: solid 0.5px #858C93;
     border-radius: 0px;
 }
-#sidebar {
-    z-index: 4;
-    padding-left:0;
-    padding-right: 0;
-    width: 20%;
-    height: 100%;
-    position: fixed;
-    color: white;
-    background-color: black;
-    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    min-width: 180px;
-    /*background-image: -webkit-gradient(to right,#14191e,#1a1f26, #29323c);
-    background-image: -moz-linear-gradient(to right,#14191e,#1a1f26, #29323c);
-    background-image: -o-linear-gradient(to right,#14191e,#1a1f26, #29323c);
-    background-image: linear-gradient(to right,#14191e,#1a1f26, #29323c);*/
+.breadcrumb h2 {
+  margin-left: 30px;
 }
 #userBar {
     box-shadow: 0 2px 17px 0 rgba(0, 0, 0, 0.2);
@@ -990,7 +978,20 @@ body {
     width: 100%;
 }
 #settingsDiv {
+  margin: 50px 0px;
+  padding: 8rem 2rem;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+}
+#updateDiv {
+  height: 100%;
+  margin: 2rem;
+  padding: 2rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px; 
 }
 #chatBox {
     height: 400px;
@@ -998,18 +999,42 @@ body {
     margin-left: 1em;
     margin-right: 1em;
 }
+#sidebar {
+    z-index: 4;
+    padding-left:0;
+    padding-right: 0;
+    width: 15%;
+    height: 100%;
+    position: fixed;
+    color: white;
+    background-color: black;
+    box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    min-width: 230px;
+    /*background-image: -webkit-gradient(to right,#14191e,#1a1f26, #29323c);
+    background-image: -moz-linear-gradient(to right,#14191e,#1a1f26, #29323c);
+    background-image: -o-linear-gradient(to right,#14191e,#1a1f26, #29323c);
+    background-image: linear-gradient(to right,#14191e,#1a1f26, #29323c);*/
+}
+.contentBanner {
+  margin: 2rem;
+  padding: 2rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px; 
+}
 #content {
     font-family: Roboto,sans-serif;
-    min-width: 80%;
-    width: 80%;
+    margin-left: 230px;
     height: auto;
-    position: absolute;
-    right: 0;
 }
 .contentWrapper {
     margin-top: 1em;
-    padding-left: 40px;
-    padding-right: 40px;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 4em;
 }
 .contactItem {
     flex: 0 1 auto;

@@ -262,7 +262,7 @@ var Home = React.createClass({
         <div className="modal-dialog" style={{width:'800px',fontFamily:'Roboto, sans-serif', backgroundColor: 'white', borderRadius: '10px', boxShadow:'0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12)'}}>
             
             <div className="col-xs-12">
-                <h2 className="text-center" style={{fontFamily:'Roboto, sans-serif', textTransform: 'none'}}>Sign Up</h2>
+                <h2 className="text-center" style={{fontFamily:'"Quicksand", sans-serif', }}>Sign Up</h2>
                 <p className="text-center">We just need some info</p>
                 <form id="signupForm" onSubmit={this.validFields} action="/somewhere">
                     <div className="alert alert-success" id="registerSuccess" style={{display: 'none'}}>"Registration Successful"</div>
@@ -313,7 +313,7 @@ var Home = React.createClass({
             </div>
             
             <div className="col-xs-12">
-                <h2 className="text-center" style={{fontFamily:'Roboto, sans-serif', textTransform: 'none'}}>Login</h2>
+                <h2 className="text-center" style={{fontFamily:'"Quicksand", sans-serif' }}>Login</h2>
                 <p className="text-center">Welcome back!</p>
                 <form id="loginForm" onSubmit={this.logInUser} >
                     <div className="alert alert-success" id="logInSuccess" style={{display: 'none'}}>"User successfully logged in"</div>
@@ -403,7 +403,7 @@ var Home = React.createClass({
                  <div className="row">
                     <div className="col-lg-12 text-center">
                         <h2 className="section-heading">The Developers</h2>
-                        <h3 className="section-subheading text-muted">Connect With Us!</h3>
+                        <h3 style={{fontSize: '24px'}} className="section-subheading text-muted">Connect With Us!</h3>
                     </div>
                 </div>
                 <div className="row">
@@ -469,7 +469,7 @@ var Home = React.createClass({
                 <div className="row">
                     <div className="col-lg-8 col-lg-offset-2 text-center">
                         <h2 className="large text-muted" style={{fontFamily:'Merriweather, sans-serif',textTransform: 'none'}}>We work 
-                            <b className="tada" id="hardWord"> hard</b>  , we promise!</h2>
+                            <b id="hardWord"> hard</b>  , we promise!</h2>
                     </div>
                 </div>
             </div>
@@ -479,7 +479,13 @@ var Home = React.createClass({
         <aside className="clients">
             <div className="container">
                 <div className="row">
-                    <div className="col-md-3 col-sm-6">
+                    <div className=""><h2 className="text-center" style={{height: '35px'}}>Brought to you by: </h2></div>
+                    <div className="col-xs-6 col-xs-offset-3">
+                        <a href="https://bootcamp.rutgers.edu/">
+                            <img src="./img/rutgers_logo.png" style={{height: '100px'}} className="img-responsive img-centered" alt="Rutgers Coding Bootcamp"/>
+                        </a>
+                    </div>
+                    {/*<div className="col-md-3 col-sm-6">
                         <a href="#">
                             <img src="#" className="img-responsive img-centered" alt=""/>
                         </a>
@@ -493,12 +499,7 @@ var Home = React.createClass({
                         <a href="#">
                             <img src="#" className="img-responsive img-centered" alt=""/>
                         </a>
-                    </div>
-                    <div className="col-md-3 col-sm-6">
-                        <a href="#">
-                            <img src="#" className="img-responsive img-centered" alt=""/>
-                        </a>
-                    </div>
+                    </div>*/}
                 </div>
             </div>
         </aside>
@@ -548,7 +549,7 @@ var Home = React.createClass({
             </div>
         </section>
 
-        <footer>
+        <footer style={{backgroundColor: 'black'}}>
             <div className="container">
                 <div className="row">
                     <div className="col-md-4">
@@ -566,9 +567,9 @@ var Home = React.createClass({
                     </div>
                     <div className="col-md-4">
                         <ul className="list-inline quicklinks">
-                            <li><a href="#" style={{color: 'black'}}>Privacy Policy</a>
+                            <li><a href="/" style={{color: '#333'}}>Privacy Policy</a>
                             </li>
-                            <li><a href="#" style={{color: 'black'}}>Terms of Use</a>
+                            <li><a href="/" style={{color: '#333'}}>Terms of Use</a>
                             </li>
                         </ul>
                     </div>
@@ -592,17 +593,17 @@ var Home = React.createClass({
                                     <h2>Sign Up</h2>
                                     <p>We just need some info</p>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Your FFirst Name *" id="firstName" required data-validation-required-message="Please enter your first name."/>
-                                        <input type="text" className="form-control" placeholder="Your Last Name *" id="lastName" required data-validation-required-message="Please enter your last name."/>
+                                        <input type="text" className="form-control" placeholder="John " id="firstName" required data-validation-required-message="Please enter your first name."/>
+                                        <input type="text" className="form-control" placeholder="Doe " id="lastName" required data-validation-required-message="Please enter your last name."/>
                                         <p className="help-block text-danger"></p>
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Username *" id="username" required data-validation-required-message="Please enter a username."/>
+                                        <input type="text" className="form-control" placeholder="johndoe123" id="username" required data-validation-required-message="Please enter a username."/>
                                         <p className="help-block text-danger"></p>
                                     </div>
                                     <div className="form-group">
-                                        <input type="text" className="form-control" placeholder="Password *" id="password" required data-validation-required-message="Please enter a password." />
-                                        <input type="text" className="form-control" placeholder="Confirm Password *" id="confirmpw" required data-validation-required-message="Please confirm/check your password." />
+                                        <input type="text" className="form-control" placeholder="******" id="password" required data-validation-required-message="Please enter a password." />
+                                        <input type="text" className="form-control" placeholder="******" id="confirmpw" required data-validation-required-message="Please confirm/check your password." />
                                         <p className="help-block text-danger"></p>
                                     </div>
                                     <button type="button" className="btn btn-primary" data-dismiss="modal"><i className="fa fa-times"></i> Sign Up</button>

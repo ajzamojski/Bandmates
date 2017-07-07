@@ -136,11 +136,14 @@ var Settings = React.createClass ({
 				</div>
 				<div className ="container contentWrapper">
 				
-				{/*Settings*/}
-				<div id="settingsDiv">
+				<div className="contentBanner">
+                    <h1 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Settings</h1>
+                    <p>Update your info here</p>
+                </div>
 
-				<div className="row">
-					<h1 className="contentHeader" style={{margin: '30px 0px 25px 60px'}}>Settings</h1>
+				{/*Settings*/}
+				<div className="row" id="settingsDiv">
+					{/*<h1 className="contentHeader" style={{margin: '30px 0px 25px 60px'}}>Settings</h1>*/}
 				<div className="col-md-10 col-md-offset-1">
 
 				<form id="editForm" onSubmit={this.handleUpdate}>
@@ -242,7 +245,6 @@ var Settings = React.createClass ({
 				</div>
 			</div>
 				</div>
-			</div>
 			</div>
 			)
 		

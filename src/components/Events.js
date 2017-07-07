@@ -1,15 +1,3 @@
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-// TO DO:
-// 1. Styling
-
-// PIE IN THE SKY:
-// 1. Be able to create user's own events
-// 2. Show users that are going
-// 3. validation
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-
 const Results = ({match}) => {
 	return <div>
 				<h1></h1>
@@ -50,9 +38,21 @@ var Events = React.createClass({
 		console.log(this.state.user);
 		this.setState({currentEvents: []});
 	},
-	postEvents: function(data) {
-		Helpers.postQueryEvents(data);
-	},
+	// postEvents: function() {
+	// 	var data = {};
+
+	// 	data.eventname = this.refs.eventname.value;
+	// 	data.description = this.refs.description.value;
+	// 	data.startTime= this.refs.startTime.value;
+	// 	data.endTime= this.refs.endTime.value;
+	// 	data.timezone= this.refs.timezone.value;
+	// 	data.currency= this.refs.currency.value;
+
+	// 	Helpers.postQueryEvents(data)
+	// 	.then(function(result) {
+			
+	// 	})
+	// },
 	showLoading: function() {
 		var loading = document.getElementById('loadingImg');
 		loading.show();
@@ -145,14 +145,19 @@ var Events = React.createClass({
 	render: function() {
 		return (
 			<div>
-				{/*BreadCrumb*/}
-				<div className="row breadcrumb">
-					<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}>Main > Events</h2>
-				</div>
+			{/*BreadCrumb*/}
+			<div className="row breadcrumb">
+				<h2 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none', fontWeight: '300'}}>Main > Events</h2>
+			</div>
+
+			
 			<div className ="container contentWrapper">
 				<div id="eventFilter" className="row">
 					
-					<h1 className="contentHeader">Events</h1>
+					<div className="contentBanner">
+						<h1 style={{fontFamily: 'Roboto, Helvetica Neue, Helvetica, Arial, sans-serif', textTransform: 'none'}}>Events</h1>
+						<p>Find events happening near you</p>
+					</div>
 					
 					<div className="panel">
 						<div className="panel-heading">
@@ -215,7 +220,7 @@ var Events = React.createClass({
 
 							</div>
 
-							<button style={{color: 'white',backgroundColor: '#FED136'}}className="btn btn-lg" value="Search" id="eventsBtn" onSubmit={this.handleSearch}>
+							<button style={{color: 'white',backgroundColor: '#FED136'}} className="btn btn-lg" value="Search" id="eventsBtn" onSubmit={this.handleSearch}>
 								<Link to="/user/events/search"></Link> <i className="fa fa-search left" />&nbsp;SEARCH</button>
 						</Validation>
 						</form>
@@ -230,7 +235,7 @@ var Events = React.createClass({
                         <div className="panel-body" id="results">
                             <Route path="/user/events/search" component={Results}/>
 								<div id="loadingImg" style={{display: 'none'}}>
-									<img style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src="http://nyoperafest.com/2017/wp-content/themes/piper/assets/images/loading.GIF" />
+									<img style={{display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src="http://i65.tinypic.com/24oav6p.gif" />
 								</div>
 								<div><p>{this.state.resultsFound}</p></div>
 								{this.state.currentEvents.map(function(event) {

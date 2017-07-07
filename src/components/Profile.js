@@ -1,11 +1,3 @@
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-// TO DO:
-// 1. Setup how user's profile page looks.
-// 2. Styling
-// -------------------------------------------------------------------------------------------------
-// -------------------------------------------------------------------------------------------------
-
 var React = require('react');
 var Helpers = require('./utils/helpers');
 
@@ -138,13 +130,11 @@ var Profile = React.createClass ({
 				</div>
 				<div className="container contentWrapper">
 					{/*Profile*/}
-					<div className="row">
+					<div className="row" style={{padding: '4rem'}}>
 						<div id="banner" style={{display: 'block', height: '5em', marginBottom: '15px'}}>
-
-							<h1 className="contentHeader" >{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
-
+							<h1 style={{textTransform: 'none', fontFamily: 'Roboto, sans-serif', fontSize: '30px', fontWeight: '700'}}>{this.state.firstName + " " + this.state.lastName + "'s Profile"}</h1>
 						</div>
-
+						
 						<div className="row" style={{display: 'flex', height:'40em'}}>
 							<div className="panel" id="" style={{padding: '0px', display: 'block', height:'100%', margin: '0px 10px 15px 0px',width: '30%'}}>
 								<div className="panel-heading">Profile</div>
@@ -153,8 +143,7 @@ var Profile = React.createClass ({
 									<div className="infoProfile">{this.state.firstName} {this.state.lastName}</div> 
 									<div className="infoProfile">{this.state.city}, {this.state.state} {this.state.zipcode == undefined ? " " : this.state.zipcode}</div> 
 									<div className="infoProfile">{this.state.email}</div>
-									
-									{this.state.contactBtn ? <button className="btn btn-lg" onClick={this.handleContactClick}>Add to Contacts</button> : ""}
+									{this.state.contactBtn ? <button style={{color: 'white',backgroundColor: '#FED136'}} className="btn btn-lg" onClick={this.handleContactClick}><i class="fa fa-plus" aria-hidden="true"></i>ADD TO CONTACTS</button> : ""}
 								</div>
 							</div>
 						
@@ -171,17 +160,18 @@ var Profile = React.createClass ({
 								</div>
 							</div>
 						</div>
+
 						<div className="row" style={{marginTop: '20px'}}>
 							<div className="panel col-xs-12" id="" style={{padding: '0px', minHeight:'30em'}}>
 								<div className="panel-heading">My Links</div>
 								<div className="panel-body">
+
 
 									<a href={this.state.youtube} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
 									<a href={this.state.soundcloud} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
 									<div style={{clear: "left"}} ><iframe style={{marginTop: "18px"}}width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
 										frameBorder="0" allowFullScreen></iframe>
 									</div>
-
 								</div>
 							</div>
 						</div>
