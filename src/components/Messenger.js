@@ -17,7 +17,7 @@ var Helpers = require('./utils/helpers');
 var Messenger = React.createClass ({
 	getInitialState: function() {
         return {
-			user: undefined,
+			user: this.props.theUser.username,
             usersContacts: [],
 			messageHistory:[],
 			messages:[]
@@ -26,8 +26,15 @@ var Messenger = React.createClass ({
 	componentDidMount: function() {
 		
 		this.socket = io().connect();
+
 		this.socket.on('message', function(message) {
 			console.log(message);
+			var msg = message.body;
+			var message = {
+				body: msg,
+				from: this.props.theUser.username,
+			};
+			console.log(message.from);
 			this.setState({messages: [message, ...this.state.messages] })
 
 		}.bind(this))
