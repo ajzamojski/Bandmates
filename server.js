@@ -198,19 +198,12 @@ app.post("/users/update/:email", function(req, res) {
 db.sequelize.sync({}).then(function() {
     
     io.on('connection', function(socket) {
-        socket.on('message', function(body) {
+        socket.on('message', function(body, username) {
             io.emit('message', {
                 body,
-                from: socket.id.slice(8)
+                from: username
             })
         })
-        socket.on('send-nickname', function(nickname) {
-            socket.nickname = nickname;
-            io.emit('send-nickname', {
-                nickname,
-            })
-            // console.log(users);
-        });
     });
 
     http.listen(PORT, function() {

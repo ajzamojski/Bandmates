@@ -15,15 +15,7 @@ var Messenger = React.createClass ({
 		
 		this.socket = io().connect();
 		
-		const nickname = this.props.theUser.username;
-		console.log(this.props.theUser.username);
 
-		this.socket.on('send-nickname', function(nickname) {
-			this.socket.nickname = nickname;
-            io.emit('send-nickname', {
-                nickname,
-            })
-		})
 
 		this.socket.on('message', function(message) {
 			console.log(message);
@@ -84,14 +76,10 @@ var Messenger = React.createClass ({
 		const body = event.target.value
 		if(event.keyCode === 13 && body) {
 			console.log(this.props.theUser.username);
-			var message = {
-				body,
-				from: this.props.theUser.username,
-			}
-			console.log('message1');
-			const nickname = this.props.theUser.username;
-			this.socket.emit('send-nickname', nickname);
-			this.socket.emit('message', body)
+
+			var username = this.props.theUser.username;
+
+			this.socket.emit('message', body, username)
 			event.target.value='';
 		}
 	},
