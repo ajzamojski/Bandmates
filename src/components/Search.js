@@ -254,6 +254,7 @@ var Search = React.createClass({
 						<div className="form-group">
 						<label htmlFor="gender">Gender:</label>
 						<select className="form-control col-xs-3" id="gender" name="gender" ref="gender">
+								<option key="GENDER" value="">Please select:</option>
 								<option key="MALE" value="MALE">Male</option>
 								<option key="FEMALE" value="FEMALE">Female</option>
 						</select>
