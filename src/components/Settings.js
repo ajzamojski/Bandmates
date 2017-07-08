@@ -193,6 +193,7 @@ var Settings = React.createClass ({
 						<div className="form-group">
 							<label htmlFor="gender">Gender:</label>
 							<select className="form-control" id="gender" name="gender" value={this.state.gender} onChange={this.handleChange}>
+								<option value="">Please choose a gender</option>
 								<option value="Male">Male</option>
 								<option value="Female">Female</option>
   							</select>
