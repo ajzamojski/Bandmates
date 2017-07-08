@@ -205,6 +205,13 @@ db.sequelize.sync({}).then(function() {
                 from: socket.id.slice(8)
             })
         })
+        socket.on('send-nickname', function(nickname) {
+            socket.nickname = nickname;
+            io.emit('send-nickname', {
+                nickname,
+            })
+            // console.log(users);
+        });
     });
 
     http.listen(PORT, function() {

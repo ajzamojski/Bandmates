@@ -11,6 +11,13 @@
 var React = require('react');
 var Helpers = require('./utils/helpers');
 
+import { 
+    BrowserRouter as Router, 
+    Route,
+    Redirect,
+    Link 
+} from "react-router-dom";
+
 
 
 const states = ["AK","AL","AR","AZ","CA","CO","CT","DE","FL","GA","HI","IA","ID","IL","IN","KS",
@@ -97,34 +104,30 @@ var Settings = React.createClass ({
 				instagram: this.state.instagram         
         };
         console.log("the user:" + this.state.username);
-
+        console.log(oguser);
+        console.log(userData);
         var query = this.state.username;
 
-		Helpers.updateUser(oguser,userData)
+        console.log("/user/profile/" + this.state.email);
 
-			.then(function(result){
-
-                if (result.data.loginError) {
-                    if (result.data.loginError[0] === 'User not found') {
-                        document.getElementById("logInUserNotFound").style.display = "block";
-                    }
-
-                    if (result.data.loginError[0] === 'Password is incorrect') {
-                        document.getElementById("logInPassIncorrect").style.display = "block";
-                    }  
-                }
-                else {
+		Helpers.updateUser(oguser,userData).then(function(result){
                 
                 console.log(result);
-                <Redirect to="/user/profile"/>
-               }
-             }); 
+                console.log("/user/profile/" + userData.email);
+                window.location.href = "/user/profile/" + userData.email;
+               }); 
+
+
+	
 	},
 
 
-	componentWillReceiveProps: function(){
-		console.log('Component Updating - Settings');
+	componentWillReceiveProps: function(nextProps){
 
+		console.log('Component Updating - Settings');
+		this.setState({user: this.props.theUser});
+
+		
 	},
 
 	render: function() {
@@ -159,12 +162,6 @@ var Settings = React.createClass ({
 						<br />
 						<label htmlFor="email">Email:</label>
 						<input type="text" className="form-control" id="loginEmail" name="email" value={this.state.email} onChange={this.handleChange}/>
-						<br />
-						<label htmlFor="password">Password:</label>
-						<input type="password" className="form-control" id="loginPassword" name="password" value={this.state.password} onChange={this.handleChange}/>
-						<br />
-						<label htmlFor="passwordVerify">Verify Password:</label>
-						<input type="password" className="form-control" id="verify" name="passwordVer" value={this.state.passwordVer} onChange={this.handleChange}/>
 						<br />
 						<label htmlFor="profilePic">Photo URL:</label>
 						<input type="text" className="form-control" id="profilePic" name="profilePic" value={this.state.profilePic} onChange={this.handleChange}/>
