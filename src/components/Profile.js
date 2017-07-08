@@ -58,7 +58,15 @@ var Profile = React.createClass ({
 					instruments : result.data.instruments,
 					profession : result.data.profession,
 					styles : result.data.styles,
-					id: result.data.id
+					id: result.data.id,
+					aboutyou: result.data.aboutyou,
+					experience: result.data.experience,
+					youtube: result.data.youtube,
+					facebook: result.data.facebook,
+					twitter: result.data.twitter,
+					instagram: result.data.instagram,
+					bandcamp: result.data.bandcamp,
+					otherURL: result.data.otherURL
 				})
 				this.renderAddBtn(result.data.id, this.props.theUser.id);
 		}.bind(this));
@@ -165,13 +173,22 @@ var Profile = React.createClass ({
 							<div className="panel col-xs-12" id="" style={{padding: '0px', minHeight:'30em'}}>
 								<div className="panel-heading">My Links</div>
 								<div className="panel-body">
+									<ul id="socialMediaList">
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>SOCIAL MEDIA: </b></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Facebook: </b><a style={{color: 'black'}} href={this.state.facebook}>{this.state.facebook}</a></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Twitter: </b><a style={{color: 'black'}} href={this.state.twitter}>{this.state.twitter}</a></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Instagram: </b><a style={{color: 'black'}} href={this.state.instagram}>{this.state.instagram}</a></li>
+									</ul>
+									<br />
 
+									<ul id="mediaList">
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>MEDIA: </b></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>YouTube: </b><a style={{color: 'black'}} href={this.state.youtube}>{this.state.youtube}</a></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>SoundCloud: </b><a style={{color: 'black'}} href={this.state.soundcloud}>{this.state.soundcloud}</a></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Bandcamp: </b><a style={{color: 'black'}} href={this.state.bandcamp}>{this.state.bandcamp}</a></li>
+										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Other: </b><a style={{color: 'black'}} href={this.state.otherURL}>{this.state.otherURL}</a></li>
+									</ul>
 
-									<a href={this.state.youtube} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
-									<a href={this.state.soundcloud} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
-									<div style={{clear: "left"}} ><iframe style={{marginTop: "18px"}}width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
-										frameBorder="0" allowFullScreen></iframe>
-									</div>
 								</div>
 							</div>
 						</div>
