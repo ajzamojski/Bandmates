@@ -160,12 +160,6 @@ var Settings = React.createClass ({
 						<label htmlFor="email">Email:</label>
 						<input type="text" className="form-control" id="loginEmail" name="email" value={this.state.email} onChange={this.handleChange}/>
 						<br />
-						<label htmlFor="password">Password:</label>
-						<input type="password" className="form-control" id="loginPassword" name="password" value={this.state.password} onChange={this.handleChange}/>
-						<br />
-						<label htmlFor="passwordVerify">Verify Password:</label>
-						<input type="password" className="form-control" id="verify" name="passwordVer" value={this.state.passwordVer} onChange={this.handleChange}/>
-						<br />
 						<label htmlFor="profilePic">Photo URL:</label>
 						<input type="text" className="form-control" id="profilePic" name="profilePic" value={this.state.profilePic} onChange={this.handleChange}/>
 						<br />

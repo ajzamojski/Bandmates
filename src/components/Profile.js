@@ -58,7 +58,8 @@ var Profile = React.createClass ({
 					instruments : result.data.instruments,
 					profession : result.data.profession,
 					styles : result.data.styles,
-					id: result.data.id
+					id: result.data.id,
+					experience: result.data.experience
 				})
 				this.renderAddBtn(result.data.id, this.props.theUser.id);
 		}.bind(this));
@@ -147,7 +148,7 @@ var Profile = React.createClass ({
 								</div>
 							</div>
 						
-							<div className="panel" style={{display: 'flex', padding: '0px', display: 'block', height:'100%', margin: '0px 0px 15px 10px',width: '70%'}}>
+							<div className="panel" style={{display: 'flex', overflowX: 'hidden', padding: '0px', display: 'block', height:'100%', margin: '0px 0px 15px 10px',width: '70%'}}>
 								<div className="panel-heading">About Me</div>
 								<div className="panel-body" id="rightProfile">
 									<b>Information: </b><br /><div id="profileInfo">{this.state.aboutyou}</div> <br></br>
@@ -156,7 +157,7 @@ var Profile = React.createClass ({
 									<div className="rightProfileItem"><b>Profession: </b>{this.state.profession}</div> <br></br>
 									<div className="rightProfileItem"><b>Instrument: </b>{this.state.instruments}</div> <br></br>
 									<div className="rightProfileItem"><b>Playstyles: </b>{this.state.styles}</div> <br></br>
-									<div className="rightProfileItem" style={{maxHeight: '80px'}}><b>Experience: </b>{this.state.experience}</div> <br></br>
+									<div className="rightProfileItem" ><b>Experience: </b>{this.state.experience}</div> <br></br>
 								</div>
 							</div>
 						</div>
@@ -169,9 +170,6 @@ var Profile = React.createClass ({
 
 									<a href={this.state.youtube} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/youtubepic.png" width="120" height="100"/> </a>
 									<a href={this.state.soundcloud} target="_blank" style={{float: "left", cursor: "pointer"}}><img src="../../img/soundcloud.jpg" width="120" height="100"/> </a>
-									<div style={{clear: "left"}} ><iframe style={{marginTop: "18px"}}width="560" height="315" src="https://www.youtube.com/embed/1hnu7ckzKNg" 
-										frameBorder="0" allowFullScreen></iframe>
-									</div>
 								</div>
 							</div>
 						</div>
