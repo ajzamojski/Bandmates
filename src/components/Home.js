@@ -485,21 +485,6 @@ var Home = React.createClass({
                             <img src="./img/rutgers_logo.png" style={{height: '100px'}} className="img-responsive img-centered" alt="Rutgers Coding Bootcamp"/>
                         </a>
                     </div>
-                    {/*<div className="col-md-3 col-sm-6">
-                        <a href="#">
-                            <img src="#" className="img-responsive img-centered" alt=""/>
-                        </a>
-                    </div>
-                    <div className="col-md-3 col-sm-6">
-                        <a href="#">
-                            <img src="#" className="img-responsive img-centered" alt=""/>
-                        </a>
-                    </div>
-                    <div className="col-md-3 col-sm-6">
-                        <a href="#">
-                            <img src="#" className="img-responsive img-centered" alt=""/>
-                        </a>
-                    </div>*/}
                 </div>
             </div>
         </aside>
