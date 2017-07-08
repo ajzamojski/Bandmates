@@ -23,7 +23,6 @@ var helper = {
 
       });
   },
-
   logInUser: function(data) {
 
     console.log(data);
@@ -59,7 +58,7 @@ var helper = {
   runQuery: function(location, newUser) {
     
     // Figure out the geolocation
-    var queryURL = "http://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + geocodeAPI;
+    var queryURL = "https://api.opencagedata.com/geocode/v1/json?query=" + location + "&pretty=1&key=" + geocodeAPI;
     var returnObj = {}
     returnObj.user = newUser;
 

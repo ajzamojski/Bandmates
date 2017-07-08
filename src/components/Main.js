@@ -86,7 +86,7 @@ var Main = React.createClass ({
 		return (
 			<div>
 				<nav id="appNav" className="navbar navbar-default navbar-custom navbar-fixed-top" style={{backgroundColor: 'black', height: '55px', boxShadow: '0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 3px 8px 0 rgba(0, 0, 0, 0.19)'}}>
-					<div style={{width: '200px', display: 'block', padding: '0px', marginRight: '0px', color: '#fec503',fontSize: '5em', position: 'relative', left: '41px', bottom: '38px', fontFamily: '"Painting in the Sunlight", "Helvetica Neue", Helvetica, Arial, cursive'}}>Bandmates</div>
+					<a href="/" style={{textDecoration: 'none'}}><div style={{width: '200px', display: 'block', padding: '0px', marginRight: '0px', color: '#fec503',fontSize: '5em', position: 'relative', left: '41px', bottom: '38px', fontFamily: '"Painting in the Sunlight", "Helvetica Neue", Helvetica, Arial, cursive'}}>Bandmates</div></a>
 				</nav>
 				{/*Sidebar*/}
 				<div>

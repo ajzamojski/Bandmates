@@ -164,7 +164,6 @@ var Events = React.createClass({
                             SEARCH FILTER
                         </div>
 						<div className="panel-body">
-						<p>Find events in your area</p>
 						<form id="eventSearch" onSubmit={this.handleSearch} style={{padding: '10px'}}>
 							<Validation ref="validation" onValidate={this.onValidate}>
 							<div className = "container">
