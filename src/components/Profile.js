@@ -155,7 +155,7 @@ var Profile = React.createClass ({
 								</div>
 							</div>
 						
-							<div className="panel" style={{display: 'flex', padding: '0px', display: 'block', height:'100%', margin: '0px 0px 15px 10px',width: '70%'}}>
+							<div className="panel" style={{display: 'flex', overflowX: 'hidden', padding: '0px', display: 'block', height:'100%', margin: '0px 0px 15px 10px',width: '70%'}}>
 								<div className="panel-heading">About Me</div>
 								<div className="panel-body" id="rightProfile">
 									<b>Information: </b><br /><div id="profileInfo">{this.state.aboutyou}</div> <br></br>
@@ -164,7 +164,7 @@ var Profile = React.createClass ({
 									<div className="rightProfileItem"><b>Profession: </b>{this.state.profession}</div> <br></br>
 									<div className="rightProfileItem"><b>Instrument: </b>{this.state.instruments}</div> <br></br>
 									<div className="rightProfileItem"><b>Playstyles: </b>{this.state.styles}</div> <br></br>
-									<div className="rightProfileItem" style={{maxHeight: '80px'}}><b>Experience: </b>{this.state.experience}</div> <br></br>
+									<div className="rightProfileItem" ><b>Experience: </b>{this.state.experience}</div> <br></br>
 								</div>
 							</div>
 						</div>
@@ -188,7 +188,6 @@ var Profile = React.createClass ({
 										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Bandcamp: </b><a style={{color: 'black'}} href={this.state.bandcamp}>{this.state.bandcamp}</a></li>
 										<li style={{listStyleType: 'none', fontSize: '16px', lineHeight: '2em'}}><b>Other: </b><a style={{color: 'black'}} href={this.state.otherURL}>{this.state.otherURL}</a></li>
 									</ul>
-
 								</div>
 							</div>
 						</div>

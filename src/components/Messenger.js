@@ -5,7 +5,7 @@ var Helpers = require('./utils/helpers');
 var Messenger = React.createClass ({
 	getInitialState: function() {
         return {
-			user: undefined,
+			user: this.props.theUser.username,
             usersContacts: [],
 			messageHistory:[],
 			messages:[]
@@ -14,11 +14,16 @@ var Messenger = React.createClass ({
 	componentDidMount: function() {
 		
 		this.socket = io().connect();
+		
+
+
 		this.socket.on('message', function(message) {
 			console.log(message);
+			console.log(message.from);
 			this.setState({messages: [message, ...this.state.messages] })
 
-		}.bind(this))
+		}
+		.bind(this))
 		
 		$.get("/loggedin", function(data) {
 
@@ -67,13 +72,14 @@ var Messenger = React.createClass ({
 	},
 	handleSubmit: function(event) {
 		event.preventDefault();
+		
 		const body = event.target.value
 		if(event.keyCode === 13 && body) {
-			const message = {
-				body,
-				from: 'Me'
-			}
-			this.socket.emit('message', body)
+			console.log(this.props.theUser.username);
+
+			var username = this.props.theUser.username;
+
+			this.socket.emit('message', body, username)
 			event.target.value='';
 		}
 	},

@@ -254,6 +254,7 @@ var Search = React.createClass({
 						<div className="form-group">
 						<label htmlFor="gender">Gender:</label>
 						<select className="form-control col-xs-3" id="gender" name="gender" ref="gender">
+								<option key="GENDER" value="">Please select:</option>
 								<option key="MALE" value="MALE">Male</option>
 								<option key="FEMALE" value="FEMALE">Female</option>
 						</select>
@@ -290,7 +291,7 @@ var Search = React.createClass({
 								<div className="resultSearch" key={user.key} data-key={user.key} style={{overflow: 'hidden'}}>
 									
 									<img className="imgResponsive" style={{maxHeight:'200px' , float:'left'}}src={user.photo}/>
-									<div style={{display: 'flex', flexDirection: 'column', float: 'left'}}>
+									<div style={{display: 'flex', flexDirection: 'column', float: 'left', marginleft: '15px'}}>
 										<h3 className="musicName"><Link to={{pathname: "/user/profile/" + user.username, state: {username: user.username}}}><a style={{color: 'black'}} data-username ={user.username}>{user.firstName + " " + user.lastName}</a></Link></h3>
 										<p style={{fontSize: '18px'}}>{user.instruments}{user.specifics == null || undefined ? "" : (": " + user.specifics)}</p>
 										<p style={{fontSize: '18px'}}>{user.city + " " + user.state}{" " + user.zip}</p>
