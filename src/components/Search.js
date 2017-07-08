@@ -43,7 +43,7 @@ var Search = React.createClass({
 				var c = res.lat;
 				var d = res.lng;
 				console.log(res);
-
+				$('#loadingImg').css('display', 'none');
 				// get difference (in mi.) between the 2 geolocations
 				var from = new google.maps.LatLng(a, b);
 				var to = new google.maps.LatLng(c, d);
@@ -161,7 +161,7 @@ var Search = React.createClass({
 	},  	
 	handleSubmit: function(event) {
 		event.preventDefault();
-		
+		$('#loadingImg').fadeIn( "slow");
 		//clear currentUsers array
 		//clear usersByRadius array
 
@@ -271,7 +271,7 @@ var Search = React.createClass({
 						</select>
 						</div>
 						
-						<button type="submit" className="btn btn-lg" id="musicianBtn">Submit</button>
+						<button type="submit" className="btn btn-lg" id="musicianBtn" onSubmit={this.handleSubmit}>Submit</button>
 					</form>
 					</div>
 					</div>
