@@ -102,7 +102,7 @@ var Main = React.createClass ({
 							<li><NavLink to={{pathname: "/user/profile/" + this.props.dbUserObject.userData.username, state: {username: this.props.dbUserObject.userData.username}}} className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-list-alt" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Profile</NavLink></li>
 							<li><NavLink to="/user/settings" className="selected" activeStyle={{backgroundColor: '#FED136'}}>&nbsp;&nbsp;&nbsp;<i className="fa fa-cog" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Settings</NavLink></li>
 
-							<li onClick={this.refreshPage}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} >&nbsp;&nbsp;&nbsp;<i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
+							<li onClick={this.logout}><NavLink exact to="/" className="selected" activeStyle={{backgroundColor: '#FED136'}} >&nbsp;&nbsp;&nbsp;<i className="fa fa-sign-out"></i>&nbsp;&nbsp;&nbsp;Logout</NavLink></li>
 
 						</ul>
 					</nav>
